@@ -35,6 +35,9 @@ export class KataEntity extends BaseEntity {
     @Column('text')
     stars: number;
 
+    @Column('text')
+    testCases: string;
+
     constructor(cwId: string) {
         super();
         this.cwId = cwId;

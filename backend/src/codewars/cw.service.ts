@@ -29,6 +29,7 @@ export class CWService {
         kataEntity.name = this.getName(stats);
         kataEntity.stars = this.getStars(stats);
         kataEntity.description = this.getDescription(afterHeader);
+        // kataEntity.testCases = this.getTestCases(afterHeader);
         const kle = new KataLanguageEntity(language);
         this.setCompletions(kataEntity, kle, stats);
         kataEntity.kataLanguageEntities.push(kle);
@@ -48,22 +49,31 @@ export class CWService {
     }
 
     private static getDescription(text: string): string {
-        const regex = /description\\":\\"(.*)",\\"activeLanguage/;
-        return text.match(regex)[1];
+        return this.getFirstMatch(text, /description\\":\\"(.*)",\\"activeLanguage/);
     }
 
     private static getKyu(text: string): number {
-        const regex = /span>(.) kyu/;
-        return +text.match(regex)[1];
+        return +this.getFirstMatch(text, /span>(.) kyu/);
     }
 
     private static getName(text: string): string {
-        const regex = />([\w\s\d]+)<\/h4>/;
-        return text.match(regex)[1];
+        return this.getFirstMatch(text, />([\w\s\d]+)<\/h4>/);
     }
 
     private static getStars(text: string): number {
-        const regex = /total_stars'>([\w\s\d]+)</;
-        return +text.match(regex)[1];
+        return +this.getFirstMatch(text, /total_stars'>([\w\s\d]+)</);
+    }
+
+    private static getTestCases(text: string): string {
+        return this.getFirstMatch(text, /Test Cases/);
+        // return this.getFirstMatch(text, /Test Cases:<\/h5><pre class="p-2 overflow-x-auto">(.+)<\/pre/s);
+    }
+
+    private static getFirstMatch(text: string, regex: RegExp): string {
+        const zzz = text.match(regex);
+        console.log(chalk.magentaBright('REGEXXXXX'), text);
+        console.log(chalk.magentaBright('REGEXXXXX'), regex);
+        console.log(chalk.magentaBright('KATA ZZZZ'), zzz);
+        return text.match(regex)[1];
     }
 }
