@@ -1,13 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import * as chalk from 'chalk';
 import { KataLanguageEntity } from '../db/entities/kata-language.entity';
+import { KataEntity } from '../db/entities/kata.entity';
 
 const axios = require('axios').default;
 
 @Injectable()
 export class CWService {
 
-    static async getKata(cwId: string, language: string): Promise<KataLanguageEntity> {
+    static async getKata(cwId: string, language: string): Promise<KataEntity> {
         console.log(chalk.yellowBright('GET KATA'), cwId);
         const html: string = await this.getHtml(cwId, language);
         return this.parseToKataEntity(cwId, language, html);
@@ -20,18 +21,23 @@ export class CWService {
             });
     }
 
-    private static parseToKataEntity(cwId: string, language: string, html: string): KataLanguageEntity {
-        const kataEntity = new KataLanguageEntity(cwId);
+    private static parseToKataEntity(cwId: string, language: string, html: string): KataEntity {
+        const kataEntity = this.loadKata(cwId);
         const afterHeader: string = html.split('</header>')[1];
         const kataStats: string = afterHeader.split('Choose language...')[0];
-        // console.log(chalk.cyanBright('AFTER HEADER....'), kataStats);
-        kataEntity.language = language;
         kataEntity.kyu = this.getKyu(kataStats);
         kataEntity.name = this.getName(kataStats);
         kataEntity.stars = this.getStars(kataStats);
-        kataEntity.completions = this.getCompletions(kataStats);
+        const kle = new KataLanguageEntity(language);
+        kle.completions = this.getCompletions(kataStats);
+        kataEntity.kataLanguageEntities.push(kle);
         console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity);
         return kataEntity;
+    }
+
+    // TODO: load Kata from db if already exists
+    private static loadKata(cwId: string): KataEntity {
+        return new KataEntity(cwId);
     }
 
     private static getCompletions(text: string): number {

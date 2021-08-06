@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { KataEntity } from './kata.entity';
 
 @Entity()
 export class KataLanguageEntity extends BaseEntity {
@@ -8,10 +9,10 @@ export class KataLanguageEntity extends BaseEntity {
 
     // @OneToOne(() => DeclarationEntity, declaration => declaration.classUT)
     // declaration: DeclarationEntity;
-    //
-    // @ManyToOne(() => FileUTEntity, fileUT => fileUT.classUTs, { onDelete: 'CASCADE' })
-    // fileUT: FileUTEntity;
-    //
+
+    @ManyToOne(() => KataEntity, kata => kata.kataLanguageEntities, { onDelete: 'CASCADE' })
+    kataEntity: KataEntity;
+
     // @OneToMany(() => MethodUTEntity, methodUT => methodUT.classUT, { cascade: true })
     // methodUTs: MethodUTEntity[];
 
@@ -19,23 +20,11 @@ export class KataLanguageEntity extends BaseEntity {
     completions: number;
 
     @Column('text')
-    cwId: string;
-
-    @Column('text')
-    kyu: number;
-
-    @Column('text')
     language: string;
 
-    @Column('text')
-    name: string;
-
-    @Column('text')
-    stars: number;
-
-    constructor(cwId: string) {
+    constructor(language: string) {
         super();
-        this.cwId = cwId;
+        this.language = language;
     }
 
 }
