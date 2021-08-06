@@ -6,6 +6,7 @@ import * as chalk from 'chalk';
 import { TConstructor } from '../shared/types/constructor.type';
 import { throwCustom } from '../shared/utils/errors.util';
 import { DbLoggerService } from './src/db/services/db-logger.service';
+import { CWService } from './src/codewars/cw.service';
 
 console.log('Launch backend...');
 
@@ -55,4 +56,5 @@ async function bootstrap() {
     await app.listen(3001);
 }
 
-bootstrap();
+// bootstrap();
+CWService.getKata('zzz');
