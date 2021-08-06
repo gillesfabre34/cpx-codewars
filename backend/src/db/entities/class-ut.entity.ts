@@ -1,5 +1,5 @@
 import { BaseEntity, Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { FileUTEntity } from './file-ut.entity';
+import { FileUTEntity } from './kata.entity';
 import { MethodUTEntity } from './method-ut.entity';
 import { MockEntity } from './mock.entity';
 import { DeclarationEntity } from './declaration.entity';

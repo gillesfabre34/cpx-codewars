@@ -5,7 +5,7 @@ import { db } from '../db/const/db.const';
 import { throwHttpException } from '../../../shared/utils/errors.util';
 
 @Injectable()
-export class FileUtService {
+export class KataService {
 
     // async getFileUTPaths(): Promise<string[]> {
     //     try {

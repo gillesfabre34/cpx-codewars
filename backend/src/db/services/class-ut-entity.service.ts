@@ -1,4 +1,4 @@
-import { FileUTEntity } from '../entities/file-ut.entity';
+import { FileUTEntity } from '../entities/kata.entity';
 import { SourceFile } from 'ts-morph';
 import { ClassUTEntity } from '../entities/class-ut.entity';
 import { MethodUtEntityService } from './method-ut-entity.service';

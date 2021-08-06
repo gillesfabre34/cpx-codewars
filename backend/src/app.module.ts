@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { FileUtModule } from './file-ut/file-ut.module';
+import { KataModule } from './kata/kata.module';
 
 @Module({
-  imports: [FileUtModule],
+  imports: [KataModule],
   controllers: [AppController],
   providers: [AppService],
 })

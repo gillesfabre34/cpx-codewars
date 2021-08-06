@@ -1,22 +1,23 @@
 import { Body, Controller, Delete, Get, HttpException, Post } from '@nestjs/common';
-import { FileUtService } from './file-ut.service';
+import { KataService } from './kata.service';
 import * as chalk from 'chalk';
 import { plural } from '../../../shared/utils/strings.util';
 import { PostFileUTsDto } from '../../../dtos/file-ut/post-file-uts.dto';
 
-@Controller('file-ut')
-export class FileUtController {
+@Controller('kata')
+export class KataController {
 
-    constructor(private fileUtService: FileUtService) { }
+    constructor(private kataService: KataService) { }
 
-    // @Get('/paths')
-    // async getFileUTPaths(): Promise<string[]> {
-    //     const fileUTPaths: string[] = await this.fileUtService.getFileUTPaths();
-    //     console.log(chalk.greenBright('Get fileUTs : '), fileUTPaths?.length);
-    //     return fileUTPaths;
-    // }
-    //
-    //
+    @Get('/paths')
+    async getFileUTPaths(): Promise<string[]> {
+        const fileUTPaths: string[] = [];
+        // const fileUTPaths: string[] = await this.fileUtService.getFileUTPaths();
+        console.log(chalk.greenBright('Get fileUTs : '), fileUTPaths?.length);
+        return fileUTPaths;
+    }
+
+
     // @Delete('/paths')
     // async deleteFileUTs(@Body() body: any): Promise<string> {
     //     if (!Array.isArray(body?.fileUTPaths)) {
