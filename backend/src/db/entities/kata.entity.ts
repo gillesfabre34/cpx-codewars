@@ -18,7 +18,13 @@ export class KataEntity extends BaseEntity {
     kataLanguageEntities: KataLanguageEntity[];
 
     @Column('text')
+    completions: number;
+
+    @Column('text')
     cwId: string;
+
+    @Column('text')
+    description: string;
 
     @Column('text')
     kyu: number;

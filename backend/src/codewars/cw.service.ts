@@ -24,12 +24,13 @@ export class CWService {
     private static parseToKataEntity(cwId: string, language: string, html: string): KataEntity {
         const kataEntity = this.loadKata(cwId);
         const afterHeader: string = html.split('</header>')[1];
-        const kataStats: string = afterHeader.split('Choose language...')[0];
-        kataEntity.kyu = this.getKyu(kataStats);
-        kataEntity.name = this.getName(kataStats);
-        kataEntity.stars = this.getStars(kataStats);
+        const stats: string = afterHeader.split('Choose language...')[0];
+        kataEntity.kyu = this.getKyu(stats);
+        kataEntity.name = this.getName(stats);
+        kataEntity.stars = this.getStars(stats);
+        kataEntity.description = this.getDescription(afterHeader);
         const kle = new KataLanguageEntity(language);
-        kle.completions = this.getCompletions(kataStats);
+        this.setCompletions(kataEntity, kle, stats);
         kataEntity.kataLanguageEntities.push(kle);
         console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity);
         return kataEntity;
@@ -40,9 +41,15 @@ export class CWService {
         return new KataEntity(cwId);
     }
 
-    private static getCompletions(text: string): number {
-        const regex = /icon-moon-bullseye[\w\s\d-]+"><\/i>([\w\s\d,]+) </;
-        return +text.match(regex)[1].replace(',', '.');
+    private static setCompletions(kataEntity: KataEntity, kle: KataLanguageEntity, text: string): void {
+        const regex = /icon-moon-bullseye[\w\s\d-]+"><\/i>([\w\s\d,]+) <span class='opacity-75'>of<\/span> ([\w\s\d,]+)</;
+        kle.completions = +text.match(regex)[1].replace(',', '.');
+        kataEntity.completions = +text.match(regex)[2].replace(',', '.');
+    }
+
+    private static getDescription(text: string): string {
+        const regex = /description\\":\\"(.*)",\\"activeLanguage/;
+        return text.match(regex)[1];
     }
 
     private static getKyu(text: string): number {
