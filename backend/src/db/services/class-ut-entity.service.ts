@@ -1,6 +1,6 @@
-import { FileUTEntity } from '../entities/kata.entity';
+import { FileUTEntity } from '../entities/kata-language.entity';
 import { SourceFile } from 'ts-morph';
-import { ClassUTEntity } from '../entities/class-ut.entity';
+import { KataLanguageEntity } from '../entities/kata-language.entity';
 import { MethodUtEntityService } from './method-ut-entity.service';
 
 export class ClassUtEntityService {
@@ -8,7 +8,7 @@ export class ClassUtEntityService {
     // static async saveClassUTEntities(fileUTEntity: FileUTEntity, sourceFile: SourceFile): Promise<void> {
     //     for (const declaration of sourceFile.getClasses()) {
     //         const className: string = declaration.getName();
-    //         let classUTEntity: ClassUTEntity = await this.existingClass(fileUTEntity, className);
+    //         let classUTEntity: KataLanguageEntity = await this.existingClass(fileUTEntity, className);
     //         if (!classUTEntity) {
     //             classUTEntity = await this.putAndReturnId(fileUTEntity, className);
     //         }
@@ -17,8 +17,8 @@ export class ClassUtEntityService {
     // }
 
 
-    // private static async existingClass(fileUTEntity: FileUTEntity, className: string): Promise<ClassUTEntity> {
-    //     return await db.connection.getRepository(ClassUTEntity)
+    // private static async existingClass(fileUTEntity: FileUTEntity, className: string): Promise<KataLanguageEntity> {
+    //     return await db.connection.getRepository(KataLanguageEntity)
     //         .createQueryBuilder('classUT')
     //         .having('classUT.name = :name', { name: className })
     //         .innerJoinAndSelect('classUT.fileUT', 'fileUT')
@@ -27,12 +27,12 @@ export class ClassUtEntityService {
     // }
 
 
-    static async save(fileUTEntity: FileUTEntity, className: string): Promise<ClassUTEntity> {
-        return await new ClassUTEntity(className, fileUTEntity).save();
+    static async save(cwId: string): Promise<KataLanguageEntity> {
+        return await new KataLanguageEntity(cwId).save();
     }
 
 
-    // static getStatementUTs(classUTEntities: ClassUTEntity[], filePath: string): StatementUT[] {
+    // static getStatementUTs(classUTEntities: KataLanguageEntity[], filePath: string): StatementUT[] {
     //     const statementUTs: StatementUT[] = [];
     //     for (const classUTEntity of classUTEntities) {
     //         statementUTs.push(...MethodUtEntityService.getStatementUTs(classUTEntity.methodUTs, classUTEntity.name, filePath));
@@ -41,8 +41,8 @@ export class ClassUtEntityService {
     // }
     //
     //
-    // static async findClassUTEntity(className: string, filePath: string): Promise<ClassUTEntity> {
-    //     return await db.connection.getRepository(ClassUTEntity)
+    // static async findClassUTEntity(className: string, filePath: string): Promise<KataLanguageEntity> {
+    //     return await db.connection.getRepository(KataLanguageEntity)
     //         .createQueryBuilder('classUT')
     //         .leftJoinAndSelect('classUT.fileUT', 'fileUT')
     //         .leftJoinAndSelect('fileUT.systemUT', 'systemUT')
