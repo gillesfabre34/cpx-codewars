@@ -23,10 +23,12 @@ export class KataService {
         const folderPath = `${CONFIG.root}/backend/src/mocks`;
         const filePath = `${folderPath}/kata.html`;
         await writeFile(filePath, text);
+        const content: string = await readFile(filePath);
+        console.log(chalk.blueBright('CONTENTTTT'), content);
     }
 
     private static getHtml(): Promise<string> {
-        return axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions/${CONFIG.language}`)
+        return axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions/${CONFIG.language}`, {headers: {'cookie': CONFIG.cookie}})
             .then(response => {
                 return response?.data;
             });
