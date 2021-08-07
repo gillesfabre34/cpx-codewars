@@ -8,7 +8,6 @@ import { DbLoggerService } from './src/services/db-logger.service';
 import { db } from './src/const/db.const';
 import { KataService } from './src/services/kata.service';
 
-console.log('Launch backend...');
 
 export function startBackend(clear: boolean) {
     getConnectionOptions().then(connectionOptions => {
@@ -22,7 +21,7 @@ export function startBackend(clear: boolean) {
                 }
                 // await bootstrap();
                 await KataService.getKata(false);
-                console.log(chalk.yellowBright('Launched backend'));
+                console.log(chalk.yellowBright('End of backend process'));
             } catch (err) {
                 console.error(chalk.redBright("Error in process : "), err.message);
             }
@@ -57,4 +56,5 @@ async function bootstrap() {
     await app.listen(3001);
 }
 
+console.log(chalk.yellowBright('Launch backend...'));
 startBackend(false);

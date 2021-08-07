@@ -13,7 +13,7 @@ export class KataLanguageEntity extends BaseEntity {
     kataEntity: KataEntity;
 
     @OneToMany(() => SolutionEntity, solution => solution.kataLanguageEntity, { cascade: true })
-    solutions: SolutionEntity[];
+    solutionEntities: SolutionEntity[];
 
     @Column('text')
     completions: number;

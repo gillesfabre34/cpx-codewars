@@ -43,6 +43,5 @@ export function arrayOfNumbersAreEqual(arr1: number[], arr2: number[]): boolean 
 
 export function push(obj: any, property: string, element: any): void {
     obj[property] = obj[property] ?? [];
-    // console.log(chalk.blueBright('ARRRRR'), obj[property]);
     obj[property].push(element);
 }
