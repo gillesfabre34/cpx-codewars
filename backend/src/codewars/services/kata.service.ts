@@ -40,9 +40,9 @@ export class KataService {
         kataEntity.name = this.getName(stats);
         kataEntity.stars = this.getStars(stats);
         kataEntity.description = this.getDescription(afterHeader);
-        kataEntity.testCases = this.getTestCases(afterHeader);
         const kle = new KataLanguageEntity();
         kle.solutions = this.getSolutions(html);
+        kle.testCases = this.getTestCases(afterHeader);
         this.setCompletions(kataEntity, kle, stats);
         kataEntity.kataLanguageEntities.push(kle);
         console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity);
@@ -80,12 +80,10 @@ export class KataService {
         htmlSplit = htmlSplit.filter(h => h.includes('Best Practices'));
         for (const html of htmlSplit) {
             const endOfCode: number = html.indexOf('</code>');
-            // console.log(chalk.magentaBright('SPLITTTT'), html.length, endOfCode);
             const code = html.slice(0, endOfCode);
             const solutionEntity = new SolutionEntity(code);
             solutionEntity.bestPractices = +this.getFirstMatch(html, /Best Practices<span>(\d+)<\/span>/s);
             solutionEntity.clever = +this.getFirstMatch(html, /Clever<span>(\d+)<\/span>/s);
-            // console.log(chalk.magentaBright('SOLUTIONNNN'), solutionEntity);
             solutionEntities.push(solutionEntity);
         }
         return solutionEntities;
@@ -96,14 +94,12 @@ export class KataService {
     }
 
     private static getTestCases(text: string): string {
-        return this.getFirstMatch(text, /Test Cases:<\/h5><pre class="p-2 overflow-x-auto">(.+)<\/pre.+Suggest/s);
+        const match: string = this.getFirstMatch(text, /Test Cases:<\/h5><pre class="p-2 overflow-x-auto">(.+)<\/pre.+Suggest/s);
+        const codeTagLength: number = `<code data-language="${CONFIG.language}">`.length;
+        return match.slice(codeTagLength, -7);
     }
 
     private static getFirstMatch(text: string, regex: RegExp): string {
-        const zzz = text.match(regex);
-        // console.log(chalk.magentaBright('REGEXXXXX'), text);
-        // console.log(chalk.magentaBright('REGEXXXXX'), regex);
-        // console.log(chalk.magentaBright('KATA ZZZZ'), zzz);
         return text.match(regex) ? text.match(regex)[1] : undefined;
     }
 }

@@ -21,6 +21,9 @@ export class KataLanguageEntity extends BaseEntity {
     @Column('text')
     language: string;
 
+    @Column('text')
+    testCases: string;
+
     constructor() {
         super();
         this.language = CONFIG.language;
