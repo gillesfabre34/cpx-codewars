@@ -15,8 +15,6 @@ export class KataService {
         console.log(chalk.yellowBright('GET KATA'), CONFIG.cwId);
         const html: string = await this.getHtml(sendRequest);
         // console.log(chalk.blueBright('CONTENTTTT'), html);
-        const zzz = html.split('Test Cases:');
-        console.log(chalk.blueBright('ZZZZZ'), zzz.length);
         return this.parseToKataEntity(html);
     }
 

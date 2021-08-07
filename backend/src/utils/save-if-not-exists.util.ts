@@ -1,6 +1,6 @@
 import { BaseEntity } from 'typeorm';
 import { db } from '../const/db.const';
-import { TConstructor } from '../../../../shared/types/constructor.type';
+import { TConstructor } from '../../../shared/types/constructor.type';
 import { FindConditions } from 'typeorm/find-options/FindConditions';
 import * as chalk from 'chalk';
 
