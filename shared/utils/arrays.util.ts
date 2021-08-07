@@ -38,3 +38,8 @@ export function arrayOfNumbersAreEqual(arr1: number[], arr2: number[]): boolean 
     }
     return true;
 }
+
+export function push(arr: any[], element: any): void {
+    arr = arr ?? [];
+    arr.push(element);
+}

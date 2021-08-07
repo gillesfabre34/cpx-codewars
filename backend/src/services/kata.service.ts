@@ -5,17 +5,22 @@ import { KataEntity } from '../entities/kata.entity';
 import { readFile, writeFile } from '../utils/file-system.util';
 import { CONFIG } from '../const/config';
 import { SolutionEntity } from '../entities/solution.entity';
+import { saveIfNotExists } from '../utils/save-if-not-exists.util';
+import { push } from '../../../shared/utils/arrays.util';
+import { KataLanguageEntityService } from './kata-language-entity.service';
 
 const axios = require('axios').default;
 
 @Injectable()
 export class KataService {
 
-    static async getKata(sendRequest: boolean): Promise<KataEntity> {
+    static async getKata(sendRequest: boolean): Promise<void> {
         console.log(chalk.yellowBright('GET KATA'), CONFIG.cwId);
         const html: string = await this.getHtml(sendRequest);
-        // console.log(chalk.blueBright('CONTENTTTT'), html);
-        return this.parseToKataEntity(html);
+        const kataEntity: KataEntity = this.parseToKataEntity(html);
+        await this.save(kataEntity);
+        console.log(chalk.greenBright('KATA SAVEED'), kataEntity);
+        // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity.kataLanguageEntities.map(k => k.solutions));
     }
 
     private static async getHtml(sendRequest: boolean): Promise<string> {
@@ -31,7 +36,7 @@ export class KataService {
     }
 
     private static parseToKataEntity(html: string): KataEntity {
-        const kataEntity = this.loadKata();
+        const kataEntity = new KataEntity();
         const afterHeader: string = html.split('</header>')[1];
         const stats: string = afterHeader.split('Choose language...')[0];
         kataEntity.kyu = this.getKyu(stats);
@@ -42,15 +47,8 @@ export class KataService {
         kle.solutions = this.getSolutions(html);
         kle.testCases = this.getTestCases(afterHeader);
         this.setCompletions(kataEntity, kle, stats);
-        kataEntity.kataLanguageEntities.push(kle);
-        console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity);
-        // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity.kataLanguageEntities.map(k => k.solutions));
+        push(kataEntity.kataLanguageEntities, kle);
         return kataEntity;
-    }
-
-    // TODO: load Kata from codewars if already exists
-    private static loadKata(): KataEntity {
-        return new KataEntity();
     }
 
     private static setCompletions(kataEntity: KataEntity, kle: KataLanguageEntity, text: string): void {
@@ -82,7 +80,7 @@ export class KataService {
             const solutionEntity = new SolutionEntity(code);
             solutionEntity.bestPractices = +this.getFirstMatch(html, /Best Practices<span>(\d+)<\/span>/s);
             solutionEntity.clever = +this.getFirstMatch(html, /Clever<span>(\d+)<\/span>/s);
-            solutionEntities.push(solutionEntity);
+            push(solutionEntities, solutionEntity);
         }
         return solutionEntities;
     }
@@ -99,5 +97,19 @@ export class KataService {
 
     private static getFirstMatch(text: string, regex: RegExp): string {
         return text.match(regex) ? text.match(regex)[1] : undefined;
+    }
+
+    private static async save(kataEntity: KataEntity) {
+        console.log(chalk.yellowBright('KLE  EXISTSSSSS ???'), kataEntity.name);
+        await saveIfNotExists(kataEntity, {name: kataEntity.name});
+        if (!await this.kleAlreadyExists(kataEntity)) {
+            console.log(chalk.greenBright('KLE NOT ALREADY EXISTSSSSS'), kataEntity.name);
+        }
+    }
+
+    private static async kleAlreadyExists(kataEntity: KataEntity): Promise<boolean> {
+        const kleDb: KataLanguageEntity = await KataLanguageEntityService.getKataLanguage(kataEntity, CONFIG.language);
+        console.log(chalk.magentaBright('KLE DBBBB'), kleDb);
+        return false;
     }
 }

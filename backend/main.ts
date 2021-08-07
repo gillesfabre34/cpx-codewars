@@ -20,7 +20,8 @@ export function startBackend(clear: boolean) {
                 if (clear) {
                     await dropSystemUT();
                 }
-                await bootstrap();
+                // await bootstrap();
+                await KataService.getKata(false);
                 console.log(chalk.yellowBright('Launched backend'));
             } catch (err) {
                 console.error(chalk.redBright("Error in process : "), err.message);
@@ -56,5 +57,4 @@ async function bootstrap() {
     await app.listen(3001);
 }
 
-// bootstrap();
-KataService.getKata(false);
+startBackend(false);
