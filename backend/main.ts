@@ -1,12 +1,12 @@
 import { BaseEntity, createConnection, getConnectionOptions } from 'typeorm';
-import { db } from './src/db/const/db.const';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './src/app.module';
 import * as chalk from 'chalk';
 import { TConstructor } from '../shared/types/constructor.type';
 import { throwCustom } from '../shared/utils/errors.util';
-import { DbLoggerService } from './src/db/services/db-logger.service';
-import { CWService } from './src/codewars/cw.service';
+import { DbLoggerService } from './src/codewars/services/db-logger.service';
+import { db } from './src/codewars/const/db.const';
+import { KataService } from './src/codewars/services/kata.service';
 
 console.log('Launch backend...');
 
@@ -57,4 +57,4 @@ async function bootstrap() {
 }
 
 // bootstrap();
-CWService.getKata('54bf1c2cd5b56cc47f0007a1', 'javascript');
+KataService.getKata(false);

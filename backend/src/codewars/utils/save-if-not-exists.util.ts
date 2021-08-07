@@ -13,7 +13,7 @@ export async function saveIfNotExists<T extends BaseEntity>(entity: T, condition
 }
 
 // export async function saveIfNotExists<T extends BaseEntity>(entityType: TConstructor<T>, conditions: FindConditions<T>, constructorParametersOrEntity: ConstructorParameters<TConstructor<T>> | T): Promise<T> {
-//     let entity: T = await db.connection.getRepository(entityType).findOne(conditions);
+//     let entity: T = await codewars.connection.getRepository(entityType).findOne(conditions);
 //     if (entity) {
 //         return entity;
 //     } else if (Array.isArray(constructorParametersOrEntity)) {

@@ -16,7 +16,7 @@ import { ImportDefault } from '../../write/models/import-default.model';
 import { ReferencedDeclaration } from '../models/referenced-class-ut-declaration.model';
 import { ShouldBeSavedService } from './should-be-saved.service';
 import { ClassOrEnumDeclaration } from '../types/class-or-enum-declaration.type';
-import { removeExtension } from '../../utils/file-system.util';
+import { removeExtension } from '../../../backend/src/db/utils/file-system.util';
 import { Mapper } from '@genese/mapper';
 
 export class FileUTDataService {

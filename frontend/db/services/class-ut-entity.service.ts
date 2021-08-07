@@ -1,7 +1,7 @@
 import { FileUTEntity } from '../entities/kata.entity';
 import { SourceFile } from 'ts-morph';
 import { ClassUTEntity } from '../entities/class-ut.entity';
-import { db } from '../../init/const/db.const';
+import { db } from '../../init/const/codewars.const';
 import { MethodUtEntityService } from './method-ut-entity.service';
 import { StatementUT } from '../../system/models/statement-ut.model';
 import { GLOBAL } from '../../init/const/global.const';

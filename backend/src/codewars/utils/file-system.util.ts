@@ -1,6 +1,6 @@
 import * as fs from 'fs-extra';
 import { Dirent } from 'fs';
-import { isCapital } from '../../shared/utils/strings.util';
+import { isCapital } from '../../../../shared/utils/strings.util';
 import * as chalk from 'chalk';
 
 const { resolve } = require('path');
@@ -90,6 +90,10 @@ export async function getFiles(dir: string): Promise<string[]> {
 
 export function isNodeModulesFolder(folder: string): boolean {
     return lastSubFolder(folder) === 'node_modules';
+}
+
+export async function readFile(path: string): Promise<string> {
+    return fs.readFileSync(path, 'utf8')
 }
 
 
