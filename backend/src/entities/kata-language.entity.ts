@@ -27,7 +27,6 @@ export class KataLanguageEntity extends BaseEntity {
     constructor() {
         super();
         this.language = CONFIG.language;
-        this.solutions = [];
     }
 
 }

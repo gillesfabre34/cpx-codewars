@@ -4,9 +4,9 @@ import { AppModule } from './src/app.module';
 import * as chalk from 'chalk';
 import { TConstructor } from '../shared/types/constructor.type';
 import { throwCustom } from '../shared/utils/errors.util';
-import { DbLoggerService } from './src/codewars/services/db-logger.service';
-import { db } from './src/codewars/const/db.const';
-import { KataService } from './src/codewars/services/kata.service';
+import { DbLoggerService } from './src/services/db-logger.service';
+import { db } from './src/const/db.const';
+import { KataService } from './src/services/kata.service';
 
 console.log('Launch backend...');
 
@@ -20,7 +20,8 @@ export function startBackend(clear: boolean) {
                 if (clear) {
                     await dropSystemUT();
                 }
-                await bootstrap();
+                // await bootstrap();
+                await KataService.getKata(false);
                 console.log(chalk.yellowBright('Launched backend'));
             } catch (err) {
                 console.error(chalk.redBright("Error in process : "), err.message);
@@ -56,5 +57,4 @@ async function bootstrap() {
     await app.listen(3001);
 }
 
-// bootstrap();
-KataService.getKata(false);
+startBackend(false);

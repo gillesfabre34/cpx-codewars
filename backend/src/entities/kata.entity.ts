@@ -1,6 +1,5 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { KataLanguageEntity } from './kata-language.entity';
-import * as chalk from 'chalk';
 import { CONFIG } from '../const/config';
 
 @Entity()
@@ -11,9 +10,6 @@ export class KataEntity extends BaseEntity {
 
     // @OneToOne(() => DeclarationEntity, declaration => declaration.classUT)
     // declaration: DeclarationEntity;
-    //
-    // @ManyToOne(() => FileUTEntity, fileUT => fileUT.classUTs, { onDelete: 'CASCADE' })
-    // fileUT: FileUTEntity;
 
     @OneToMany(() => KataLanguageEntity, kataLanguage => kataLanguage.kataEntity, { cascade: true })
     kataLanguageEntities: KataLanguageEntity[];
@@ -39,7 +35,6 @@ export class KataEntity extends BaseEntity {
     constructor() {
         super();
         this.cwId = CONFIG.cwId;
-        this.kataLanguageEntities = [];
     }
 
 }
