@@ -57,4 +57,4 @@ async function bootstrap() {
 }
 
 // bootstrap();
-KataService.getKata();
+KataService.getKata(false);

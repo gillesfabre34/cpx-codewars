@@ -10,28 +10,25 @@ const axios = require('axios').default;
 @Injectable()
 export class KataService {
 
-    static async getKata(): Promise<KataEntity> {
+    static async getKata(sendRequest: boolean): Promise<KataEntity> {
         console.log(chalk.yellowBright('GET KATA'), CONFIG.cwId);
-        const html: string = await this.getHtml();
-        await this.writeKataFile(html);
+        const html: string = await this.getHtml(sendRequest);
+        console.log(chalk.blueBright('CONTENTTTT'), html);
         const zzz = html.split('TEST CASES');
         console.log(chalk.blueBright('ZZZZZ'), zzz.length);
         return this.parseToKataEntity(html);
     }
 
-    private static async writeKataFile(text: string): Promise<void> {
-        const folderPath = `${CONFIG.root}/backend/src/mocks`;
-        const filePath = `${folderPath}/kata.html`;
-        await writeFile(filePath, text);
-        const content: string = await readFile(filePath);
-        console.log(chalk.blueBright('CONTENTTTT'), content);
-    }
-
-    private static getHtml(): Promise<string> {
-        return axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions/${CONFIG.language}`, {headers: {'cookie': CONFIG.cookie}})
-            .then(response => {
-                return response?.data;
-            });
+    private static async getHtml(sendRequest: boolean): Promise<string> {
+        const filePath = `${CONFIG.root}/backend/src/mocks/kata.html`;
+        if (sendRequest) {
+            const html: string = await axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions/${CONFIG.language}`, {headers: {'cookie': CONFIG.cookie}})
+                .then(response => {
+                    return response?.data;
+                });
+            await writeFile(filePath, html);
+        }
+        return await readFile(filePath);
     }
 
     private static parseToKataEntity(html: string): KataEntity {
