@@ -19,7 +19,7 @@ export class KataService {
         const html: string = await this.getHtml(sendRequest);
         const kataEntity: KataEntity = this.parseToKataEntity(html);
         await this.save(kataEntity);
-        console.log(chalk.greenBright('KATA SAVEED'), kataEntity);
+        // console.log(chalk.greenBright('KATA SAVEED'), kataEntity);
         // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity.kataLanguageEntities.map(k => k.solutions));
     }
 
@@ -47,7 +47,9 @@ export class KataService {
         kle.solutions = this.getSolutions(html);
         kle.testCases = this.getTestCases(afterHeader);
         this.setCompletions(kataEntity, kle, stats);
-        push(kataEntity.kataLanguageEntities, kle);
+        // console.log(chalk.redBright('kataEntity.kataLanguageEntities'), kataEntity);
+        push(kataEntity, 'kataLanguageEntities', kle);
+        // console.log(chalk.redBright('kataEntity.kataLanguageEntities'), kataEntity);
         return kataEntity;
     }
 
@@ -80,7 +82,7 @@ export class KataService {
             const solutionEntity = new SolutionEntity(code);
             solutionEntity.bestPractices = +this.getFirstMatch(html, /Best Practices<span>(\d+)<\/span>/s);
             solutionEntity.clever = +this.getFirstMatch(html, /Clever<span>(\d+)<\/span>/s);
-            push(solutionEntities, solutionEntity);
+            solutionEntities.push(solutionEntity);
         }
         return solutionEntities;
     }
@@ -101,15 +103,18 @@ export class KataService {
 
     private static async save(kataEntity: KataEntity) {
         console.log(chalk.yellowBright('KLE  EXISTSSSSS ???'), kataEntity.name);
-        await saveIfNotExists(kataEntity, {name: kataEntity.name});
-        if (!await this.kleAlreadyExists(kataEntity)) {
+        const dbEntity: KataEntity = await saveIfNotExists(kataEntity, {name: kataEntity.name});
+        if (!await this.kleAlreadyExists(dbEntity)) {
             console.log(chalk.greenBright('KLE NOT ALREADY EXISTSSSSS'), kataEntity.name);
+            const kle: KataLanguageEntity = kataEntity.kataLanguageEntities.find(k => k.language === CONFIG.language);
+            kle.kataEntity = dbEntity;
+            await kle.save();
         }
     }
 
-    private static async kleAlreadyExists(kataEntity: KataEntity): Promise<boolean> {
-        const kleDb: KataLanguageEntity = await KataLanguageEntityService.getKataLanguage(kataEntity, CONFIG.language);
-        console.log(chalk.magentaBright('KLE DBBBB'), kleDb);
-        return false;
+    private static async kleAlreadyExists(dbEntity: KataEntity): Promise<boolean> {
+        const kleDb: KataLanguageEntity = await KataLanguageEntityService.findKataLanguage(dbEntity.id, CONFIG.language);
+        console.log(chalk.magentaBright('KLE DBBBB'), !!kleDb);
+        return !!kleDb;
     }
 }
