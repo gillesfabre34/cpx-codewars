@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as chalk from 'chalk';
 import { KataLanguageEntity } from '../entities/kata-language.entity';
 import { KataEntity } from '../entities/kata.entity';
-import { removeFile } from '../utils/file-system.util';
+import { readFile, removeFile, writeFile } from '../utils/file-system.util';
 import { CONFIG } from '../const/config';
 
 const axios = require('axios').default;
@@ -13,15 +13,16 @@ export class KataService {
     static async getKata(): Promise<KataEntity> {
         console.log(chalk.yellowBright('GET KATA'), CONFIG.cwId);
         const html: string = await this.getHtml();
-        this.writeKataFile(html);
+        await this.writeKataFile(html);
         const zzz = html.split('TEST CASES');
         console.log(chalk.blueBright('ZZZZZ'), zzz.length);
         return this.parseToKataEntity(html);
     }
 
-    private static writeKataFile(text: string): void {
-        const path = CONFIG.root;
-        // removeFile()
+    private static async writeKataFile(text: string): Promise<void> {
+        const folderPath = `${CONFIG.root}/backend/src/mocks`;
+        const filePath = `${folderPath}/kata.html`;
+        await writeFile(filePath, text);
     }
 
     private static getHtml(): Promise<string> {

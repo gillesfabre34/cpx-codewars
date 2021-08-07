@@ -92,6 +92,10 @@ export function isNodeModulesFolder(folder: string): boolean {
     return lastSubFolder(folder) === 'node_modules';
 }
 
+export async function readFile(path: string): Promise<string> {
+    return fs.readFileSync(path, 'utf8')
+}
+
 
 function lastSubFolder(folder: string): string {
     const split: string[] = folder?.split('/');
