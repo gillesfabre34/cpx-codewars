@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import * as chalk from 'chalk';
 import { KataLanguageEntity } from '../entities/kata-language.entity';
 import { KataEntity } from '../entities/kata.entity';
-import { readFile, removeFile, writeFile } from '../utils/file-system.util';
+import { readFile, writeFile } from '../utils/file-system.util';
 import { CONFIG } from '../const/config';
+import { SolutionEntity } from '../entities/solution.entity';
 
 const axios = require('axios').default;
 
@@ -13,8 +14,8 @@ export class KataService {
     static async getKata(sendRequest: boolean): Promise<KataEntity> {
         console.log(chalk.yellowBright('GET KATA'), CONFIG.cwId);
         const html: string = await this.getHtml(sendRequest);
-        console.log(chalk.blueBright('CONTENTTTT'), html);
-        const zzz = html.split('TEST CASES');
+        // console.log(chalk.blueBright('CONTENTTTT'), html);
+        const zzz = html.split('Test Cases:');
         console.log(chalk.blueBright('ZZZZZ'), zzz.length);
         return this.parseToKataEntity(html);
     }
@@ -39,11 +40,13 @@ export class KataService {
         kataEntity.name = this.getName(stats);
         kataEntity.stars = this.getStars(stats);
         kataEntity.description = this.getDescription(afterHeader);
-        // kataEntity.testCases = this.getTestCases(afterHeader);
+        kataEntity.testCases = this.getTestCases(afterHeader);
         const kle = new KataLanguageEntity();
+        kle.solutions = this.getSolutions(html);
         this.setCompletions(kataEntity, kle, stats);
         kataEntity.kataLanguageEntities.push(kle);
-        // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity);
+        console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity);
+        // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity.kataLanguageEntities.map(k => k.solutions));
         return kataEntity;
     }
 
@@ -70,13 +73,30 @@ export class KataService {
         return this.getFirstMatch(text, />([\w\s\d]+)<\/h4>/);
     }
 
+    private static getSolutions(text: string): SolutionEntity[] {
+        const solutionEntities: SolutionEntity[] = [];
+        const solutionsList = text.split('solutions_list')[1];
+        let htmlSplit: string[] = solutionsList.split(`<code data-language="${CONFIG.language}">`);
+        htmlSplit = htmlSplit.filter(h => h.includes('Best Practices'));
+        for (const html of htmlSplit) {
+            const endOfCode: number = html.indexOf('</code>');
+            // console.log(chalk.magentaBright('SPLITTTT'), html.length, endOfCode);
+            const code = html.slice(0, endOfCode);
+            const solutionEntity = new SolutionEntity(code);
+            solutionEntity.bestPractices = +this.getFirstMatch(html, /Best Practices<span>(\d+)<\/span>/s);
+            solutionEntity.clever = +this.getFirstMatch(html, /Clever<span>(\d+)<\/span>/s);
+            // console.log(chalk.magentaBright('SOLUTIONNNN'), solutionEntity);
+            solutionEntities.push(solutionEntity);
+        }
+        return solutionEntities;
+    }
+
     private static getStars(text: string): number {
         return +this.getFirstMatch(text, /total_stars'>([\w\s\d]+)</);
     }
 
     private static getTestCases(text: string): string {
-        return this.getFirstMatch(text, /Test Cases/);
-        // return this.getFirstMatch(text, /Test Cases:<\/h5><pre class="p-2 overflow-x-auto">(.+)<\/pre/s);
+        return this.getFirstMatch(text, /Test Cases:<\/h5><pre class="p-2 overflow-x-auto">(.+)<\/pre.+Suggest/s);
     }
 
     private static getFirstMatch(text: string, regex: RegExp): string {
@@ -84,6 +104,6 @@ export class KataService {
         // console.log(chalk.magentaBright('REGEXXXXX'), text);
         // console.log(chalk.magentaBright('REGEXXXXX'), regex);
         // console.log(chalk.magentaBright('KATA ZZZZ'), zzz);
-        return text.match(regex)[1];
+        return text.match(regex) ? text.match(regex)[1] : undefined;
     }
 }

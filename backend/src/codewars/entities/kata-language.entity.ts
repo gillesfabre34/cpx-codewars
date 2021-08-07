@@ -1,6 +1,7 @@
-import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { KataEntity } from './kata.entity';
 import { CONFIG } from '../const/config';
+import { SolutionEntity } from './solution.entity';
 
 @Entity()
 export class KataLanguageEntity extends BaseEntity {
@@ -8,14 +9,11 @@ export class KataLanguageEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    // @OneToOne(() => DeclarationEntity, declaration => declaration.classUT)
-    // declaration: DeclarationEntity;
-
     @ManyToOne(() => KataEntity, kata => kata.kataLanguageEntities, { onDelete: 'CASCADE' })
     kataEntity: KataEntity;
 
-    // @OneToMany(() => MethodUTEntity, methodUT => methodUT.classUT, { cascade: true })
-    // methodUTs: MethodUTEntity[];
+    @OneToMany(() => SolutionEntity, solution => solution.kataLanguageEntity, { cascade: true })
+    solutions: SolutionEntity[];
 
     @Column('text')
     completions: number;
@@ -26,6 +24,7 @@ export class KataLanguageEntity extends BaseEntity {
     constructor() {
         super();
         this.language = CONFIG.language;
+        this.solutions = [];
     }
 
 }
