@@ -1,6 +1,6 @@
 import * as fs from 'fs-extra';
 import { Dirent } from 'fs';
-import { isCapital } from '../../shared/utils/strings.util';
+import { isCapital } from '../../../../shared/utils/strings.util';
 import * as chalk from 'chalk';
 
 const { resolve } = require('path');

@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { KataLanguageEntity } from './kata-language.entity';
 import * as chalk from 'chalk';
+import { CONFIG } from '../const/config';
 
 @Entity()
 export class KataEntity extends BaseEntity {
@@ -38,9 +39,9 @@ export class KataEntity extends BaseEntity {
     @Column('text')
     testCases: string;
 
-    constructor(cwId: string) {
+    constructor() {
         super();
-        this.cwId = cwId;
+        this.cwId = CONFIG.cwId;
         this.kataLanguageEntities = [];
     }
 

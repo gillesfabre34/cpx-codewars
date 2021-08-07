@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { KataEntity } from './kata.entity';
+import { CONFIG } from '../const/config';
 
 @Entity()
 export class KataLanguageEntity extends BaseEntity {
@@ -22,9 +23,9 @@ export class KataLanguageEntity extends BaseEntity {
     @Column('text')
     language: string;
 
-    constructor(language: string) {
+    constructor() {
         super();
-        this.language = language;
+        this.language = CONFIG.language;
     }
 
 }

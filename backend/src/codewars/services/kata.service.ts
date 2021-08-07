@@ -1,28 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import * as chalk from 'chalk';
-import { KataLanguageEntity } from '../db/entities/kata-language.entity';
-import { KataEntity } from '../db/entities/kata.entity';
+import { KataLanguageEntity } from '../entities/kata-language.entity';
+import { KataEntity } from '../entities/kata.entity';
+import { removeFile } from '../utils/file-system.util';
+import { CONFIG } from '../const/config';
 
 const axios = require('axios').default;
 
 @Injectable()
-export class CWService {
+export class KataService {
 
-    static async getKata(cwId: string, language: string): Promise<KataEntity> {
-        console.log(chalk.yellowBright('GET KATA'), cwId);
-        const html: string = await this.getHtml(cwId, language);
-        return this.parseToKataEntity(cwId, language, html);
+    static async getKata(): Promise<KataEntity> {
+        console.log(chalk.yellowBright('GET KATA'), CONFIG.cwId);
+        const html: string = await this.getHtml();
+        this.writeKataFile(html);
+        const zzz = html.split('TEST CASES');
+        console.log(chalk.blueBright('ZZZZZ'), zzz.length);
+        return this.parseToKataEntity(html);
     }
 
-    private static getHtml(cwId: string, language: string): Promise<string> {
-        return axios.get(`https://www.codewars.com/kata/${cwId}/solutions/${language}`)
+    private static writeKataFile(text: string): void {
+        const path = CONFIG.root;
+        // removeFile()
+    }
+
+    private static getHtml(): Promise<string> {
+        return axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions/${CONFIG.language}`)
             .then(response => {
                 return response?.data;
             });
     }
 
-    private static parseToKataEntity(cwId: string, language: string, html: string): KataEntity {
-        const kataEntity = this.loadKata(cwId);
+    private static parseToKataEntity(html: string): KataEntity {
+        const kataEntity = this.loadKata();
         const afterHeader: string = html.split('</header>')[1];
         const stats: string = afterHeader.split('Choose language...')[0];
         kataEntity.kyu = this.getKyu(stats);
@@ -30,16 +40,16 @@ export class CWService {
         kataEntity.stars = this.getStars(stats);
         kataEntity.description = this.getDescription(afterHeader);
         // kataEntity.testCases = this.getTestCases(afterHeader);
-        const kle = new KataLanguageEntity(language);
+        const kle = new KataLanguageEntity();
         this.setCompletions(kataEntity, kle, stats);
         kataEntity.kataLanguageEntities.push(kle);
-        console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity);
+        // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity);
         return kataEntity;
     }
 
-    // TODO: load Kata from db if already exists
-    private static loadKata(cwId: string): KataEntity {
-        return new KataEntity(cwId);
+    // TODO: load Kata from codewars if already exists
+    private static loadKata(): KataEntity {
+        return new KataEntity();
     }
 
     private static setCompletions(kataEntity: KataEntity, kle: KataLanguageEntity, text: string): void {
@@ -71,9 +81,9 @@ export class CWService {
 
     private static getFirstMatch(text: string, regex: RegExp): string {
         const zzz = text.match(regex);
-        console.log(chalk.magentaBright('REGEXXXXX'), text);
-        console.log(chalk.magentaBright('REGEXXXXX'), regex);
-        console.log(chalk.magentaBright('KATA ZZZZ'), zzz);
+        // console.log(chalk.magentaBright('REGEXXXXX'), text);
+        // console.log(chalk.magentaBright('REGEXXXXX'), regex);
+        // console.log(chalk.magentaBright('KATA ZZZZ'), zzz);
         return text.match(regex)[1];
     }
 }
