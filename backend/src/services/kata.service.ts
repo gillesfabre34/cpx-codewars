@@ -16,7 +16,7 @@ const axios = require('axios').default;
 export class KataService {
 
     static async getKata(): Promise<void> {
-        console.log(chalk.yellowBright('GET KATA'), CONFIG.cwId);
+        console.log(chalk.cyanBright('GET KATA'), CONFIG.cwId);
         const html: string = await this.getHtml();
         // console.log(chalk.greenBright('HTMLLLL'), html?.slice(0,10000));
         const kataEntity: KataEntity = this.parseToKataEntity(html);
@@ -28,7 +28,7 @@ export class KataService {
     private static async getHtml(): Promise<string> {
         const filePath = `${CONFIG.root}/backend/src/mocks/kata.html`;
         if (CONFIG.sendRequest) {
-            const DEBUG_DISPLAY_ASK_SOLUTIONS = true;
+            const DEBUG_DISPLAY_ASK_SOLUTIONS = false;
             let html: string;
             if (DEBUG_DISPLAY_ASK_SOLUTIONS) {
                 await axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions?show-solutions=1`, {headers: {'cookie': CONFIG.cookie}})
@@ -73,7 +73,7 @@ export class KataService {
     private static setCompletions(kataEntity: KataEntity, kle: KataLanguageEntity, text: string): void {
         const regex = /icon-moon-bullseye[\w\s\d-]+"><\/i>([\w\s\d,]+) <span class='opacity-75'>of<\/span> ([\w\s\d,]+)</;
         kle.completions = +text.match(regex)[1].replace(',', '.');
-        kataEntity.completions = +text.match(regex)[2].replace(',', '.');
+        kataEntity.completions = text.match(regex)[2].replace(',', '.');
     }
 
     private static getDescription(text: string): string {
@@ -85,7 +85,7 @@ export class KataService {
     }
 
     private static getName(text: string): string {
-        return this.getFirstMatch(text, />([\w\s\d\/!?.]+)<\/h4>/);
+        return this.getFirstMatch(text, />([\w\s\d\/!?.,]+)<\/h4>/);
     }
 
     private static getSolutions(text: string): SolutionEntity[] {
