@@ -72,7 +72,7 @@ export class KataService {
 
     private static setCompletions(kataEntity: KataEntity, kle: KataLanguageEntity, text: string): void {
         const regex = /icon-moon-bullseye[\w\s\d-]+"><\/i>([\w\s\d,]+) <span class='opacity-75'>of<\/span> ([\w\s\d,]+)</;
-        kle.completions = +text.match(regex)[1].replace(',', '.');
+        kle.completions = text.match(regex)[1].replace(',', '.');
         kataEntity.completions = text.match(regex)[2].replace(',', '.');
     }
 
@@ -85,7 +85,7 @@ export class KataService {
     }
 
     private static getName(text: string): string {
-        return this.getFirstMatch(text, />([\w\s\d\/!?.,]+)<\/h4>/);
+        return this.getFirstMatch(text, />([\w\s\d\/!?.,'#\-]+)<\/h4>/);
     }
 
     private static getSolutions(text: string): SolutionEntity[] {
@@ -122,7 +122,7 @@ export class KataService {
         console.log(chalk.cyanBright('KATA NAMEEEEE'), kataEntity?.name);
         if (!kataEntity?.name) {
             throwCustom('No name for kata entity', kataEntity);
-            throw Error('errorrrr');
+            throw Error();
         }
         const dbEntity: KataEntity = await saveIfNotExists(kataEntity, {name: kataEntity.name});
         if (!await this.kleAlreadyExists(dbEntity)) {
@@ -134,7 +134,6 @@ export class KataService {
 
     private static async kleAlreadyExists(dbEntity: KataEntity): Promise<boolean> {
         const kleDb: KataLanguageEntity = await KataLanguageEntityService.findKataLanguage(dbEntity.id, CONFIG.language);
-        console.log(chalk.magentaBright('KATA ALREADY EXISTS : '), !!kleDb);
         return !!kleDb;
     }
 }
