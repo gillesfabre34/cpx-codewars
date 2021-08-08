@@ -2,12 +2,12 @@ import { BaseEntity, createConnection, getConnectionOptions } from 'typeorm';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './src/app.module';
 import * as chalk from 'chalk';
-import { TConstructor } from '../shared/types/constructor.type';
 import { throwCustom } from '../shared/utils/errors.util';
 import { DbLoggerService } from './src/services/db-logger.service';
 import { db } from './src/const/db.const';
 import { KataService } from './src/services/kata.service';
 import { SolutionsFilesService } from './src/services/solutions-files.service';
+import { TConstructor } from '../shared/types/constructor.type';
 
 console.log(chalk.yellowBright('Launch backend...'));
 

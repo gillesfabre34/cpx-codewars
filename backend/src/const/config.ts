@@ -5,6 +5,6 @@ export const CONFIG: Config = {
     cwId: '559a28007caad2ac4e000083',
     language: 'javascript',
     root: '/Users/utilisateur/Documents/these/cpx-codewars',
-    sendRequest: true,
+    sendRequest: false,
 }
 
