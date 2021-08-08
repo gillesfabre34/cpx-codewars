@@ -5,6 +5,10 @@ import * as chalk from 'chalk';
 
 const { resolve } = require('path');
 
+export function existsSync(path: string): boolean {
+    return fs.existsSync(path);
+}
+
 /**
  * Returns the name of the file at a given path
  * @param pathFile      // The path of the file

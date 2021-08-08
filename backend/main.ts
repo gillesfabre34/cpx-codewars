@@ -7,8 +7,9 @@ import { throwCustom } from '../shared/utils/errors.util';
 import { DbLoggerService } from './src/services/db-logger.service';
 import { db } from './src/const/db.const';
 import { KataService } from './src/services/kata.service';
+import { SolutionsFilesService } from './src/services/solutions-files.service';
 
-console.log('Launch backend...');
+console.log(chalk.yellowBright('Launch backend...'));
 
 export function startBackend(clear: boolean) {
     getConnectionOptions().then(connectionOptions => {
@@ -21,10 +22,11 @@ export function startBackend(clear: boolean) {
                     await dropSystemUT();
                 }
                 // await bootstrap();
-                await KataService.getKata(false);
+                await KataService.getKata();
+                // await SolutionsFilesService.createFiles();
                 console.log(chalk.yellowBright('Launched backend'));
             } catch (err) {
-                console.error(chalk.redBright("Error in process : "), err.message);
+                console.error(chalk.redBright("Error in process : "), err);
             }
         })
     });

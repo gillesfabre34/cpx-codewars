@@ -2,6 +2,7 @@ import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColum
 import { KataEntity } from './kata.entity';
 import { CONFIG } from '../const/config';
 import { SolutionEntity } from './solution.entity';
+import * as chalk from 'chalk';
 
 @Entity()
 export class KataLanguageEntity extends BaseEntity {
@@ -27,6 +28,13 @@ export class KataLanguageEntity extends BaseEntity {
     constructor() {
         super();
         this.language = CONFIG.language;
+    }
+
+    get path(): string {
+        console.log(chalk.blueBright('this.kataEntityyyy'), this.kataEntity);
+        const fileName: string = this.kataEntity.name.toLowerCase()
+            .replace(' ', '-');
+        return `${CONFIG.root}/dist/solutions/${fileName}`;
     }
 
 }
