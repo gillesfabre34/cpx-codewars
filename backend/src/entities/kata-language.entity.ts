@@ -17,7 +17,7 @@ export class KataLanguageEntity extends BaseEntity {
     solutions: SolutionEntity[];
 
     @Column('text')
-    completions: number;
+    completions: string;
 
     @Column('text')
     language: string;
