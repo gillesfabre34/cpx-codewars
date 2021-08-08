@@ -8,28 +8,45 @@ import { SolutionEntity } from '../entities/solution.entity';
 import { saveIfNotExists } from '../utils/save-if-not-exists.util';
 import { push } from '../../../shared/utils/arrays.util';
 import { KataLanguageEntityService } from './kata-language-entity.service';
+import { throwCustom } from '../../../shared/utils/errors.util';
 
 const axios = require('axios').default;
 
 @Injectable()
 export class KataService {
 
-    static async getKata(sendRequest: boolean): Promise<void> {
-        console.log(chalk.yellowBright('GET KATA'), CONFIG.cwId);
-        const html: string = await this.getHtml(sendRequest);
+    static async getKata(): Promise<void> {
+        console.log(chalk.cyanBright('GET KATA'), CONFIG.cwId);
+        const html: string = await this.getHtml();
+        // console.log(chalk.greenBright('HTMLLLL'), html?.slice(0,10000));
         const kataEntity: KataEntity = this.parseToKataEntity(html);
         await this.save(kataEntity);
-        // console.log(chalk.greenBright('KATA SAVEED'), kataEntity);
+        console.log(chalk.greenBright('KATA SAVEED'), kataEntity.name);
         // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity.kataLanguageEntities.map(k => k.solutions));
     }
 
-    private static async getHtml(sendRequest: boolean): Promise<string> {
+    private static async getHtml(): Promise<string> {
         const filePath = `${CONFIG.root}/backend/src/mocks/kata.html`;
-        if (sendRequest) {
-            const html: string = await axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions/${CONFIG.language}`, {headers: {'cookie': CONFIG.cookie}})
-                .then(response => {
-                    return response?.data;
-                });
+        if (CONFIG.sendRequest) {
+            const DEBUG_DISPLAY_ASK_SOLUTIONS = false;
+            let html: string;
+            if (DEBUG_DISPLAY_ASK_SOLUTIONS) {
+                await axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions?show-solutions=1`, {headers: {'cookie': CONFIG.cookie}})
+                    .then(async responseDisplaySolutions => {
+                        return responseDisplaySolutions?.data;
+                    });
+                console.log(chalk.greenBright('ASKED TO DISPLAY SOLUTIONS'));
+                html = await axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions/${CONFIG.language}`, {headers: {'cookie': CONFIG.cookie}})
+                    .then(response => {
+                        console.log(chalk.greenBright('HTML SOLUTIONS : '), response?.data.slice(0, 100));
+                        return response?.data;
+                    });
+            } else {
+                html = await axios.get(`https://www.codewars.com/kata/${CONFIG.cwId}/solutions/${CONFIG.language}`, {headers: {'cookie': CONFIG.cookie}})
+                    .then(response => {
+                        return response?.data;
+                    });
+            }
             await writeFile(filePath, html);
         }
         return await readFile(filePath);
@@ -56,7 +73,7 @@ export class KataService {
     private static setCompletions(kataEntity: KataEntity, kle: KataLanguageEntity, text: string): void {
         const regex = /icon-moon-bullseye[\w\s\d-]+"><\/i>([\w\s\d,]+) <span class='opacity-75'>of<\/span> ([\w\s\d,]+)</;
         kle.completions = +text.match(regex)[1].replace(',', '.');
-        kataEntity.completions = +text.match(regex)[2].replace(',', '.');
+        kataEntity.completions = text.match(regex)[2].replace(',', '.');
     }
 
     private static getDescription(text: string): string {
@@ -68,7 +85,7 @@ export class KataService {
     }
 
     private static getName(text: string): string {
-        return this.getFirstMatch(text, />([\w\s\d]+)<\/h4>/);
+        return this.getFirstMatch(text, />([\w\s\d\/!?.,]+)<\/h4>/);
     }
 
     private static getSolutions(text: string): SolutionEntity[] {
@@ -102,10 +119,13 @@ export class KataService {
     }
 
     private static async save(kataEntity: KataEntity) {
-        console.log(chalk.yellowBright('KLE  EXISTSSSSS ???'), kataEntity.name);
+        console.log(chalk.cyanBright('KATA NAMEEEEE'), kataEntity?.name);
+        if (!kataEntity?.name) {
+            throwCustom('No name for kata entity', kataEntity);
+            throw Error('errorrrr');
+        }
         const dbEntity: KataEntity = await saveIfNotExists(kataEntity, {name: kataEntity.name});
         if (!await this.kleAlreadyExists(dbEntity)) {
-            console.log(chalk.greenBright('KLE NOT ALREADY EXISTSSSSS'), kataEntity.name);
             const kle: KataLanguageEntity = kataEntity.kataLanguageEntities.find(k => k.language === CONFIG.language);
             kle.kataEntity = dbEntity;
             await kle.save();
@@ -114,7 +134,7 @@ export class KataService {
 
     private static async kleAlreadyExists(dbEntity: KataEntity): Promise<boolean> {
         const kleDb: KataLanguageEntity = await KataLanguageEntityService.findKataLanguage(dbEntity.id, CONFIG.language);
-        console.log(chalk.magentaBright('KLE DBBBB'), !!kleDb);
+        console.log(chalk.magentaBright('KATA ALREADY EXISTS : '), !!kleDb);
         return !!kleDb;
     }
 }
