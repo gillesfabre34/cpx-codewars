@@ -5,6 +5,10 @@ import { Options } from './core/models/options.model';
 import { createOutDir } from './core/services/file.service';
 import { AstFolder } from './json-ast-to-reports/models/ast/ast-folder.model';
 import * as chalk from 'chalk';
+import { LanguageToJsonAst } from './languages-to-json-ast/language-to-json-ast';
+import { Framework } from './core/types/framework.type';
+import { Language } from './core/enum/language.enum';
+import { JsonAstToReports } from './json-ast-to-reports/json-ast-to-reports';
 
 const ora = require('ora');
 const path = require('path');
@@ -48,29 +52,23 @@ async function start(): Promise<number> {
     if (!ENABLE_CONSOLE_REPORT) {
         createOutDir();
     }
-    spinner.start('AST generation');
-    await useWorker(
-        `${__dirname}/workers/ast-worker.js`,
-        {
-            pathCommand: process.cwd(),
-            modifiedPath: pathToAnalyse,
-            pathGeneseNodeJs: __dirname,
-            language: LANGUAGE,
-            framework: FRAMEWORK
-        });
-    spinner.succeed();
-    spinner.start('Report generation');
-    const reportResult: { message: any; astFolder: AstFolder } = await useWorker(
-        `${__dirname}/workers/report-worker.js`,
-        {
-            pathCommand: process.cwd(),
-            modifiedPath: pathToAnalyse,
-            pathGeneseNodeJs: __dirname,
-            markdown: ENABLE_MARKDOWN_REPORT,
-            consoleMode: ENABLE_CONSOLE_REPORT,
-            framework: FRAMEWORK
-        });
-    spinner.succeed();
+    console.log(chalk.yellowBright('AST generation...'));
+    Options.setOptions(process.cwd(), pathToAnalyse, __dirname, FRAMEWORK as Framework);
+    LanguageToJsonAst.start(Options.pathFolderToAnalyze, LANGUAGE as Language)
+    console.log(chalk.yellowBright('Report generation...'));
+    const reportResult = JsonAstToReports.start(Options.pathCommand, undefined, ENABLE_MARKDOWN_REPORT, ENABLE_CONSOLE_REPORT)
+
+    // const reportResult: { message: any; astFolder: AstFolder } = await useWorker(
+    //     `${__dirname}/workers/report-worker.js`,
+    //     {
+    //         pathCommand: process.cwd(),
+    //         modifiedPath: pathToAnalyse,
+    //         pathGeneseNodeJs: __dirname,
+    //         markdown: ENABLE_MARKDOWN_REPORT,
+    //         consoleMode: ENABLE_CONSOLE_REPORT,
+    //         framework: FRAMEWORK
+    //     });
+    // spinner.succeed();
 
     if (reportResult.message?.length > 0) {
         console.log();

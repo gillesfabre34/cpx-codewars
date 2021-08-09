@@ -3,7 +3,9 @@
     "version": "0.0.1",
     "scripts": {
         "back": "ts-node backend/main.ts",
-        "genese": "ts-node genese-cpx/src/index.ts"
+        "build": "tsc && cp -r genese-cpx/src/json-ast-to-reports/templates dist/genese-cpx/src/json-ast-to-reports/templates && cp -r genese-cpx/src/automatic-refactoring/templates dist/genese-cpx/src/automatic-refactoring/templates && cp -r genese-cpx/src/core/chartjs dist/genese-cpx/src/core/chartjs",
+        "genese": "ts-node genese-cpx/src/index.ts",
+        "start": "npm run build && node dist/genese-cpx/src/index-debug.js"
     },
     "private": true,
     "dependencies": {

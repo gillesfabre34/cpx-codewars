@@ -1,9 +1,9 @@
 import { BaseEntity, createConnection, getConnectionOptions } from 'typeorm';
-import { DbLoggerService } from '../backend/src/db/services/db-logger.service';
-import { db } from '../backend/src/db/const/db.const';
 // import { StatementUTEntity } from '../backend/src/codewars/entities/statement-ut.entity';
 import * as chalk from 'chalk';
-import { TConstructor } from '../shared/types/constructor.type';
+import { DbLoggerService } from '../../backend/src/services/db-logger.service';
+import { db } from '../../backend/src/const/db.const';
+import { TConstructor } from '../types/constructor.type';
 
 // -----------------------------------------   Clear DB   -----------------------------------------
 

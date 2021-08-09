@@ -33,7 +33,7 @@ export class KataLanguageEntity extends BaseEntity {
     get path(): string {
         const fileName: string = this.kataEntity.name.toLowerCase()
             .replace(/\s/g, '-');
-        return `${CONFIG.root}/dist/solutions/${fileName}.js`;
+        return `${CONFIG.root}/dist/solutions/${fileName}.ts`;
     }
 
 }

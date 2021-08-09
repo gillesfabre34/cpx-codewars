@@ -29,7 +29,7 @@ export const DEV_MOCK = '/Users/utilisateur/Documents/perso_gilles_fabre/projets
 /**
  * The custom weights included in the libraries-weights Json files
  */
-export const WEIGHTS = WeightsService.merge();
+// export const WEIGHTS = WeightsService.merge();
 
 
 /**

@@ -29,6 +29,7 @@ export class SolutionsFilesService {
     }
 
     static getCode(kle: KataLanguageEntity): string {
-        return kle.solutionEntities.map(s => cleanHtml(s.code)).join('\n\n');
+        const code: string = kle.solutionEntities.map(s => cleanHtml(s.code)).join('\n\n');
+        return `${code} \n`;
     }
 }

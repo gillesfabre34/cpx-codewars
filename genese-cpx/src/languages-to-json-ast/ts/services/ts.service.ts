@@ -2,6 +2,7 @@ import { KindAliases } from '../../globals.const';
 import { Expression, Node, ParameterDeclaration, SyntaxKind, VariableDeclaration, VariableStatement } from 'ts-morph';
 import { isFunctionKind } from '../types/function-kind.type';
 import { FunctionNode } from '../types/function-node.type';
+import * as chalk from 'chalk';
 
 /**
  * Service for operations on Node elements (ts-morph nodes)
@@ -93,11 +94,15 @@ export class Ts {
 
 
     static getParameterType(parameterNode: ParameterDeclaration): string {
-        const trivialInitializer: string = this.getTrivialInitializer(parameterNode);
-        if (!this.hasCompilerNodeType(parameterNode) && !trivialInitializer) {
-            return undefined;
-        } else {
-            return this.sanitizeType(parameterNode.getType().getText());
+        try {
+            const trivialInitializer: string = this.getTrivialInitializer(parameterNode);
+            if (!this.hasCompilerNodeType(parameterNode) && !trivialInitializer) {
+                return undefined;
+            } else {
+                return this.sanitizeType(parameterNode.getType().getText());
+            }
+        } catch (err) {
+            return 'any';
         }
     }
 

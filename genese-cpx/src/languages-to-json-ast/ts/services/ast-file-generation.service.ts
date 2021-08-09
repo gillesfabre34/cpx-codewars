@@ -5,7 +5,7 @@ import { AstNodeInterface } from '../../../core/interfaces/ast/ast-node.interfac
 import { DefinitionInfo, Identifier, Node, SourceFile } from 'ts-morph';
 import { SyntaxKind } from '../../../core/enum/syntax-kind.enum';
 import { CpxFactorsInterface } from '../../../core/interfaces/cpx-factors.interface';
-import { project, WEIGHTED_METHODS, WEIGHTS } from '../../globals.const';
+import { project, WEIGHTED_METHODS } from '../../globals.const';
 import { Ts } from './ts.service';
 import { randomString } from '../../../core/services/tools.service';
 import { Options } from '../../../core/models/options.model';
@@ -134,18 +134,19 @@ export class AstFileGenerationService {
      * @param nodeName          // The name of the Node (redundant, but avoids new calculation of this value)
      */
     useWeight(definition: DefinitionInfo, nodeName: string): CpxFactorsInterface {
-        if (!definition) {
-            return undefined;
-        }
-        const lib = this.library(definition);
-        const method = lib ? Object.keys(WEIGHTS[lib]).find(e => e === nodeName) : undefined;
-        return method ?
-            {
-                use: {
-                    method: WEIGHTS[lib][method]
-                }
-            }
-            : undefined;
+        return undefined;
+        // if (!definition) {
+        //     return undefined;
+        // }
+        // const lib = this.library(definition);
+        // const method = lib ? Object.keys(WEIGHTS[lib]).find(e => e === nodeName) : undefined;
+        // return method ?
+        //     {
+        //         use: {
+        //             method: WEIGHTS[lib][method]
+        //         }
+        //     }
+        //     : undefined;
     }
 
 

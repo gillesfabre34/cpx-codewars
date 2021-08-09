@@ -1,5 +1,6 @@
 import { Code } from '../models/code/code.model';
 import { CodeLine } from '../models/code/code-line.model';
+import * as chalk from 'chalk';
 
 /**
  * Service managing Code objects
@@ -46,6 +47,9 @@ export class CodeService {
         if (position < 0 || position > code?.end) {
             return 0;
         }
+        // console.log(chalk.yellowBright('CODEEEEE'), code);
+        // console.log(chalk.magentaBright('CODE LINESSSSS'), code.lines?.length, position);
+        // console.log(chalk.magentaBright('FILTERRRR'), code.lines.filter(l => l.start <= position && l.end > position));
         return  code.lines.filter(l => l.start <= position && l.end > position)?.[0].issue;
     }
 

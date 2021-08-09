@@ -256,6 +256,7 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
         if (this._lineEnd) {
             return this._lineEnd;
         }
+        console.log(chalk.blueBright('LINE ENDDDD'), this.astFile?.name);
         this._lineEnd = CodeService.getLineIssue(this.astFile?.code, this.end);
         return this._lineEnd;
     }
@@ -265,6 +266,7 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
         if (this._linePos) {
             return this._linePos;
         }
+        console.log(chalk.cyanBright('LINE POSSSS'), this.astFile?.name);
         this._linePos = CodeService.getLineIssue(this.astFile?.code, this.pos);
         return this._linePos;
     }
@@ -274,6 +276,7 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
         if (this._lineStart) {
             return this._lineStart;
         }
+        console.log(chalk.magentaBright('LINE STARTTTT'), this.astFile?.name);
         this._lineStart = CodeService.getLineIssue(this.astFile?.code, this.start);
         return this._lineStart;
     }
