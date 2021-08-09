@@ -56,31 +56,19 @@ async function start(): Promise<number> {
     Options.setOptions(process.cwd(), pathToAnalyse, __dirname, FRAMEWORK as Framework);
     LanguageToJsonAst.start(Options.pathFolderToAnalyze, LANGUAGE as Language)
     console.log(chalk.yellowBright('Report generation...'));
-    const reportResult = JsonAstToReports.start(Options.pathCommand, undefined, ENABLE_MARKDOWN_REPORT, ENABLE_CONSOLE_REPORT)
+    const reportResult = JsonAstToReports.start(Options.pathCommand, undefined, ENABLE_MARKDOWN_REPORT, ENABLE_CONSOLE_REPORT);
 
-    // const reportResult: { message: any; astFolder: AstFolder } = await useWorker(
-    //     `${__dirname}/workers/report-worker.js`,
-    //     {
-    //         pathCommand: process.cwd(),
-    //         modifiedPath: pathToAnalyse,
-    //         pathGeneseNodeJs: __dirname,
-    //         markdown: ENABLE_MARKDOWN_REPORT,
-    //         consoleMode: ENABLE_CONSOLE_REPORT,
-    //         framework: FRAMEWORK
-    //     });
-    // spinner.succeed();
-
-    if (reportResult.message?.length > 0) {
+    if (reportResult?.length > 0) {
         console.log();
-        if (typeof reportResult.message === 'object') {
-            console.table(reportResult.message, ['filename', 'methodName', 'cpxIndex']);
+        if (typeof reportResult === 'object') {
+            console.table(reportResult, ['filename', 'methodName', 'cpxIndex']);
         } else {
-            const stats: any = reportResult.astFolder['_stats'];
+            const stats: any = JsonAstToReports.astFolder['_stats'];
             console.log(chalk.blueBright('Files : '), stats.numberOfFiles);
             console.log(chalk.blueBright('Methods : '), stats.numberOfMethods);
             console.log(chalk.blueBright('Cognitive Complexity : '), stats.totalCognitiveComplexity);
             console.log(chalk.blueBright('Cyclomatic Complexity : '), stats.totalCyclomaticComplexity);
-            console.log(reportResult.message);
+            console.log(reportResult);
         }
         if (ENABLE_CONSOLE_REPORT) {
             return 1;

@@ -2,660 +2,429 @@
 	"astFolder": {
 		"path": "/Users/utilisateur/Documents/these/cpx-codewars/dist/solutions/",
 		"astFiles": [
+		],
+		"children": [
 			{
-				"name": "beginner-series-#3-sum-of-numbers.ts",
-				"text": "const GetSum = (a, b) => {\n  let min = Math.min(a, b),\n      max = Math.max(a, b);\n  return (max - min + 1) * (min + max) / 2;\n}\n\nfunction GetSum( a,b )\n{\n   if (a == b) return a;\n   else if (a < b) return a + GetSum(a+1, b);\n   else return a + GetSum(a-1,b);\n}\n\nfunction GetSum(a,b)\n{\n  return (Math.abs(a - b) + 1) * (a+b) / 2;\n}\n\nfunction GetSum( a,b )\n{\n  tmp = 0;\n  \n  if(a < b)\n    while(a <= b) tmp += a++;\n  else\n    while(a >= b) tmp += a--;\n      \n  return tmp;\n}\n\nfunction GetSum( a,b ) {\n   var result = 0;\n   var bigger = a > b ? a : b;\n   var smaller = a > b ? b : a;\n   for (var i = smaller; i <= bigger; i++) { result += i }\n   return result\n}\n\nfunction GetSum( a,b )\n{\n//if both a and b are equal return a\n   if(a===b){\n     return a;\n   }\n   var result = 0;\n   \n   var x = a, y = b;\n // check the larger and smaller numbers and assign them to x and y\n   if(a > b) {\n      x = b, y = a;\n   }\n //in a loop add the numbers from the smaller one until it reaches the larger number\n   for(var i = x; i <=y; i++ ) {\n     result += i;\n   }\n   return result;\n   \n}\n\nfunction getSum( a, b ){\n  return Array.from({length: b >= a ? b-a+1 : a-b+1}, (_, i)=> b >= a ? i+a : i+b).reduce((a, b)=> a + b, 0)\n}\n\nfunction GetSum(a, b) {\n  return (a + b) * (Math.abs(a - b) + 1) / 2;\n}\n\nconst GetSum= (a, b, x=Math.min(a,b), y=Math.max(a,b)) => (y-x+1)*(x+y)/2\n\nfunction GetSum(a, b) {\n   return a > b ? GetSum(b, a) : (b - a + 1) * (b + a) / 2;\n} \n",
-				"astNode": {
-					"end": 1447,
-					"kind": "SourceFile",
-					"pos": 0,
-					"start": 0,
-					"children": [
-						{
-							"end": 128,
-							"kind": "VariableStatement",
+				"path": "/Users/utilisateur/Documents/these/cpx-codewars/dist/solutions/sum-of-digits-/",
+				"astFiles": [
+					{
+						"name": "-digital-root.ts",
+						"text": "function digital_root(n) {\n  return (n - 1) % 9 + 1;\n}\n\nfunction digital_root(n) {\n  if (n < 10) return n;\n  \n  return digital_root(\n    n.toString().split('').reduce(function(acc, d) { return acc + +d; }, 0));\n}\n\nfunction digital_root(n) {\n  if (n < 10)\n    return n;\n\n  for (var sum = 0, i = 0, n = String(n); i < n.length; i++)\n    sum += Number(n[i]);\n   \n  return digital_root(sum);\n}\n\nfunction digital_root(n){\n    n = eval(n.toString().split('').join('+'));\n\n    if (n > 9) {\n        return digital_root(n);\n    }\n\n    return n;\n}\n\nfunction digital_root(n) {\n  if (n < 10) return n\n  return digital_root(n % 10 + digital_root(Math.floor(n / 10)))\n}\n\nfunction digital_root(n) {\n  return--n%9+1;\n}\n\nfunction digital_root(n) {\n  // ...\n  var output = []\n  var s_number = n.toString();\n\nfor (var i = 0, len = s_number.length; i < len; i += 1) {\n    output.push(+s_number.charAt(i));\n}\n  if (output.length === 1) {\n    return output[0]\n  }\n\n  for (var i = 0, sum = 0; i < output.length; sum += output[i++]);\n  \n\n  return digital_root(sum)\n}\n\nfunction digital_root(n) {\n  while (n > 9) { n = (''+n).split('').reduce(function(s,d) {return +s + +d;}); }\n  return n;\n}\n\nfunction digital_root(n) {\n\tlet finalSum = 10, tempSum = 0;\n  while (finalSum > 9) {\n\t\twhile (n > 9) {\n\t\t\ttempSum += n%10;\n\t\t\tn = parseInt(n/10);\n\t\t}\n    tempSum += n;\n    finalSum = tempSum;\n    n = finalSum;\n    tempSum = 0;\n\t}\n  return finalSum;\n}\n\nfunction digital_root(n) {\n  if(n < 10) {\n    return n;\n  }\n  n = n.toString().split(\"\");\n  var result = 0;\n  for(var i = 0; i < n.length; i++) {\n    result += parseInt(n[i]);\n  }\n  return result < 10 ? result : digital_root(result);\n} \n",
+						"astNode": {
+							"end": 1657,
+							"kind": "SourceFile",
 							"pos": 0,
 							"start": 0,
-							"type": "",
 							"children": [
 								{
-									"end": 128,
-									"kind": "VariableDeclarationList",
+									"end": 54,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
 									"pos": 0,
 									"start": 0,
 									"children": [
 										{
-											"end": 128,
-											"kind": "VariableDeclaration",
-											"pos": 5,
-											"start": 6,
+											"end": 21,
+											"kind": "Identifier",
+											"name": "digital_root",
+											"pos": 8,
+											"start": 9
+										},
+										{
+											"end": 23,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 22,
+											"start": 22,
 											"children": [
 												{
-													"end": 12,
+													"end": 23,
 													"kind": "Identifier",
-													"name": "GetSum",
-													"pos": 5,
-													"start": 6
-												},
+													"name": "n",
+													"pos": 22,
+													"start": 22
+												}
+											]
+										},
+										{
+											"end": 54,
+											"kind": "Block",
+											"pos": 24,
+											"start": 25,
+											"children": [
 												{
-													"end": 128,
-													"kind": "ArrowFunction",
-													"pos": 14,
-													"start": 15,
+													"end": 52,
+													"kind": "Keyword",
+													"pos": 26,
+													"start": 29,
 													"children": [
 														{
-															"end": 17,
-															"kind": "Parameter",
-															"name": "a",
-															"pos": 16,
-															"start": 16,
+															"end": 51,
+															"kind": "BinaryExpression",
+															"pos": 35,
+															"start": 36,
 															"children": [
 																{
-																	"end": 17,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 16,
-																	"start": 16
-																}
-															]
-														},
-														{
-															"end": 20,
-															"kind": "Parameter",
-															"name": "b",
-															"pos": 18,
-															"start": 19,
-															"children": [
-																{
-																	"end": 20,
-																	"kind": "Identifier",
-																	"name": "b",
-																	"pos": 18,
-																	"start": 19
-																}
-															]
-														},
-														{
-															"end": 24,
-															"kind": "EqualsGreaterThanToken",
-															"pos": 21,
-															"start": 22
-														},
-														{
-															"end": 128,
-															"kind": "Block",
-															"pos": 24,
-															"start": 25,
-															"children": [
-																{
-																	"end": 82,
-																	"kind": "VariableStatement",
-																	"pos": 26,
-																	"start": 29,
-																	"type": "",
+																	"end": 47,
+																	"kind": "BinaryExpression",
+																	"pos": 35,
+																	"start": 36,
 																	"children": [
 																		{
-																			"end": 81,
-																			"kind": "VariableDeclarationList",
-																			"pos": 26,
-																			"start": 29,
+																			"end": 43,
+																			"kind": "ParenthesizedExpression",
+																			"pos": 35,
+																			"start": 36,
 																			"children": [
 																				{
-																					"end": 53,
-																					"kind": "VariableDeclaration",
-																					"pos": 32,
-																					"start": 33,
+																					"end": 42,
+																					"kind": "BinaryExpression",
+																					"pos": 37,
+																					"start": 37,
 																					"children": [
 																						{
-																							"end": 36,
+																							"end": 38,
 																							"kind": "Identifier",
-																							"name": "min",
-																							"pos": 32,
-																							"start": 33
+																							"name": "n",
+																							"pos": 37,
+																							"start": 37
 																						},
 																						{
-																							"end": 53,
-																							"kind": "CallExpression",
+																							"end": 40,
+																							"kind": "MinusToken",
 																							"pos": 38,
-																							"start": 39,
-																							"children": [
-																								{
-																									"end": 47,
-																									"kind": "PropertyAccessExpression",
-																									"pos": 38,
-																									"start": 39,
-																									"children": [
-																										{
-																											"end": 43,
-																											"kind": "Identifier",
-																											"name": "Math",
-																											"pos": 38,
-																											"start": 39
-																										},
-																										{
-																											"end": 47,
-																											"kind": "Identifier",
-																											"name": "min",
-																											"pos": 44,
-																											"start": 44,
-																											"type": "function"
-																										}
-																									]
-																								},
-																								{
-																									"end": 49,
-																									"kind": "Identifier",
-																									"name": "a",
-																									"pos": 48,
-																									"start": 48
-																								},
-																								{
-																									"end": 52,
-																									"kind": "Identifier",
-																									"name": "b",
-																									"pos": 50,
-																									"start": 51
-																								}
-																							]
-																						}
-																					]
-																				},
-																				{
-																					"end": 81,
-																					"kind": "VariableDeclaration",
-																					"pos": 54,
-																					"start": 61,
-																					"children": [
-																						{
-																							"end": 64,
-																							"kind": "Identifier",
-																							"name": "max",
-																							"pos": 54,
-																							"start": 61
+																							"start": 39
 																						},
 																						{
-																							"end": 81,
-																							"kind": "CallExpression",
-																							"pos": 66,
-																							"start": 67,
-																							"children": [
-																								{
-																									"end": 75,
-																									"kind": "PropertyAccessExpression",
-																									"pos": 66,
-																									"start": 67,
-																									"children": [
-																										{
-																											"end": 71,
-																											"kind": "Identifier",
-																											"name": "Math",
-																											"pos": 66,
-																											"start": 67
-																										},
-																										{
-																											"end": 75,
-																											"kind": "Identifier",
-																											"name": "max",
-																											"pos": 72,
-																											"start": 72,
-																											"type": "function"
-																										}
-																									]
-																								},
-																								{
-																									"end": 77,
-																									"kind": "Identifier",
-																									"name": "a",
-																									"pos": 76,
-																									"start": 76
-																								},
-																								{
-																									"end": 80,
-																									"kind": "Identifier",
-																									"name": "b",
-																									"pos": 78,
-																									"start": 79
-																								}
-																							]
+																							"end": 42,
+																							"kind": "Literal",
+																							"pos": 40,
+																							"start": 41
 																						}
 																					]
 																				}
 																			]
+																		},
+																		{
+																			"end": 45,
+																			"kind": "PercentToken",
+																			"pos": 43,
+																			"start": 44
+																		},
+																		{
+																			"end": 47,
+																			"kind": "Literal",
+																			"pos": 45,
+																			"start": 46
 																		}
 																	]
 																},
 																{
-																	"end": 126,
-																	"kind": "Keyword",
-																	"pos": 82,
-																	"start": 85,
+																	"end": 49,
+																	"kind": "PlusToken",
+																	"pos": 47,
+																	"start": 48
+																},
+																{
+																	"end": 51,
+																	"kind": "Literal",
+																	"pos": 49,
+																	"start": 50
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"end": 212,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 54,
+									"start": 56,
+									"children": [
+										{
+											"end": 77,
+											"kind": "Identifier",
+											"name": "digital_root",
+											"pos": 64,
+											"start": 65
+										},
+										{
+											"end": 79,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 78,
+											"start": 78,
+											"children": [
+												{
+													"end": 79,
+													"kind": "Identifier",
+													"name": "n",
+													"pos": 78,
+													"start": 78
+												}
+											]
+										},
+										{
+											"end": 212,
+											"kind": "Block",
+											"pos": 80,
+											"start": 81,
+											"children": [
+												{
+													"end": 106,
+													"kind": "IfStatement",
+													"pos": 82,
+													"start": 85,
+													"children": [
+														{
+															"end": 95,
+															"kind": "BinaryExpression",
+															"pos": 89,
+															"start": 89,
+															"children": [
+																{
+																	"end": 90,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 89,
+																	"start": 89
+																},
+																{
+																	"end": 92,
+																	"kind": "LessThanToken",
+																	"pos": 90,
+																	"start": 91
+																},
+																{
+																	"end": 95,
+																	"kind": "Literal",
+																	"pos": 92,
+																	"start": 93
+																}
+															]
+														},
+														{
+															"end": 106,
+															"kind": "Keyword",
+															"pos": 96,
+															"start": 97,
+															"children": [
+																{
+																	"end": 105,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 103,
+																	"start": 104
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 210,
+													"kind": "Keyword",
+													"pos": 106,
+													"start": 112,
+													"children": [
+														{
+															"end": 209,
+															"kind": "CallExpression",
+															"pos": 118,
+															"start": 119,
+															"children": [
+																{
+																	"end": 131,
+																	"kind": "Identifier",
+																	"name": "digital_root",
+																	"pos": 118,
+																	"start": 119,
+																	"type": "function"
+																},
+																{
+																	"end": 208,
+																	"kind": "CallExpression",
+																	"pos": 132,
+																	"start": 137,
 																	"children": [
 																		{
-																			"end": 125,
-																			"kind": "BinaryExpression",
-																			"pos": 91,
-																			"start": 92,
+																			"end": 166,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 132,
+																			"start": 137,
 																			"children": [
 																				{
-																					"end": 121,
-																					"kind": "BinaryExpression",
-																					"pos": 91,
-																					"start": 92,
+																					"end": 159,
+																					"kind": "CallExpression",
+																					"pos": 132,
+																					"start": 137,
 																					"children": [
 																						{
-																							"end": 107,
-																							"kind": "ParenthesizedExpression",
-																							"pos": 91,
-																							"start": 92,
+																							"end": 155,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 132,
+																							"start": 137,
 																							"children": [
 																								{
-																									"end": 106,
-																									"kind": "BinaryExpression",
-																									"pos": 93,
-																									"start": 93,
+																									"end": 149,
+																									"kind": "CallExpression",
+																									"pos": 132,
+																									"start": 137,
 																									"children": [
 																										{
-																											"end": 102,
-																											"kind": "BinaryExpression",
-																											"pos": 93,
-																											"start": 93,
+																											"end": 147,
+																											"kind": "PropertyAccessExpression",
+																											"pos": 132,
+																											"start": 137,
 																											"children": [
 																												{
-																													"end": 96,
+																													"end": 138,
 																													"kind": "Identifier",
-																													"name": "max",
-																													"pos": 93,
-																													"start": 93
+																													"name": "n",
+																													"pos": 132,
+																													"start": 137
 																												},
 																												{
-																													"end": 98,
-																													"kind": "MinusToken",
-																													"pos": 96,
-																													"start": 97
-																												},
-																												{
-																													"end": 102,
+																													"end": 147,
 																													"kind": "Identifier",
-																													"name": "min",
-																													"pos": 98,
-																													"start": 99
+																													"name": "toString",
+																													"pos": 139,
+																													"start": 139,
+																													"type": "function"
 																												}
 																											]
-																										},
-																										{
-																											"end": 104,
-																											"kind": "PlusToken",
-																											"pos": 102,
-																											"start": 103
-																										},
-																										{
-																											"end": 106,
-																											"kind": "Literal",
-																											"pos": 104,
-																											"start": 105
 																										}
 																									]
+																								},
+																								{
+																									"end": 155,
+																									"kind": "Identifier",
+																									"name": "split",
+																									"pos": 150,
+																									"start": 150,
+																									"type": "function"
 																								}
 																							]
 																						},
 																						{
-																							"end": 109,
-																							"kind": "AsteriskToken",
-																							"pos": 107,
-																							"start": 108
-																						},
+																							"end": 158,
+																							"kind": "Literal",
+																							"pos": 156,
+																							"start": 156
+																						}
+																					]
+																				},
+																				{
+																					"end": 166,
+																					"kind": "Identifier",
+																					"name": "reduce",
+																					"pos": 160,
+																					"start": 160,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 204,
+																			"kind": "FunctionExpression",
+																			"pos": 167,
+																			"start": 167,
+																			"children": [
+																				{
+																					"end": 179,
+																					"kind": "Parameter",
+																					"name": "acc",
+																					"pos": 176,
+																					"start": 176,
+																					"children": [
 																						{
-																							"end": 121,
-																							"kind": "ParenthesizedExpression",
-																							"pos": 109,
-																							"start": 110,
+																							"end": 179,
+																							"kind": "Identifier",
+																							"name": "acc",
+																							"pos": 176,
+																							"start": 176
+																						}
+																					]
+																				},
+																				{
+																					"end": 182,
+																					"kind": "Parameter",
+																					"name": "d",
+																					"pos": 180,
+																					"start": 181,
+																					"children": [
+																						{
+																							"end": 182,
+																							"kind": "Identifier",
+																							"name": "d",
+																							"pos": 180,
+																							"start": 181
+																						}
+																					]
+																				},
+																				{
+																					"end": 204,
+																					"kind": "Block",
+																					"pos": 183,
+																					"start": 184,
+																					"children": [
+																						{
+																							"end": 202,
+																							"kind": "Keyword",
+																							"pos": 185,
+																							"start": 186,
 																							"children": [
 																								{
-																									"end": 120,
+																									"end": 201,
 																									"kind": "BinaryExpression",
-																									"pos": 111,
-																									"start": 111,
+																									"pos": 192,
+																									"start": 193,
 																									"children": [
 																										{
-																											"end": 114,
+																											"end": 196,
 																											"kind": "Identifier",
-																											"name": "min",
-																											"pos": 111,
-																											"start": 111
+																											"name": "acc",
+																											"pos": 192,
+																											"start": 193
 																										},
 																										{
-																											"end": 116,
+																											"end": 198,
 																											"kind": "PlusToken",
-																											"pos": 114,
-																											"start": 115
+																											"pos": 196,
+																											"start": 197
 																										},
 																										{
-																											"end": 120,
-																											"kind": "Identifier",
-																											"name": "max",
-																											"pos": 116,
-																											"start": 117
+																											"end": 201,
+																											"kind": "PrefixUnaryExpression",
+																											"pos": 198,
+																											"start": 199,
+																											"children": [
+																												{
+																													"end": 201,
+																													"kind": "Identifier",
+																													"name": "d",
+																													"pos": 200,
+																													"start": 200
+																												}
+																											]
 																										}
 																									]
 																								}
 																							]
 																						}
 																					]
-																				},
-																				{
-																					"end": 123,
-																					"kind": "SlashToken",
-																					"pos": 121,
-																					"start": 122
-																				},
-																				{
-																					"end": 125,
-																					"kind": "Literal",
-																					"pos": 123,
-																					"start": 124
 																				}
 																			]
-																		}
-																	]
-																}
-															]
-														}
-													]
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							"end": 261,
-							"kind": "FunctionDeclaration",
-							"name": "GetSum",
-							"pos": 128,
-							"start": 130,
-							"children": [
-								{
-									"end": 145,
-									"kind": "Identifier",
-									"name": "GetSum",
-									"pos": 138,
-									"start": 139
-								},
-								{
-									"end": 148,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 146,
-									"start": 147,
-									"children": [
-										{
-											"end": 148,
-											"kind": "Identifier",
-											"name": "a",
-											"pos": 146,
-											"start": 147
-										}
-									]
-								},
-								{
-									"end": 150,
-									"kind": "Parameter",
-									"name": "b",
-									"pos": 149,
-									"start": 149,
-									"children": [
-										{
-											"end": 150,
-											"kind": "Identifier",
-											"name": "b",
-											"pos": 149,
-											"start": 149
-										}
-									]
-								},
-								{
-									"end": 261,
-									"kind": "Block",
-									"pos": 152,
-									"start": 153,
-									"children": [
-										{
-											"end": 259,
-											"kind": "IfStatement",
-											"pos": 154,
-											"start": 158,
-											"children": [
-												{
-													"end": 168,
-													"kind": "BinaryExpression",
-													"pos": 162,
-													"start": 162,
-													"children": [
-														{
-															"end": 163,
-															"kind": "Identifier",
-															"name": "a",
-															"pos": 162,
-															"start": 162
-														},
-														{
-															"end": 166,
-															"kind": "EqualsEqualsToken",
-															"pos": 163,
-															"start": 164
-														},
-														{
-															"end": 168,
-															"kind": "Identifier",
-															"name": "b",
-															"pos": 166,
-															"start": 167
-														}
-													]
-												},
-												{
-													"end": 179,
-													"kind": "Keyword",
-													"pos": 169,
-													"start": 170,
-													"children": [
-														{
-															"end": 178,
-															"kind": "Identifier",
-															"name": "a",
-															"pos": 176,
-															"start": 177
-														}
-													]
-												},
-												{
-													"end": 259,
-													"kind": "IfStatement",
-													"pos": 187,
-													"start": 188,
-													"children": [
-														{
-															"end": 197,
-															"kind": "BinaryExpression",
-															"pos": 192,
-															"start": 192,
-															"children": [
-																{
-																	"end": 193,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 192,
-																	"start": 192
-																},
-																{
-																	"end": 195,
-																	"kind": "LessThanToken",
-																	"pos": 193,
-																	"start": 194
-																},
-																{
-																	"end": 197,
-																	"kind": "Identifier",
-																	"name": "b",
-																	"pos": 195,
-																	"start": 196
-																}
-															]
-														},
-														{
-															"end": 225,
-															"kind": "Keyword",
-															"pos": 198,
-															"start": 199,
-															"children": [
-																{
-																	"end": 224,
-																	"kind": "BinaryExpression",
-																	"pos": 205,
-																	"start": 206,
-																	"children": [
+																		},
 																		{
 																			"end": 207,
-																			"kind": "Identifier",
-																			"name": "a",
+																			"kind": "Literal",
 																			"pos": 205,
 																			"start": 206
-																		},
-																		{
-																			"end": 209,
-																			"kind": "PlusToken",
-																			"pos": 207,
-																			"start": 208
-																		},
-																		{
-																			"end": 224,
-																			"kind": "CallExpression",
-																			"pos": 209,
-																			"start": 210,
-																			"children": [
-																				{
-																					"end": 216,
-																					"kind": "Identifier",
-																					"name": "GetSum",
-																					"pos": 209,
-																					"start": 210,
-																					"type": "function"
-																				},
-																				{
-																					"end": 220,
-																					"kind": "BinaryExpression",
-																					"pos": 217,
-																					"start": 217,
-																					"children": [
-																						{
-																							"end": 218,
-																							"kind": "Identifier",
-																							"name": "a",
-																							"pos": 217,
-																							"start": 217
-																						},
-																						{
-																							"end": 219,
-																							"kind": "PlusToken",
-																							"pos": 218,
-																							"start": 218
-																						},
-																						{
-																							"end": 220,
-																							"kind": "Literal",
-																							"pos": 219,
-																							"start": 219
-																						}
-																					]
-																				},
-																				{
-																					"end": 223,
-																					"kind": "Identifier",
-																					"name": "b",
-																					"pos": 221,
-																					"start": 222
-																				}
-																			]
-																		}
-																	]
-																}
-															]
-														},
-														{
-															"end": 259,
-															"kind": "Keyword",
-															"pos": 233,
-															"start": 234,
-															"children": [
-																{
-																	"end": 258,
-																	"kind": "BinaryExpression",
-																	"pos": 240,
-																	"start": 241,
-																	"children": [
-																		{
-																			"end": 242,
-																			"kind": "Identifier",
-																			"name": "a",
-																			"pos": 240,
-																			"start": 241
-																		},
-																		{
-																			"end": 244,
-																			"kind": "PlusToken",
-																			"pos": 242,
-																			"start": 243
-																		},
-																		{
-																			"end": 258,
-																			"kind": "CallExpression",
-																			"pos": 244,
-																			"start": 245,
-																			"children": [
-																				{
-																					"end": 251,
-																					"kind": "Identifier",
-																					"name": "GetSum",
-																					"pos": 244,
-																					"start": 245,
-																					"type": "function"
-																				},
-																				{
-																					"end": 255,
-																					"kind": "BinaryExpression",
-																					"pos": 252,
-																					"start": 252,
-																					"children": [
-																						{
-																							"end": 253,
-																							"kind": "Identifier",
-																							"name": "a",
-																							"pos": 252,
-																							"start": 252
-																						},
-																						{
-																							"end": 254,
-																							"kind": "MinusToken",
-																							"pos": 253,
-																							"start": 253
-																						},
-																						{
-																							"end": 255,
-																							"kind": "Literal",
-																							"pos": 254,
-																							"start": 254
-																						}
-																					]
-																				},
-																				{
-																					"end": 257,
-																					"kind": "Identifier",
-																					"name": "b",
-																					"pos": 256,
-																					"start": 256
-																				}
-																			]
 																		}
 																	]
 																}
@@ -666,2750 +435,2844 @@
 											]
 										}
 									]
-								}
-							]
-						},
-						{
-							"end": 331,
-							"kind": "FunctionDeclaration",
-							"name": "GetSum",
-							"pos": 261,
-							"start": 263,
-							"children": [
-								{
-									"end": 278,
-									"kind": "Identifier",
-									"name": "GetSum",
-									"pos": 271,
-									"start": 272
 								},
 								{
-									"end": 280,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 279,
-									"start": 279,
+									"end": 389,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 212,
+									"start": 214,
 									"children": [
 										{
-											"end": 280,
+											"end": 235,
 											"kind": "Identifier",
-											"name": "a",
-											"pos": 279,
-											"start": 279
-										}
-									]
-								},
-								{
-									"end": 282,
-									"kind": "Parameter",
-									"name": "b",
-									"pos": 281,
-									"start": 281,
-									"children": [
+											"name": "digital_root",
+											"pos": 222,
+											"start": 223
+										},
 										{
-											"end": 282,
-											"kind": "Identifier",
-											"name": "b",
-											"pos": 281,
-											"start": 281
-										}
-									]
-								},
-								{
-									"end": 331,
-									"kind": "Block",
-									"pos": 283,
-									"start": 284,
-									"children": [
-										{
-											"end": 329,
-											"kind": "Keyword",
-											"pos": 285,
-											"start": 288,
+											"end": 237,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 236,
+											"start": 236,
 											"children": [
 												{
-													"end": 328,
-													"kind": "BinaryExpression",
-													"pos": 294,
-													"start": 295,
+													"end": 237,
+													"kind": "Identifier",
+													"name": "n",
+													"pos": 236,
+													"start": 236
+												}
+											]
+										},
+										{
+											"end": 389,
+											"kind": "Block",
+											"pos": 238,
+											"start": 239,
+											"children": [
+												{
+													"end": 268,
+													"kind": "IfStatement",
+													"pos": 240,
+													"start": 243,
 													"children": [
+														{
+															"end": 253,
+															"kind": "BinaryExpression",
+															"pos": 247,
+															"start": 247,
+															"children": [
+																{
+																	"end": 248,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 247,
+																	"start": 247
+																},
+																{
+																	"end": 250,
+																	"kind": "LessThanToken",
+																	"pos": 248,
+																	"start": 249
+																},
+																{
+																	"end": 253,
+																	"kind": "Literal",
+																	"pos": 250,
+																	"start": 251
+																}
+															]
+														},
+														{
+															"end": 268,
+															"kind": "Keyword",
+															"pos": 254,
+															"start": 259,
+															"children": [
+																{
+																	"end": 267,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 265,
+																	"start": 266
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 355,
+													"kind": "ForStatement",
+													"pos": 268,
+													"start": 272,
+													"children": [
+														{
+															"end": 310,
+															"kind": "VariableDeclarationList",
+															"pos": 277,
+															"start": 277,
+															"children": [
+																{
+																	"end": 288,
+																	"kind": "VariableDeclaration",
+																	"pos": 280,
+																	"start": 281,
+																	"children": [
+																		{
+																			"end": 284,
+																			"kind": "Identifier",
+																			"name": "sum",
+																			"pos": 280,
+																			"start": 281
+																		},
+																		{
+																			"end": 288,
+																			"kind": "Literal",
+																			"pos": 286,
+																			"start": 287
+																		}
+																	]
+																},
+																{
+																	"end": 295,
+																	"kind": "VariableDeclaration",
+																	"pos": 289,
+																	"start": 290,
+																	"children": [
+																		{
+																			"end": 291,
+																			"kind": "Identifier",
+																			"name": "i",
+																			"pos": 289,
+																			"start": 290
+																		},
+																		{
+																			"end": 295,
+																			"kind": "Literal",
+																			"pos": 293,
+																			"start": 294
+																		}
+																	]
+																},
+																{
+																	"end": 310,
+																	"kind": "VariableDeclaration",
+																	"pos": 296,
+																	"start": 297,
+																	"children": [
+																		{
+																			"end": 298,
+																			"kind": "Identifier",
+																			"name": "n",
+																			"pos": 296,
+																			"start": 297
+																		},
+																		{
+																			"end": 310,
+																			"kind": "CallExpression",
+																			"pos": 300,
+																			"start": 301,
+																			"children": [
+																				{
+																					"end": 307,
+																					"kind": "Identifier",
+																					"name": "String",
+																					"pos": 300,
+																					"start": 301,
+																					"type": "function"
+																				},
+																				{
+																					"end": 309,
+																					"kind": "Identifier",
+																					"name": "n",
+																					"pos": 308,
+																					"start": 308
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														},
 														{
 															"end": 324,
 															"kind": "BinaryExpression",
-															"pos": 294,
-															"start": 295,
+															"pos": 311,
+															"start": 312,
 															"children": [
 																{
-																	"end": 316,
-																	"kind": "ParenthesizedExpression",
-																	"pos": 294,
-																	"start": 295,
-																	"children": [
-																		{
-																			"end": 315,
-																			"kind": "BinaryExpression",
-																			"pos": 296,
-																			"start": 296,
-																			"children": [
-																				{
-																					"end": 311,
-																					"kind": "CallExpression",
-																					"pos": 296,
-																					"start": 296,
-																					"children": [
-																						{
-																							"end": 304,
-																							"kind": "PropertyAccessExpression",
-																							"pos": 296,
-																							"start": 296,
-																							"children": [
-																								{
-																									"end": 300,
-																									"kind": "Identifier",
-																									"name": "Math",
-																									"pos": 296,
-																									"start": 296
-																								},
-																								{
-																									"end": 304,
-																									"kind": "Identifier",
-																									"name": "abs",
-																									"pos": 301,
-																									"start": 301,
-																									"type": "function"
-																								}
-																							]
-																						},
-																						{
-																							"end": 310,
-																							"kind": "BinaryExpression",
-																							"pos": 305,
-																							"start": 305,
-																							"children": [
-																								{
-																									"end": 306,
-																									"kind": "Identifier",
-																									"name": "a",
-																									"pos": 305,
-																									"start": 305
-																								},
-																								{
-																									"end": 308,
-																									"kind": "MinusToken",
-																									"pos": 306,
-																									"start": 307
-																								},
-																								{
-																									"end": 310,
-																									"kind": "Identifier",
-																									"name": "b",
-																									"pos": 308,
-																									"start": 309
-																								}
-																							]
-																						}
-																					]
-																				},
-																				{
-																					"end": 313,
-																					"kind": "PlusToken",
-																					"pos": 311,
-																					"start": 312
-																				},
-																				{
-																					"end": 315,
-																					"kind": "Literal",
-																					"pos": 313,
-																					"start": 314
-																				}
-																			]
-																		}
-																	]
+																	"end": 313,
+																	"kind": "Identifier",
+																	"name": "i",
+																	"pos": 311,
+																	"start": 312
 																},
 																{
-																	"end": 318,
-																	"kind": "AsteriskToken",
-																	"pos": 316,
-																	"start": 317
+																	"end": 315,
+																	"kind": "LessThanToken",
+																	"pos": 313,
+																	"start": 314
 																},
 																{
 																	"end": 324,
-																	"kind": "ParenthesizedExpression",
-																	"pos": 318,
-																	"start": 319,
+																	"kind": "PropertyAccessExpression",
+																	"pos": 315,
+																	"start": 316,
 																	"children": [
 																		{
-																			"end": 323,
-																			"kind": "BinaryExpression",
-																			"pos": 320,
-																			"start": 320,
-																			"children": [
-																				{
-																					"end": 321,
-																					"kind": "Identifier",
-																					"name": "a",
-																					"pos": 320,
-																					"start": 320
-																				},
-																				{
-																					"end": 322,
-																					"kind": "PlusToken",
-																					"pos": 321,
-																					"start": 321
-																				},
-																				{
-																					"end": 323,
-																					"kind": "Identifier",
-																					"name": "b",
-																					"pos": 322,
-																					"start": 322
-																				}
-																			]
+																			"end": 317,
+																			"kind": "Identifier",
+																			"name": "n",
+																			"pos": 315,
+																			"start": 316
+																		},
+																		{
+																			"end": 324,
+																			"kind": "Identifier",
+																			"name": "length",
+																			"pos": 318,
+																			"start": 318
 																		}
 																	]
 																}
 															]
 														},
 														{
-															"end": 326,
-															"kind": "SlashToken",
-															"pos": 324,
-															"start": 325
-														},
-														{
-															"end": 328,
-															"kind": "Literal",
-															"pos": 326,
-															"start": 327
-														}
-													]
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							"end": 473,
-							"kind": "FunctionDeclaration",
-							"name": "GetSum",
-							"pos": 331,
-							"start": 333,
-							"children": [
-								{
-									"end": 348,
-									"kind": "Identifier",
-									"name": "GetSum",
-									"pos": 341,
-									"start": 342
-								},
-								{
-									"end": 351,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 349,
-									"start": 350,
-									"children": [
-										{
-											"end": 351,
-											"kind": "Identifier",
-											"name": "a",
-											"pos": 349,
-											"start": 350
-										}
-									]
-								},
-								{
-									"end": 353,
-									"kind": "Parameter",
-									"name": "b",
-									"pos": 352,
-									"start": 352,
-									"children": [
-										{
-											"end": 353,
-											"kind": "Identifier",
-											"name": "b",
-											"pos": 352,
-											"start": 352
-										}
-									]
-								},
-								{
-									"end": 473,
-									"kind": "Block",
-									"pos": 355,
-									"start": 356,
-									"children": [
-										{
-											"end": 368,
-											"kind": "ExpressionStatement",
-											"pos": 357,
-											"start": 360,
-											"children": [
-												{
-													"end": 367,
-													"kind": "BinaryExpression",
-													"pos": 357,
-													"start": 360,
-													"children": [
-														{
-															"end": 363,
-															"kind": "Identifier",
-															"name": "tmp",
-															"pos": 357,
-															"start": 360
-														},
-														{
-															"end": 365,
-															"kind": "EqualsToken",
-															"pos": 363,
-															"start": 364
-														},
-														{
-															"end": 367,
-															"kind": "Literal",
-															"pos": 365,
-															"start": 366
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 450,
-											"kind": "IfStatement",
-											"pos": 368,
-											"start": 374,
-											"children": [
-												{
-													"end": 382,
-													"kind": "BinaryExpression",
-													"pos": 377,
-													"start": 377,
-													"children": [
-														{
-															"end": 378,
-															"kind": "Identifier",
-															"name": "a",
-															"pos": 377,
-															"start": 377
-														},
-														{
-															"end": 380,
-															"kind": "LessThanToken",
-															"pos": 378,
-															"start": 379
-														},
-														{
-															"end": 382,
-															"kind": "Identifier",
-															"name": "b",
-															"pos": 380,
-															"start": 381
-														}
-													]
-												},
-												{
-													"end": 413,
-													"kind": "WhileStatement",
-													"pos": 383,
-													"start": 388,
-													"children": [
-														{
-															"end": 400,
-															"kind": "BinaryExpression",
-															"pos": 394,
-															"start": 394,
+															"end": 329,
+															"kind": "PostfixUnaryExpression",
+															"pos": 325,
+															"start": 326,
 															"children": [
 																{
-																	"end": 395,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 394,
-																	"start": 394
-																},
-																{
-																	"end": 398,
-																	"kind": "LessThanEqualsToken",
-																	"pos": 395,
-																	"start": 396
-																},
-																{
-																	"end": 400,
-																	"kind": "Identifier",
-																	"name": "b",
-																	"pos": 398,
-																	"start": 399
-																}
-															]
-														},
-														{
-															"end": 413,
-															"kind": "ExpressionStatement",
-															"pos": 401,
-															"start": 402,
-															"children": [
-																{
-																	"end": 412,
-																	"kind": "BinaryExpression",
-																	"pos": 401,
-																	"start": 402,
-																	"children": [
-																		{
-																			"end": 405,
-																			"kind": "Identifier",
-																			"name": "tmp",
-																			"pos": 401,
-																			"start": 402
-																		},
-																		{
-																			"end": 408,
-																			"kind": "PlusEqualsToken",
-																			"pos": 405,
-																			"start": 406
-																		},
-																		{
-																			"end": 412,
-																			"kind": "PostfixUnaryExpression",
-																			"pos": 408,
-																			"start": 409,
-																			"children": [
-																				{
-																					"end": 410,
-																					"kind": "Identifier",
-																					"name": "a",
-																					"pos": 408,
-																					"start": 409
-																				}
-																			]
-																		}
-																	]
-																}
-															]
-														}
-													]
-												},
-												{
-													"end": 450,
-													"kind": "WhileStatement",
-													"pos": 420,
-													"start": 425,
-													"children": [
-														{
-															"end": 437,
-															"kind": "BinaryExpression",
-															"pos": 431,
-															"start": 431,
-															"children": [
-																{
-																	"end": 432,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 431,
-																	"start": 431
-																},
-																{
-																	"end": 435,
-																	"kind": "GreaterThanEqualsToken",
-																	"pos": 432,
-																	"start": 433
-																},
-																{
-																	"end": 437,
-																	"kind": "Identifier",
-																	"name": "b",
-																	"pos": 435,
-																	"start": 436
-																}
-															]
-														},
-														{
-															"end": 450,
-															"kind": "ExpressionStatement",
-															"pos": 438,
-															"start": 439,
-															"children": [
-																{
-																	"end": 449,
-																	"kind": "BinaryExpression",
-																	"pos": 438,
-																	"start": 439,
-																	"children": [
-																		{
-																			"end": 442,
-																			"kind": "Identifier",
-																			"name": "tmp",
-																			"pos": 438,
-																			"start": 439
-																		},
-																		{
-																			"end": 445,
-																			"kind": "PlusEqualsToken",
-																			"pos": 442,
-																			"start": 443
-																		},
-																		{
-																			"end": 449,
-																			"kind": "PostfixUnaryExpression",
-																			"pos": 445,
-																			"start": 446,
-																			"children": [
-																				{
-																					"end": 447,
-																					"kind": "Identifier",
-																					"name": "a",
-																					"pos": 445,
-																					"start": 446
-																				}
-																			]
-																		}
-																	]
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 471,
-											"kind": "Keyword",
-											"pos": 450,
-											"start": 460,
-											"children": [
-												{
-													"end": 470,
-													"kind": "Identifier",
-													"name": "tmp",
-													"pos": 466,
-													"start": 467
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							"end": 659,
-							"kind": "FunctionDeclaration",
-							"name": "GetSum",
-							"pos": 473,
-							"start": 475,
-							"children": [
-								{
-									"end": 490,
-									"kind": "Identifier",
-									"name": "GetSum",
-									"pos": 483,
-									"start": 484
-								},
-								{
-									"end": 493,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 491,
-									"start": 492,
-									"children": [
-										{
-											"end": 493,
-											"kind": "Identifier",
-											"name": "a",
-											"pos": 491,
-											"start": 492
-										}
-									]
-								},
-								{
-									"end": 495,
-									"kind": "Parameter",
-									"name": "b",
-									"pos": 494,
-									"start": 494,
-									"children": [
-										{
-											"end": 495,
-											"kind": "Identifier",
-											"name": "b",
-											"pos": 494,
-											"start": 494
-										}
-									]
-								},
-								{
-									"end": 659,
-									"kind": "Block",
-									"pos": 497,
-									"start": 498,
-									"children": [
-										{
-											"end": 518,
-											"kind": "VariableStatement",
-											"pos": 499,
-											"start": 503,
-											"type": "NumericLiteral",
-											"children": [
-												{
-													"end": 517,
-													"kind": "VariableDeclarationList",
-													"pos": 499,
-													"start": 503,
-													"children": [
-														{
-															"end": 517,
-															"kind": "VariableDeclaration",
-															"pos": 506,
-															"start": 507,
-															"children": [
-																{
-																	"end": 513,
-																	"kind": "Identifier",
-																	"name": "result",
-																	"pos": 506,
-																	"start": 507
-																},
-																{
-																	"end": 517,
-																	"kind": "Literal",
-																	"pos": 515,
-																	"start": 516
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 549,
-											"kind": "VariableStatement",
-											"pos": 518,
-											"start": 522,
-											"type": "",
-											"children": [
-												{
-													"end": 548,
-													"kind": "VariableDeclarationList",
-													"pos": 518,
-													"start": 522,
-													"children": [
-														{
-															"end": 548,
-															"kind": "VariableDeclaration",
-															"pos": 525,
-															"start": 526,
-															"children": [
-																{
-																	"end": 532,
-																	"kind": "Identifier",
-																	"name": "bigger",
-																	"pos": 525,
-																	"start": 526
-																},
-																{
-																	"end": 548,
-																	"kind": "ConditionalExpression",
-																	"pos": 534,
-																	"start": 535,
-																	"children": [
-																		{
-																			"end": 540,
-																			"kind": "BinaryExpression",
-																			"pos": 534,
-																			"start": 535,
-																			"children": [
-																				{
-																					"end": 536,
-																					"kind": "Identifier",
-																					"name": "a",
-																					"pos": 534,
-																					"start": 535
-																				},
-																				{
-																					"end": 538,
-																					"kind": "GreaterThanToken",
-																					"pos": 536,
-																					"start": 537
-																				},
-																				{
-																					"end": 540,
-																					"kind": "Identifier",
-																					"name": "b",
-																					"pos": 538,
-																					"start": 539
-																				}
-																			]
-																		},
-																		{
-																			"end": 542,
-																			"kind": "QuestionToken",
-																			"pos": 540,
-																			"start": 541
-																		},
-																		{
-																			"end": 544,
-																			"kind": "Identifier",
-																			"name": "a",
-																			"pos": 542,
-																			"start": 543
-																		},
-																		{
-																			"end": 546,
-																			"kind": "ColonToken",
-																			"pos": 544,
-																			"start": 545
-																		},
-																		{
-																			"end": 548,
-																			"kind": "Identifier",
-																			"name": "b",
-																			"pos": 546,
-																			"start": 547
-																		}
-																	]
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 581,
-											"kind": "VariableStatement",
-											"pos": 549,
-											"start": 553,
-											"type": "",
-											"children": [
-												{
-													"end": 580,
-													"kind": "VariableDeclarationList",
-													"pos": 549,
-													"start": 553,
-													"children": [
-														{
-															"end": 580,
-															"kind": "VariableDeclaration",
-															"pos": 556,
-															"start": 557,
-															"children": [
-																{
-																	"end": 564,
-																	"kind": "Identifier",
-																	"name": "smaller",
-																	"pos": 556,
-																	"start": 557
-																},
-																{
-																	"end": 580,
-																	"kind": "ConditionalExpression",
-																	"pos": 566,
-																	"start": 567,
-																	"children": [
-																		{
-																			"end": 572,
-																			"kind": "BinaryExpression",
-																			"pos": 566,
-																			"start": 567,
-																			"children": [
-																				{
-																					"end": 568,
-																					"kind": "Identifier",
-																					"name": "a",
-																					"pos": 566,
-																					"start": 567
-																				},
-																				{
-																					"end": 570,
-																					"kind": "GreaterThanToken",
-																					"pos": 568,
-																					"start": 569
-																				},
-																				{
-																					"end": 572,
-																					"kind": "Identifier",
-																					"name": "b",
-																					"pos": 570,
-																					"start": 571
-																				}
-																			]
-																		},
-																		{
-																			"end": 574,
-																			"kind": "QuestionToken",
-																			"pos": 572,
-																			"start": 573
-																		},
-																		{
-																			"end": 576,
-																			"kind": "Identifier",
-																			"name": "b",
-																			"pos": 574,
-																			"start": 575
-																		},
-																		{
-																			"end": 578,
-																			"kind": "ColonToken",
-																			"pos": 576,
-																			"start": 577
-																		},
-																		{
-																			"end": 580,
-																			"kind": "Identifier",
-																			"name": "a",
-																			"pos": 578,
-																			"start": 579
-																		}
-																	]
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 640,
-											"kind": "ForStatement",
-											"pos": 581,
-											"start": 585,
-											"children": [
-												{
-													"end": 605,
-													"kind": "VariableDeclarationList",
-													"pos": 590,
-													"start": 590,
-													"children": [
-														{
-															"end": 605,
-															"kind": "VariableDeclaration",
-															"pos": 593,
-															"start": 594,
-															"children": [
-																{
-																	"end": 595,
+																	"end": 327,
 																	"kind": "Identifier",
 																	"name": "i",
-																	"pos": 593,
-																	"start": 594
-																},
-																{
-																	"end": 605,
-																	"kind": "Identifier",
-																	"name": "smaller",
-																	"pos": 597,
-																	"start": 598
+																	"pos": 325,
+																	"start": 326
 																}
 															]
-														}
-													]
-												},
-												{
-													"end": 618,
-													"kind": "BinaryExpression",
-													"pos": 606,
-													"start": 607,
-													"children": [
-														{
-															"end": 608,
-															"kind": "Identifier",
-															"name": "i",
-															"pos": 606,
-															"start": 607
 														},
 														{
-															"end": 611,
-															"kind": "LessThanEqualsToken",
-															"pos": 608,
-															"start": 609
-														},
-														{
-															"end": 618,
-															"kind": "Identifier",
-															"name": "bigger",
-															"pos": 611,
-															"start": 612
-														}
-													]
-												},
-												{
-													"end": 623,
-													"kind": "PostfixUnaryExpression",
-													"pos": 619,
-													"start": 620,
-													"children": [
-														{
-															"end": 621,
-															"kind": "Identifier",
-															"name": "i",
-															"pos": 619,
-															"start": 620
-														}
-													]
-												},
-												{
-													"end": 640,
-													"kind": "Block",
-													"pos": 624,
-													"start": 625,
-													"children": [
-														{
-															"end": 638,
+															"end": 355,
 															"kind": "ExpressionStatement",
-															"pos": 626,
-															"start": 627,
+															"pos": 330,
+															"start": 335,
 															"children": [
 																{
-																	"end": 638,
+																	"end": 354,
 																	"kind": "BinaryExpression",
-																	"pos": 626,
-																	"start": 627,
+																	"pos": 330,
+																	"start": 335,
 																	"children": [
 																		{
-																			"end": 633,
+																			"end": 338,
 																			"kind": "Identifier",
-																			"name": "result",
-																			"pos": 626,
-																			"start": 627
+																			"name": "sum",
+																			"pos": 330,
+																			"start": 335
 																		},
 																		{
-																			"end": 636,
+																			"end": 341,
 																			"kind": "PlusEqualsToken",
-																			"pos": 633,
-																			"start": 634
+																			"pos": 338,
+																			"start": 339
 																		},
 																		{
-																			"end": 638,
-																			"kind": "Identifier",
-																			"name": "i",
-																			"pos": 636,
-																			"start": 637
-																		}
-																	]
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 657,
-											"kind": "Keyword",
-											"pos": 640,
-											"start": 644,
-											"children": [
-												{
-													"end": 657,
-													"kind": "Identifier",
-													"name": "result",
-													"pos": 650,
-													"start": 651
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							"end": 1073,
-							"kind": "FunctionDeclaration",
-							"name": "GetSum",
-							"pos": 659,
-							"start": 661,
-							"children": [
-								{
-									"end": 676,
-									"kind": "Identifier",
-									"name": "GetSum",
-									"pos": 669,
-									"start": 670
-								},
-								{
-									"end": 679,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 677,
-									"start": 678,
-									"children": [
-										{
-											"end": 679,
-											"kind": "Identifier",
-											"name": "a",
-											"pos": 677,
-											"start": 678
-										}
-									]
-								},
-								{
-									"end": 681,
-									"kind": "Parameter",
-									"name": "b",
-									"pos": 680,
-									"start": 680,
-									"children": [
-										{
-											"end": 681,
-											"kind": "Identifier",
-											"name": "b",
-											"pos": 680,
-											"start": 680
-										}
-									]
-								},
-								{
-									"end": 1073,
-									"kind": "Block",
-									"pos": 683,
-									"start": 684,
-									"children": [
-										{
-											"end": 756,
-											"kind": "IfStatement",
-											"pos": 685,
-											"start": 726,
-											"children": [
-												{
-													"end": 734,
-													"kind": "BinaryExpression",
-													"pos": 729,
-													"start": 729,
-													"children": [
-														{
-															"end": 730,
-															"kind": "Identifier",
-															"name": "a",
-															"pos": 729,
-															"start": 729
-														},
-														{
-															"end": 733,
-															"kind": "EqualsEqualsEqualsToken",
-															"pos": 730,
-															"start": 730
-														},
-														{
-															"end": 734,
-															"kind": "Identifier",
-															"name": "b",
-															"pos": 733,
-															"start": 733
-														}
-													]
-												},
-												{
-													"end": 756,
-													"kind": "Block",
-													"pos": 735,
-													"start": 735,
-													"children": [
-														{
-															"end": 751,
-															"kind": "Keyword",
-															"pos": 736,
-															"start": 742,
-															"children": [
-																{
-																	"end": 750,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 748,
-																	"start": 749
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 775,
-											"kind": "VariableStatement",
-											"pos": 756,
-											"start": 760,
-											"type": "NumericLiteral",
-											"children": [
-												{
-													"end": 774,
-													"kind": "VariableDeclarationList",
-													"pos": 756,
-													"start": 760,
-													"children": [
-														{
-															"end": 774,
-															"kind": "VariableDeclaration",
-															"pos": 763,
-															"start": 764,
-															"children": [
-																{
-																	"end": 770,
-																	"kind": "Identifier",
-																	"name": "result",
-																	"pos": 763,
-																	"start": 764
-																},
-																{
-																	"end": 774,
-																	"kind": "Literal",
-																	"pos": 772,
-																	"start": 773
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 800,
-											"kind": "VariableStatement",
-											"pos": 775,
-											"start": 783,
-											"type": "",
-											"children": [
-												{
-													"end": 799,
-													"kind": "VariableDeclarationList",
-													"pos": 775,
-													"start": 783,
-													"children": [
-														{
-															"end": 792,
-															"kind": "VariableDeclaration",
-															"pos": 786,
-															"start": 787,
-															"children": [
-																{
-																	"end": 788,
-																	"kind": "Identifier",
-																	"name": "x",
-																	"pos": 786,
-																	"start": 787
-																},
-																{
-																	"end": 792,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 790,
-																	"start": 791
-																}
-															]
-														},
-														{
-															"end": 799,
-															"kind": "VariableDeclaration",
-															"pos": 793,
-															"start": 794,
-															"children": [
-																{
-																	"end": 795,
-																	"kind": "Identifier",
-																	"name": "y",
-																	"pos": 793,
-																	"start": 794
-																},
-																{
-																	"end": 799,
-																	"kind": "Identifier",
-																	"name": "b",
-																	"pos": 797,
-																	"start": 798
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 908,
-											"kind": "IfStatement",
-											"pos": 800,
-											"start": 872,
-											"children": [
-												{
-													"end": 880,
-													"kind": "BinaryExpression",
-													"pos": 875,
-													"start": 875,
-													"children": [
-														{
-															"end": 876,
-															"kind": "Identifier",
-															"name": "a",
-															"pos": 875,
-															"start": 875
-														},
-														{
-															"end": 878,
-															"kind": "GreaterThanToken",
-															"pos": 876,
-															"start": 877
-														},
-														{
-															"end": 880,
-															"kind": "Identifier",
-															"name": "b",
-															"pos": 878,
-															"start": 879
-														}
-													]
-												},
-												{
-													"end": 908,
-													"kind": "Block",
-													"pos": 881,
-													"start": 882,
-													"children": [
-														{
-															"end": 903,
-															"kind": "ExpressionStatement",
-															"pos": 883,
-															"start": 890,
-															"children": [
-																{
-																	"end": 902,
-																	"kind": "BinaryExpression",
-																	"pos": 883,
-																	"start": 890,
-																	"children": [
-																		{
-																			"end": 895,
-																			"kind": "BinaryExpression",
-																			"pos": 883,
-																			"start": 890,
+																			"end": 354,
+																			"kind": "CallExpression",
+																			"pos": 341,
+																			"start": 342,
 																			"children": [
 																				{
-																					"end": 891,
+																					"end": 348,
 																					"kind": "Identifier",
-																					"name": "x",
-																					"pos": 883,
-																					"start": 890
-																				},
-																				{
-																					"end": 893,
-																					"kind": "EqualsToken",
-																					"pos": 891,
-																					"start": 892
-																				},
-																				{
-																					"end": 895,
-																					"kind": "Identifier",
-																					"name": "b",
-																					"pos": 893,
-																					"start": 894
-																				}
-																			]
-																		},
-																		{
-																			"end": 896,
-																			"kind": "CommaToken",
-																			"pos": 895,
-																			"start": 895
-																		},
-																		{
-																			"end": 902,
-																			"kind": "BinaryExpression",
-																			"pos": 896,
-																			"start": 897,
-																			"children": [
-																				{
-																					"end": 898,
-																					"kind": "Identifier",
-																					"name": "y",
-																					"pos": 896,
-																					"start": 897
-																				},
-																				{
-																					"end": 900,
-																					"kind": "EqualsToken",
-																					"pos": 898,
-																					"start": 899
-																				},
-																				{
-																					"end": 902,
-																					"kind": "Identifier",
-																					"name": "a",
-																					"pos": 900,
-																					"start": 901
-																				}
-																			]
-																		}
-																	]
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 1049,
-											"kind": "ForStatement",
-											"pos": 908,
-											"start": 997,
-											"children": [
-												{
-													"end": 1010,
-													"kind": "VariableDeclarationList",
-													"pos": 1001,
-													"start": 1001,
-													"children": [
-														{
-															"end": 1010,
-															"kind": "VariableDeclaration",
-															"pos": 1004,
-															"start": 1005,
-															"children": [
-																{
-																	"end": 1006,
-																	"kind": "Identifier",
-																	"name": "i",
-																	"pos": 1004,
-																	"start": 1005
-																},
-																{
-																	"end": 1010,
-																	"kind": "Identifier",
-																	"name": "x",
-																	"pos": 1008,
-																	"start": 1009
-																}
-															]
-														}
-													]
-												},
-												{
-													"end": 1017,
-													"kind": "BinaryExpression",
-													"pos": 1011,
-													"start": 1012,
-													"children": [
-														{
-															"end": 1013,
-															"kind": "Identifier",
-															"name": "i",
-															"pos": 1011,
-															"start": 1012
-														},
-														{
-															"end": 1016,
-															"kind": "LessThanEqualsToken",
-															"pos": 1013,
-															"start": 1014
-														},
-														{
-															"end": 1017,
-															"kind": "Identifier",
-															"name": "y",
-															"pos": 1016,
-															"start": 1016
-														}
-													]
-												},
-												{
-													"end": 1022,
-													"kind": "PostfixUnaryExpression",
-													"pos": 1018,
-													"start": 1019,
-													"children": [
-														{
-															"end": 1020,
-															"kind": "Identifier",
-															"name": "i",
-															"pos": 1018,
-															"start": 1019
-														}
-													]
-												},
-												{
-													"end": 1049,
-													"kind": "Block",
-													"pos": 1024,
-													"start": 1025,
-													"children": [
-														{
-															"end": 1044,
-															"kind": "ExpressionStatement",
-															"pos": 1026,
-															"start": 1032,
-															"children": [
-																{
-																	"end": 1043,
-																	"kind": "BinaryExpression",
-																	"pos": 1026,
-																	"start": 1032,
-																	"children": [
-																		{
-																			"end": 1038,
-																			"kind": "Identifier",
-																			"name": "result",
-																			"pos": 1026,
-																			"start": 1032
-																		},
-																		{
-																			"end": 1041,
-																			"kind": "PlusEqualsToken",
-																			"pos": 1038,
-																			"start": 1039
-																		},
-																		{
-																			"end": 1043,
-																			"kind": "Identifier",
-																			"name": "i",
-																			"pos": 1041,
-																			"start": 1042
-																		}
-																	]
-																}
-															]
-														}
-													]
-												}
-											]
-										},
-										{
-											"end": 1067,
-											"kind": "Keyword",
-											"pos": 1049,
-											"start": 1053,
-											"children": [
-												{
-													"end": 1066,
-													"kind": "Identifier",
-													"name": "result",
-													"pos": 1059,
-													"start": 1060
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							"end": 1210,
-							"kind": "FunctionDeclaration",
-							"name": "getSum",
-							"pos": 1073,
-							"start": 1075,
-							"children": [
-								{
-									"end": 1090,
-									"kind": "Identifier",
-									"name": "getSum",
-									"pos": 1083,
-									"start": 1084
-								},
-								{
-									"end": 1093,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 1091,
-									"start": 1092,
-									"children": [
-										{
-											"end": 1093,
-											"kind": "Identifier",
-											"name": "a",
-											"pos": 1091,
-											"start": 1092
-										}
-									]
-								},
-								{
-									"end": 1096,
-									"kind": "Parameter",
-									"name": "b",
-									"pos": 1094,
-									"start": 1095,
-									"children": [
-										{
-											"end": 1096,
-											"kind": "Identifier",
-											"name": "b",
-											"pos": 1094,
-											"start": 1095
-										}
-									]
-								},
-								{
-									"end": 1210,
-									"kind": "Block",
-									"pos": 1098,
-									"start": 1098,
-									"children": [
-										{
-											"end": 1208,
-											"kind": "Keyword",
-											"pos": 1099,
-											"start": 1102,
-											"children": [
-												{
-													"end": 1208,
-													"kind": "CallExpression",
-													"pos": 1108,
-													"start": 1109,
-													"children": [
-														{
-															"end": 1189,
-															"kind": "PropertyAccessExpression",
-															"pos": 1108,
-															"start": 1109,
-															"children": [
-																{
-																	"end": 1182,
-																	"kind": "CallExpression",
-																	"pos": 1108,
-																	"start": 1109,
-																	"children": [
-																		{
-																			"end": 1119,
-																			"kind": "PropertyAccessExpression",
-																			"pos": 1108,
-																			"start": 1109,
-																			"children": [
-																				{
-																					"end": 1114,
-																					"kind": "Identifier",
-																					"name": "Array",
-																					"pos": 1108,
-																					"start": 1109
-																				},
-																				{
-																					"end": 1119,
-																					"kind": "Identifier",
-																					"name": "from",
-																					"pos": 1115,
-																					"start": 1115,
+																					"name": "Number",
+																					"pos": 341,
+																					"start": 342,
 																					"type": "function"
-																				}
-																			]
-																		},
-																		{
-																			"end": 1152,
-																			"kind": "ObjectLiteralExpression",
-																			"pos": 1120,
-																			"start": 1120,
-																			"children": [
+																				},
 																				{
-																					"end": 1151,
-																					"kind": "PropertyAssignment",
-																					"pos": 1121,
-																					"start": 1121,
+																					"end": 353,
+																					"kind": "ElementAccessExpression",
+																					"pos": 349,
+																					"start": 349,
 																					"children": [
 																						{
-																							"end": 1127,
+																							"end": 350,
 																							"kind": "Identifier",
-																							"name": "length",
-																							"pos": 1121,
-																							"start": 1121
+																							"name": "n",
+																							"pos": 349,
+																							"start": 349
 																						},
 																						{
-																							"end": 1151,
-																							"kind": "ConditionalExpression",
-																							"pos": 1128,
-																							"start": 1129,
-																							"children": [
-																								{
-																									"end": 1135,
-																									"kind": "BinaryExpression",
-																									"pos": 1128,
-																									"start": 1129,
-																									"children": [
-																										{
-																											"end": 1130,
-																											"kind": "Identifier",
-																											"name": "b",
-																											"pos": 1128,
-																											"start": 1129
-																										},
-																										{
-																											"end": 1133,
-																											"kind": "GreaterThanEqualsToken",
-																											"pos": 1130,
-																											"start": 1131
-																										},
-																										{
-																											"end": 1135,
-																											"kind": "Identifier",
-																											"name": "a",
-																											"pos": 1133,
-																											"start": 1134
-																										}
-																									]
-																								},
-																								{
-																									"end": 1137,
-																									"kind": "QuestionToken",
-																									"pos": 1135,
-																									"start": 1136
-																								},
-																								{
-																									"end": 1143,
-																									"kind": "BinaryExpression",
-																									"pos": 1137,
-																									"start": 1138,
-																									"children": [
-																										{
-																											"end": 1141,
-																											"kind": "BinaryExpression",
-																											"pos": 1137,
-																											"start": 1138,
-																											"children": [
-																												{
-																													"end": 1139,
-																													"kind": "Identifier",
-																													"name": "b",
-																													"pos": 1137,
-																													"start": 1138
-																												},
-																												{
-																													"end": 1140,
-																													"kind": "MinusToken",
-																													"pos": 1139,
-																													"start": 1139
-																												},
-																												{
-																													"end": 1141,
-																													"kind": "Identifier",
-																													"name": "a",
-																													"pos": 1140,
-																													"start": 1140
-																												}
-																											]
-																										},
-																										{
-																											"end": 1142,
-																											"kind": "PlusToken",
-																											"pos": 1141,
-																											"start": 1141
-																										},
-																										{
-																											"end": 1143,
-																											"kind": "Literal",
-																											"pos": 1142,
-																											"start": 1142
-																										}
-																									]
-																								},
-																								{
-																									"end": 1145,
-																									"kind": "ColonToken",
-																									"pos": 1143,
-																									"start": 1144
-																								},
-																								{
-																									"end": 1151,
-																									"kind": "BinaryExpression",
-																									"pos": 1145,
-																									"start": 1146,
-																									"children": [
-																										{
-																											"end": 1149,
-																											"kind": "BinaryExpression",
-																											"pos": 1145,
-																											"start": 1146,
-																											"children": [
-																												{
-																													"end": 1147,
-																													"kind": "Identifier",
-																													"name": "a",
-																													"pos": 1145,
-																													"start": 1146
-																												},
-																												{
-																													"end": 1148,
-																													"kind": "MinusToken",
-																													"pos": 1147,
-																													"start": 1147
-																												},
-																												{
-																													"end": 1149,
-																													"kind": "Identifier",
-																													"name": "b",
-																													"pos": 1148,
-																													"start": 1148
-																												}
-																											]
-																										},
-																										{
-																											"end": 1150,
-																											"kind": "PlusToken",
-																											"pos": 1149,
-																											"start": 1149
-																										},
-																										{
-																											"end": 1151,
-																											"kind": "Literal",
-																											"pos": 1150,
-																											"start": 1150
-																										}
-																									]
-																								}
-																							]
-																						}
-																					]
-																				}
-																			]
-																		},
-																		{
-																			"end": 1181,
-																			"kind": "ArrowFunction",
-																			"pos": 1153,
-																			"start": 1154,
-																			"children": [
-																				{
-																					"end": 1156,
-																					"kind": "Parameter",
-																					"name": "_",
-																					"pos": 1155,
-																					"start": 1155,
-																					"children": [
-																						{
-																							"end": 1156,
-																							"kind": "Identifier",
-																							"name": "_",
-																							"pos": 1155,
-																							"start": 1155
-																						}
-																					]
-																				},
-																				{
-																					"end": 1159,
-																					"kind": "Parameter",
-																					"name": "i",
-																					"pos": 1157,
-																					"start": 1158,
-																					"children": [
-																						{
-																							"end": 1159,
+																							"end": 352,
 																							"kind": "Identifier",
 																							"name": "i",
-																							"pos": 1157,
-																							"start": 1158
-																						}
-																					]
-																				},
-																				{
-																					"end": 1162,
-																					"kind": "EqualsGreaterThanToken",
-																					"pos": 1160,
-																					"start": 1160
-																				},
-																				{
-																					"end": 1181,
-																					"kind": "ConditionalExpression",
-																					"pos": 1162,
-																					"start": 1163,
-																					"children": [
-																						{
-																							"end": 1169,
-																							"kind": "BinaryExpression",
-																							"pos": 1162,
-																							"start": 1163,
-																							"children": [
-																								{
-																									"end": 1164,
-																									"kind": "Identifier",
-																									"name": "b",
-																									"pos": 1162,
-																									"start": 1163
-																								},
-																								{
-																									"end": 1167,
-																									"kind": "GreaterThanEqualsToken",
-																									"pos": 1164,
-																									"start": 1165
-																								},
-																								{
-																									"end": 1169,
-																									"kind": "Identifier",
-																									"name": "a",
-																									"pos": 1167,
-																									"start": 1168
-																								}
-																							]
-																						},
-																						{
-																							"end": 1171,
-																							"kind": "QuestionToken",
-																							"pos": 1169,
-																							"start": 1170
-																						},
-																						{
-																							"end": 1175,
-																							"kind": "BinaryExpression",
-																							"pos": 1171,
-																							"start": 1172,
-																							"children": [
-																								{
-																									"end": 1173,
-																									"kind": "Identifier",
-																									"name": "i",
-																									"pos": 1171,
-																									"start": 1172
-																								},
-																								{
-																									"end": 1174,
-																									"kind": "PlusToken",
-																									"pos": 1173,
-																									"start": 1173
-																								},
-																								{
-																									"end": 1175,
-																									"kind": "Identifier",
-																									"name": "a",
-																									"pos": 1174,
-																									"start": 1174
-																								}
-																							]
-																						},
-																						{
-																							"end": 1177,
-																							"kind": "ColonToken",
-																							"pos": 1175,
-																							"start": 1176
-																						},
-																						{
-																							"end": 1181,
-																							"kind": "BinaryExpression",
-																							"pos": 1177,
-																							"start": 1178,
-																							"children": [
-																								{
-																									"end": 1179,
-																									"kind": "Identifier",
-																									"name": "i",
-																									"pos": 1177,
-																									"start": 1178
-																								},
-																								{
-																									"end": 1180,
-																									"kind": "PlusToken",
-																									"pos": 1179,
-																									"start": 1179
-																								},
-																								{
-																									"end": 1181,
-																									"kind": "Identifier",
-																									"name": "b",
-																									"pos": 1180,
-																									"start": 1180
-																								}
-																							]
+																							"pos": 351,
+																							"start": 351
 																						}
 																					]
 																				}
 																			]
 																		}
 																	]
-																},
-																{
-																	"end": 1189,
-																	"kind": "Identifier",
-																	"name": "reduce",
-																	"pos": 1183,
-																	"start": 1183,
-																	"type": "function"
 																}
 															]
-														},
+														}
+													]
+												},
+												{
+													"end": 387,
+													"kind": "Keyword",
+													"pos": 355,
+													"start": 362,
+													"children": [
 														{
-															"end": 1204,
-															"kind": "ArrowFunction",
-															"pos": 1190,
-															"start": 1190,
+															"end": 386,
+															"kind": "CallExpression",
+															"pos": 368,
+															"start": 369,
 															"children": [
 																{
-																	"end": 1192,
-																	"kind": "Parameter",
-																	"name": "a",
-																	"pos": 1191,
-																	"start": 1191,
-																	"children": [
-																		{
-																			"end": 1192,
-																			"kind": "Identifier",
-																			"name": "a",
-																			"pos": 1191,
-																			"start": 1191
-																		}
-																	]
+																	"end": 381,
+																	"kind": "Identifier",
+																	"name": "digital_root",
+																	"pos": 368,
+																	"start": 369,
+																	"type": "function"
 																},
 																{
-																	"end": 1195,
-																	"kind": "Parameter",
-																	"name": "b",
-																	"pos": 1193,
-																	"start": 1194,
-																	"children": [
-																		{
-																			"end": 1195,
-																			"kind": "Identifier",
-																			"name": "b",
-																			"pos": 1193,
-																			"start": 1194
-																		}
-																	]
-																},
-																{
-																	"end": 1198,
-																	"kind": "EqualsGreaterThanToken",
-																	"pos": 1196,
-																	"start": 1196
-																},
-																{
-																	"end": 1204,
-																	"kind": "BinaryExpression",
-																	"pos": 1198,
-																	"start": 1199,
-																	"children": [
-																		{
-																			"end": 1200,
-																			"kind": "Identifier",
-																			"name": "a",
-																			"pos": 1198,
-																			"start": 1199
-																		},
-																		{
-																			"end": 1202,
-																			"kind": "PlusToken",
-																			"pos": 1200,
-																			"start": 1201
-																		},
-																		{
-																			"end": 1204,
-																			"kind": "Identifier",
-																			"name": "b",
-																			"pos": 1202,
-																			"start": 1203
-																		}
-																	]
+																	"end": 385,
+																	"kind": "Identifier",
+																	"name": "sum",
+																	"pos": 382,
+																	"start": 382
 																}
 															]
-														},
-														{
-															"end": 1207,
-															"kind": "Literal",
-															"pos": 1205,
-															"start": 1206
 														}
 													]
 												}
 											]
 										}
 									]
-								}
-							]
-						},
-						{
-							"end": 1283,
-							"kind": "FunctionDeclaration",
-							"name": "GetSum",
-							"pos": 1210,
-							"start": 1212,
-							"children": [
-								{
-									"end": 1227,
-									"kind": "Identifier",
-									"name": "GetSum",
-									"pos": 1220,
-									"start": 1221
 								},
 								{
-									"end": 1229,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 1228,
-									"start": 1228,
+									"end": 537,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 389,
+									"start": 391,
 									"children": [
 										{
-											"end": 1229,
+											"end": 412,
 											"kind": "Identifier",
-											"name": "a",
-											"pos": 1228,
-											"start": 1228
-										}
-									]
-								},
-								{
-									"end": 1232,
-									"kind": "Parameter",
-									"name": "b",
-									"pos": 1230,
-									"start": 1231,
-									"children": [
+											"name": "digital_root",
+											"pos": 399,
+											"start": 400
+										},
 										{
-											"end": 1232,
-											"kind": "Identifier",
-											"name": "b",
-											"pos": 1230,
-											"start": 1231
-										}
-									]
-								},
-								{
-									"end": 1283,
-									"kind": "Block",
-									"pos": 1233,
-									"start": 1234,
-									"children": [
-										{
-											"end": 1281,
-											"kind": "Keyword",
-											"pos": 1235,
-											"start": 1238,
+											"end": 414,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 413,
+											"start": 413,
 											"children": [
 												{
-													"end": 1280,
-													"kind": "BinaryExpression",
-													"pos": 1244,
-													"start": 1245,
+													"end": 414,
+													"kind": "Identifier",
+													"name": "n",
+													"pos": 413,
+													"start": 413
+												}
+											]
+										},
+										{
+											"end": 537,
+											"kind": "Block",
+											"pos": 415,
+											"start": 415,
+											"children": [
+												{
+													"end": 464,
+													"kind": "ExpressionStatement",
+													"pos": 416,
+													"start": 421,
 													"children": [
 														{
-															"end": 1276,
+															"end": 463,
 															"kind": "BinaryExpression",
-															"pos": 1244,
-															"start": 1245,
+															"pos": 416,
+															"start": 421,
 															"children": [
 																{
-																	"end": 1252,
-																	"kind": "ParenthesizedExpression",
-																	"pos": 1244,
-																	"start": 1245,
+																	"end": 422,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 416,
+																	"start": 421
+																},
+																{
+																	"end": 424,
+																	"kind": "EqualsToken",
+																	"pos": 422,
+																	"start": 423
+																},
+																{
+																	"end": 463,
+																	"kind": "CallExpression",
+																	"pos": 424,
+																	"start": 425,
 																	"children": [
 																		{
-																			"end": 1251,
-																			"kind": "BinaryExpression",
-																			"pos": 1246,
-																			"start": 1246,
+																			"end": 429,
+																			"kind": "Identifier",
+																			"name": "eval",
+																			"pos": 424,
+																			"start": 425,
+																			"type": "function"
+																		},
+																		{
+																			"end": 462,
+																			"kind": "CallExpression",
+																			"pos": 430,
+																			"start": 430,
 																			"children": [
 																				{
-																					"end": 1247,
-																					"kind": "Identifier",
-																					"name": "a",
-																					"pos": 1246,
-																					"start": 1246
+																					"end": 457,
+																					"kind": "PropertyAccessExpression",
+																					"pos": 430,
+																					"start": 430,
+																					"children": [
+																						{
+																							"end": 452,
+																							"kind": "CallExpression",
+																							"pos": 430,
+																							"start": 430,
+																							"children": [
+																								{
+																									"end": 448,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 430,
+																									"start": 430,
+																									"children": [
+																										{
+																											"end": 442,
+																											"kind": "CallExpression",
+																											"pos": 430,
+																											"start": 430,
+																											"children": [
+																												{
+																													"end": 440,
+																													"kind": "PropertyAccessExpression",
+																													"pos": 430,
+																													"start": 430,
+																													"children": [
+																														{
+																															"end": 431,
+																															"kind": "Identifier",
+																															"name": "n",
+																															"pos": 430,
+																															"start": 430
+																														},
+																														{
+																															"end": 440,
+																															"kind": "Identifier",
+																															"name": "toString",
+																															"pos": 432,
+																															"start": 432,
+																															"type": "function"
+																														}
+																													]
+																												}
+																											]
+																										},
+																										{
+																											"end": 448,
+																											"kind": "Identifier",
+																											"name": "split",
+																											"pos": 443,
+																											"start": 443,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 451,
+																									"kind": "Literal",
+																									"pos": 449,
+																									"start": 449
+																								}
+																							]
+																						},
+																						{
+																							"end": 457,
+																							"kind": "Identifier",
+																							"name": "join",
+																							"pos": 453,
+																							"start": 453,
+																							"type": "function"
+																						}
+																					]
 																				},
 																				{
-																					"end": 1249,
-																					"kind": "PlusToken",
-																					"pos": 1247,
-																					"start": 1248
-																				},
-																				{
-																					"end": 1251,
-																					"kind": "Identifier",
-																					"name": "b",
-																					"pos": 1249,
-																					"start": 1250
+																					"end": 461,
+																					"kind": "Literal",
+																					"pos": 458,
+																					"start": 458
 																				}
 																			]
 																		}
 																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 520,
+													"kind": "IfStatement",
+													"pos": 464,
+													"start": 470,
+													"children": [
+														{
+															"end": 479,
+															"kind": "BinaryExpression",
+															"pos": 474,
+															"start": 474,
+															"children": [
+																{
+																	"end": 475,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 474,
+																	"start": 474
 																},
 																{
-																	"end": 1254,
-																	"kind": "AsteriskToken",
-																	"pos": 1252,
-																	"start": 1253
+																	"end": 477,
+																	"kind": "GreaterThanToken",
+																	"pos": 475,
+																	"start": 476
 																},
 																{
-																	"end": 1276,
-																	"kind": "ParenthesizedExpression",
-																	"pos": 1254,
-																	"start": 1255,
+																	"end": 479,
+																	"kind": "Literal",
+																	"pos": 477,
+																	"start": 478
+																}
+															]
+														},
+														{
+															"end": 520,
+															"kind": "Block",
+															"pos": 480,
+															"start": 481,
+															"children": [
+																{
+																	"end": 514,
+																	"kind": "Keyword",
+																	"pos": 482,
+																	"start": 491,
 																	"children": [
 																		{
-																			"end": 1275,
-																			"kind": "BinaryExpression",
-																			"pos": 1256,
-																			"start": 1256,
+																			"end": 513,
+																			"kind": "CallExpression",
+																			"pos": 497,
+																			"start": 498,
 																			"children": [
 																				{
-																					"end": 1271,
+																					"end": 510,
+																					"kind": "Identifier",
+																					"name": "digital_root",
+																					"pos": 497,
+																					"start": 498,
+																					"type": "function"
+																				},
+																				{
+																					"end": 512,
+																					"kind": "Identifier",
+																					"name": "n",
+																					"pos": 511,
+																					"start": 511
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 535,
+													"kind": "Keyword",
+													"pos": 520,
+													"start": 526,
+													"children": [
+														{
+															"end": 534,
+															"kind": "Identifier",
+															"name": "n",
+															"pos": 532,
+															"start": 533
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"end": 655,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 537,
+									"start": 539,
+									"children": [
+										{
+											"end": 560,
+											"kind": "Identifier",
+											"name": "digital_root",
+											"pos": 547,
+											"start": 548
+										},
+										{
+											"end": 562,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 561,
+											"start": 561,
+											"children": [
+												{
+													"end": 562,
+													"kind": "Identifier",
+													"name": "n",
+													"pos": 561,
+													"start": 561
+												}
+											]
+										},
+										{
+											"end": 655,
+											"kind": "Block",
+											"pos": 563,
+											"start": 564,
+											"children": [
+												{
+													"end": 588,
+													"kind": "IfStatement",
+													"pos": 565,
+													"start": 568,
+													"children": [
+														{
+															"end": 578,
+															"kind": "BinaryExpression",
+															"pos": 572,
+															"start": 572,
+															"children": [
+																{
+																	"end": 573,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 572,
+																	"start": 572
+																},
+																{
+																	"end": 575,
+																	"kind": "LessThanToken",
+																	"pos": 573,
+																	"start": 574
+																},
+																{
+																	"end": 578,
+																	"kind": "Literal",
+																	"pos": 575,
+																	"start": 576
+																}
+															]
+														},
+														{
+															"end": 588,
+															"kind": "Keyword",
+															"pos": 579,
+															"start": 580,
+															"children": [
+																{
+																	"end": 588,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 586,
+																	"start": 587
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 653,
+													"kind": "Keyword",
+													"pos": 588,
+													"start": 591,
+													"children": [
+														{
+															"end": 653,
+															"kind": "CallExpression",
+															"pos": 597,
+															"start": 598,
+															"children": [
+																{
+																	"end": 610,
+																	"kind": "Identifier",
+																	"name": "digital_root",
+																	"pos": 597,
+																	"start": 598,
+																	"type": "function"
+																},
+																{
+																	"end": 652,
+																	"kind": "BinaryExpression",
+																	"pos": 611,
+																	"start": 611,
+																	"children": [
+																		{
+																			"end": 617,
+																			"kind": "BinaryExpression",
+																			"pos": 611,
+																			"start": 611,
+																			"children": [
+																				{
+																					"end": 612,
+																					"kind": "Identifier",
+																					"name": "n",
+																					"pos": 611,
+																					"start": 611
+																				},
+																				{
+																					"end": 614,
+																					"kind": "PercentToken",
+																					"pos": 612,
+																					"start": 613
+																				},
+																				{
+																					"end": 617,
+																					"kind": "Literal",
+																					"pos": 614,
+																					"start": 615
+																				}
+																			]
+																		},
+																		{
+																			"end": 619,
+																			"kind": "PlusToken",
+																			"pos": 617,
+																			"start": 618
+																		},
+																		{
+																			"end": 652,
+																			"kind": "CallExpression",
+																			"pos": 619,
+																			"start": 620,
+																			"children": [
+																				{
+																					"end": 632,
+																					"kind": "Identifier",
+																					"name": "digital_root",
+																					"pos": 619,
+																					"start": 620,
+																					"type": "function"
+																				},
+																				{
+																					"end": 651,
 																					"kind": "CallExpression",
-																					"pos": 1256,
-																					"start": 1256,
+																					"pos": 633,
+																					"start": 633,
 																					"children": [
 																						{
-																							"end": 1264,
+																							"end": 643,
 																							"kind": "PropertyAccessExpression",
-																							"pos": 1256,
-																							"start": 1256,
+																							"pos": 633,
+																							"start": 633,
 																							"children": [
 																								{
-																									"end": 1260,
+																									"end": 637,
 																									"kind": "Identifier",
 																									"name": "Math",
-																									"pos": 1256,
-																									"start": 1256
+																									"pos": 633,
+																									"start": 633
 																								},
 																								{
-																									"end": 1264,
+																									"end": 643,
 																									"kind": "Identifier",
-																									"name": "abs",
-																									"pos": 1261,
-																									"start": 1261,
+																									"name": "floor",
+																									"pos": 638,
+																									"start": 638,
 																									"type": "function"
 																								}
 																							]
 																						},
 																						{
-																							"end": 1270,
+																							"end": 650,
 																							"kind": "BinaryExpression",
-																							"pos": 1265,
-																							"start": 1265,
+																							"pos": 644,
+																							"start": 644,
 																							"children": [
 																								{
-																									"end": 1266,
+																									"end": 645,
 																									"kind": "Identifier",
-																									"name": "a",
-																									"pos": 1265,
-																									"start": 1265
+																									"name": "n",
+																									"pos": 644,
+																									"start": 644
 																								},
 																								{
-																									"end": 1268,
-																									"kind": "MinusToken",
-																									"pos": 1266,
-																									"start": 1267
+																									"end": 647,
+																									"kind": "SlashToken",
+																									"pos": 645,
+																									"start": 646
 																								},
 																								{
-																									"end": 1270,
-																									"kind": "Identifier",
-																									"name": "b",
-																									"pos": 1268,
-																									"start": 1269
+																									"end": 650,
+																									"kind": "Literal",
+																									"pos": 647,
+																									"start": 648
 																								}
 																							]
 																						}
 																					]
-																				},
-																				{
-																					"end": 1273,
-																					"kind": "PlusToken",
-																					"pos": 1271,
-																					"start": 1272
-																				},
-																				{
-																					"end": 1275,
-																					"kind": "Literal",
-																					"pos": 1273,
-																					"start": 1274
 																				}
 																			]
 																		}
 																	]
 																}
 															]
-														},
-														{
-															"end": 1278,
-															"kind": "SlashToken",
-															"pos": 1276,
-															"start": 1277
-														},
-														{
-															"end": 1280,
-															"kind": "Literal",
-															"pos": 1278,
-															"start": 1279
 														}
 													]
 												}
 											]
 										}
 									]
-								}
-							]
-						},
-						{
-							"end": 1358,
-							"kind": "VariableStatement",
-							"pos": 1283,
-							"start": 1285,
-							"type": "",
-							"children": [
+								},
 								{
-									"end": 1358,
-									"kind": "VariableDeclarationList",
-									"pos": 1283,
-									"start": 1285,
+									"end": 702,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 655,
+									"start": 657,
 									"children": [
 										{
-											"end": 1358,
-											"kind": "VariableDeclaration",
-											"pos": 1290,
-											"start": 1291,
+											"end": 678,
+											"kind": "Identifier",
+											"name": "digital_root",
+											"pos": 665,
+											"start": 666
+										},
+										{
+											"end": 680,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 679,
+											"start": 679,
 											"children": [
 												{
-													"end": 1297,
+													"end": 680,
 													"kind": "Identifier",
-													"name": "GetSum",
-													"pos": 1290,
-													"start": 1291
-												},
+													"name": "n",
+													"pos": 679,
+													"start": 679
+												}
+											]
+										},
+										{
+											"end": 702,
+											"kind": "Block",
+											"pos": 681,
+											"start": 682,
+											"children": [
 												{
-													"end": 1358,
-													"kind": "ArrowFunction",
-													"pos": 1298,
-													"start": 1299,
+													"end": 700,
+													"kind": "Keyword",
+													"pos": 683,
+													"start": 686,
 													"children": [
 														{
-															"end": 1301,
-															"kind": "Parameter",
-															"name": "a",
-															"pos": 1300,
-															"start": 1300,
+															"end": 699,
+															"kind": "BinaryExpression",
+															"pos": 692,
+															"start": 692,
 															"children": [
 																{
-																	"end": 1301,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 1300,
-																	"start": 1300
-																}
-															]
-														},
-														{
-															"end": 1304,
-															"kind": "Parameter",
-															"name": "b",
-															"pos": 1302,
-															"start": 1303,
-															"children": [
-																{
-																	"end": 1304,
-																	"kind": "Identifier",
-																	"name": "b",
-																	"pos": 1302,
-																	"start": 1303
-																}
-															]
-														},
-														{
-															"end": 1321,
-															"kind": "Parameter",
-															"name": "x",
-															"pos": 1305,
-															"start": 1306,
-															"children": [
-																{
-																	"end": 1307,
-																	"kind": "Identifier",
-																	"name": "x",
-																	"pos": 1305,
-																	"start": 1306
-																},
-																{
-																	"end": 1321,
-																	"kind": "CallExpression",
-																	"pos": 1308,
-																	"start": 1308,
+																	"end": 697,
+																	"kind": "BinaryExpression",
+																	"pos": 692,
+																	"start": 692,
 																	"children": [
 																		{
-																			"end": 1316,
-																			"kind": "PropertyAccessExpression",
-																			"pos": 1308,
-																			"start": 1308,
+																			"end": 695,
+																			"kind": "PrefixUnaryExpression",
+																			"pos": 692,
+																			"start": 692,
 																			"children": [
 																				{
-																					"end": 1312,
+																					"end": 695,
 																					"kind": "Identifier",
-																					"name": "Math",
-																					"pos": 1308,
-																					"start": 1308
-																				},
-																				{
-																					"end": 1316,
-																					"kind": "Identifier",
-																					"name": "min",
-																					"pos": 1313,
-																					"start": 1313,
-																					"type": "function"
+																					"name": "n",
+																					"pos": 694,
+																					"start": 694
 																				}
 																			]
 																		},
 																		{
-																			"end": 1318,
-																			"kind": "Identifier",
-																			"name": "a",
-																			"pos": 1317,
-																			"start": 1317
+																			"end": 696,
+																			"kind": "PercentToken",
+																			"pos": 695,
+																			"start": 695
 																		},
 																		{
-																			"end": 1320,
+																			"end": 697,
+																			"kind": "Literal",
+																			"pos": 696,
+																			"start": 696
+																		}
+																	]
+																},
+																{
+																	"end": 698,
+																	"kind": "PlusToken",
+																	"pos": 697,
+																	"start": 697
+																},
+																{
+																	"end": 699,
+																	"kind": "Literal",
+																	"pos": 698,
+																	"start": 698
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"end": 1042,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 702,
+									"start": 704,
+									"children": [
+										{
+											"end": 725,
+											"kind": "Identifier",
+											"name": "digital_root",
+											"pos": 712,
+											"start": 713
+										},
+										{
+											"end": 727,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 726,
+											"start": 726,
+											"children": [
+												{
+													"end": 727,
+													"kind": "Identifier",
+													"name": "n",
+													"pos": 726,
+													"start": 726
+												}
+											]
+										},
+										{
+											"end": 1042,
+											"kind": "Block",
+											"pos": 728,
+											"start": 729,
+											"children": [
+												{
+													"end": 757,
+													"kind": "VariableStatement",
+													"pos": 730,
+													"start": 742,
+													"type": "",
+													"children": [
+														{
+															"end": 757,
+															"kind": "VariableDeclarationList",
+															"pos": 730,
+															"start": 742,
+															"children": [
+																{
+																	"end": 757,
+																	"kind": "VariableDeclaration",
+																	"pos": 745,
+																	"start": 746,
+																	"children": [
+																		{
+																			"end": 752,
 																			"kind": "Identifier",
-																			"name": "b",
-																			"pos": 1319,
-																			"start": 1319
+																			"name": "output",
+																			"pos": 745,
+																			"start": 746
+																		},
+																		{
+																			"end": 757,
+																			"kind": "ArrayLiteralExpression",
+																			"pos": 754,
+																			"start": 755
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 788,
+													"kind": "VariableStatement",
+													"pos": 757,
+													"start": 760,
+													"type": "",
+													"children": [
+														{
+															"end": 787,
+															"kind": "VariableDeclarationList",
+															"pos": 757,
+															"start": 760,
+															"children": [
+																{
+																	"end": 787,
+																	"kind": "VariableDeclaration",
+																	"pos": 763,
+																	"start": 764,
+																	"children": [
+																		{
+																			"end": 772,
+																			"kind": "Identifier",
+																			"name": "s_number",
+																			"pos": 763,
+																			"start": 764
+																		},
+																		{
+																			"end": 787,
+																			"kind": "CallExpression",
+																			"pos": 774,
+																			"start": 775,
+																			"children": [
+																				{
+																					"end": 785,
+																					"kind": "PropertyAccessExpression",
+																					"pos": 774,
+																					"start": 775,
+																					"children": [
+																						{
+																							"end": 776,
+																							"kind": "Identifier",
+																							"name": "n",
+																							"pos": 774,
+																							"start": 775
+																						},
+																						{
+																							"end": 785,
+																							"kind": "Identifier",
+																							"name": "toString",
+																							"pos": 777,
+																							"start": 777,
+																							"type": "function"
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 887,
+													"kind": "ForStatement",
+													"pos": 788,
+													"start": 790,
+													"children": [
+														{
+															"end": 827,
+															"kind": "VariableDeclarationList",
+															"pos": 795,
+															"start": 795,
+															"children": [
+																{
+																	"end": 804,
+																	"kind": "VariableDeclaration",
+																	"pos": 798,
+																	"start": 799,
+																	"children": [
+																		{
+																			"end": 800,
+																			"kind": "Identifier",
+																			"name": "i",
+																			"pos": 798,
+																			"start": 799
+																		},
+																		{
+																			"end": 804,
+																			"kind": "Literal",
+																			"pos": 802,
+																			"start": 803
+																		}
+																	]
+																},
+																{
+																	"end": 827,
+																	"kind": "VariableDeclaration",
+																	"pos": 805,
+																	"start": 806,
+																	"children": [
+																		{
+																			"end": 809,
+																			"kind": "Identifier",
+																			"name": "len",
+																			"pos": 805,
+																			"start": 806
+																		},
+																		{
+																			"end": 827,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 811,
+																			"start": 812,
+																			"children": [
+																				{
+																					"end": 820,
+																					"kind": "Identifier",
+																					"name": "s_number",
+																					"pos": 811,
+																					"start": 812
+																				},
+																				{
+																					"end": 827,
+																					"kind": "Identifier",
+																					"name": "length",
+																					"pos": 821,
+																					"start": 821
+																				}
+																			]
 																		}
 																	]
 																}
 															]
 														},
 														{
-															"end": 1338,
-															"kind": "Parameter",
-															"name": "y",
-															"pos": 1322,
-															"start": 1323,
+															"end": 836,
+															"kind": "BinaryExpression",
+															"pos": 828,
+															"start": 829,
 															"children": [
 																{
-																	"end": 1324,
+																	"end": 830,
 																	"kind": "Identifier",
-																	"name": "y",
-																	"pos": 1322,
-																	"start": 1323
+																	"name": "i",
+																	"pos": 828,
+																	"start": 829
 																},
 																{
-																	"end": 1338,
-																	"kind": "CallExpression",
-																	"pos": 1325,
-																	"start": 1325,
+																	"end": 832,
+																	"kind": "LessThanToken",
+																	"pos": 830,
+																	"start": 831
+																},
+																{
+																	"end": 836,
+																	"kind": "Identifier",
+																	"name": "len",
+																	"pos": 832,
+																	"start": 833
+																}
+															]
+														},
+														{
+															"end": 844,
+															"kind": "BinaryExpression",
+															"pos": 837,
+															"start": 838,
+															"children": [
+																{
+																	"end": 839,
+																	"kind": "Identifier",
+																	"name": "i",
+																	"pos": 837,
+																	"start": 838
+																},
+																{
+																	"end": 842,
+																	"kind": "PlusEqualsToken",
+																	"pos": 839,
+																	"start": 840
+																},
+																{
+																	"end": 844,
+																	"kind": "Literal",
+																	"pos": 842,
+																	"start": 843
+																}
+															]
+														},
+														{
+															"end": 887,
+															"kind": "Block",
+															"pos": 845,
+															"start": 846,
+															"children": [
+																{
+																	"end": 885,
+																	"kind": "ExpressionStatement",
+																	"pos": 847,
+																	"start": 852,
 																	"children": [
 																		{
-																			"end": 1333,
-																			"kind": "PropertyAccessExpression",
-																			"pos": 1325,
-																			"start": 1325,
+																			"end": 884,
+																			"kind": "CallExpression",
+																			"pos": 847,
+																			"start": 852,
+																			"children": [
+																				{
+																					"end": 863,
+																					"kind": "PropertyAccessExpression",
+																					"pos": 847,
+																					"start": 852,
+																					"children": [
+																						{
+																							"end": 858,
+																							"kind": "Identifier",
+																							"name": "output",
+																							"pos": 847,
+																							"start": 852
+																						},
+																						{
+																							"end": 863,
+																							"kind": "Identifier",
+																							"name": "push",
+																							"pos": 859,
+																							"start": 859,
+																							"type": "function"
+																						}
+																					]
+																				},
+																				{
+																					"end": 883,
+																					"kind": "PrefixUnaryExpression",
+																					"pos": 864,
+																					"start": 864,
+																					"children": [
+																						{
+																							"end": 883,
+																							"kind": "CallExpression",
+																							"pos": 865,
+																							"start": 865,
+																							"children": [
+																								{
+																									"end": 880,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 865,
+																									"start": 865,
+																									"children": [
+																										{
+																											"end": 873,
+																											"kind": "Identifier",
+																											"name": "s_number",
+																											"pos": 865,
+																											"start": 865
+																										},
+																										{
+																											"end": 880,
+																											"kind": "Identifier",
+																											"name": "charAt",
+																											"pos": 874,
+																											"start": 874,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 882,
+																									"kind": "Identifier",
+																									"name": "i",
+																									"pos": 881,
+																									"start": 881
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 941,
+													"kind": "IfStatement",
+													"pos": 887,
+													"start": 890,
+													"children": [
+														{
+															"end": 913,
+															"kind": "BinaryExpression",
+															"pos": 894,
+															"start": 894,
+															"children": [
+																{
+																	"end": 907,
+																	"kind": "PropertyAccessExpression",
+																	"pos": 894,
+																	"start": 894,
+																	"children": [
+																		{
+																			"end": 900,
+																			"kind": "Identifier",
+																			"name": "output",
+																			"pos": 894,
+																			"start": 894
+																		},
+																		{
+																			"end": 907,
+																			"kind": "Identifier",
+																			"name": "length",
+																			"pos": 901,
+																			"start": 901
+																		}
+																	]
+																},
+																{
+																	"end": 911,
+																	"kind": "EqualsEqualsEqualsToken",
+																	"pos": 907,
+																	"start": 908
+																},
+																{
+																	"end": 913,
+																	"kind": "Literal",
+																	"pos": 911,
+																	"start": 912
+																}
+															]
+														},
+														{
+															"end": 941,
+															"kind": "Block",
+															"pos": 914,
+															"start": 915,
+															"children": [
+																{
+																	"end": 937,
+																	"kind": "Keyword",
+																	"pos": 916,
+																	"start": 921,
+																	"children": [
+																		{
+																			"end": 937,
+																			"kind": "ElementAccessExpression",
+																			"pos": 927,
+																			"start": 928,
+																			"children": [
+																				{
+																					"end": 934,
+																					"kind": "Identifier",
+																					"name": "output",
+																					"pos": 927,
+																					"start": 928
+																				},
+																				{
+																					"end": 936,
+																					"kind": "Literal",
+																					"pos": 935,
+																					"start": 935
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 1009,
+													"kind": "ForStatement",
+													"pos": 941,
+													"start": 945,
+													"children": [
+														{
+															"end": 968,
+															"kind": "VariableDeclarationList",
+															"pos": 950,
+															"start": 950,
+															"children": [
+																{
+																	"end": 959,
+																	"kind": "VariableDeclaration",
+																	"pos": 953,
+																	"start": 954,
+																	"children": [
+																		{
+																			"end": 955,
+																			"kind": "Identifier",
+																			"name": "i",
+																			"pos": 953,
+																			"start": 954
+																		},
+																		{
+																			"end": 959,
+																			"kind": "Literal",
+																			"pos": 957,
+																			"start": 958
+																		}
+																	]
+																},
+																{
+																	"end": 968,
+																	"kind": "VariableDeclaration",
+																	"pos": 960,
+																	"start": 961,
+																	"children": [
+																		{
+																			"end": 964,
+																			"kind": "Identifier",
+																			"name": "sum",
+																			"pos": 960,
+																			"start": 961
+																		},
+																		{
+																			"end": 968,
+																			"kind": "Literal",
+																			"pos": 966,
+																			"start": 967
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 987,
+															"kind": "BinaryExpression",
+															"pos": 969,
+															"start": 970,
+															"children": [
+																{
+																	"end": 971,
+																	"kind": "Identifier",
+																	"name": "i",
+																	"pos": 969,
+																	"start": 970
+																},
+																{
+																	"end": 973,
+																	"kind": "LessThanToken",
+																	"pos": 971,
+																	"start": 972
+																},
+																{
+																	"end": 987,
+																	"kind": "PropertyAccessExpression",
+																	"pos": 973,
+																	"start": 974,
+																	"children": [
+																		{
+																			"end": 980,
+																			"kind": "Identifier",
+																			"name": "output",
+																			"pos": 973,
+																			"start": 974
+																		},
+																		{
+																			"end": 987,
+																			"kind": "Identifier",
+																			"name": "length",
+																			"pos": 981,
+																			"start": 981
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 1007,
+															"kind": "BinaryExpression",
+															"pos": 988,
+															"start": 989,
+															"children": [
+																{
+																	"end": 992,
+																	"kind": "Identifier",
+																	"name": "sum",
+																	"pos": 988,
+																	"start": 989
+																},
+																{
+																	"end": 995,
+																	"kind": "PlusEqualsToken",
+																	"pos": 992,
+																	"start": 993
+																},
+																{
+																	"end": 1007,
+																	"kind": "ElementAccessExpression",
+																	"pos": 995,
+																	"start": 996,
+																	"children": [
+																		{
+																			"end": 1002,
+																			"kind": "Identifier",
+																			"name": "output",
+																			"pos": 995,
+																			"start": 996
+																		},
+																		{
+																			"end": 1006,
+																			"kind": "PostfixUnaryExpression",
+																			"pos": 1003,
+																			"start": 1003,
+																			"children": [
+																				{
+																					"end": 1004,
+																					"kind": "Identifier",
+																					"name": "i",
+																					"pos": 1003,
+																					"start": 1003
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 1009,
+															"kind": "EmptyStatement",
+															"pos": 1008,
+															"start": 1008
+														}
+													]
+												},
+												{
+													"end": 1040,
+													"kind": "Keyword",
+													"pos": 1009,
+													"start": 1016,
+													"children": [
+														{
+															"end": 1040,
+															"kind": "CallExpression",
+															"pos": 1022,
+															"start": 1023,
+															"children": [
+																{
+																	"end": 1035,
+																	"kind": "Identifier",
+																	"name": "digital_root",
+																	"pos": 1022,
+																	"start": 1023,
+																	"type": "function"
+																},
+																{
+																	"end": 1039,
+																	"kind": "Identifier",
+																	"name": "sum",
+																	"pos": 1036,
+																	"start": 1036
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"end": 1166,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 1042,
+									"start": 1044,
+									"children": [
+										{
+											"end": 1065,
+											"kind": "Identifier",
+											"name": "digital_root",
+											"pos": 1052,
+											"start": 1053
+										},
+										{
+											"end": 1067,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 1066,
+											"start": 1066,
+											"children": [
+												{
+													"end": 1067,
+													"kind": "Identifier",
+													"name": "n",
+													"pos": 1066,
+													"start": 1066
+												}
+											]
+										},
+										{
+											"end": 1166,
+											"kind": "Block",
+											"pos": 1068,
+											"start": 1069,
+											"children": [
+												{
+													"end": 1152,
+													"kind": "WhileStatement",
+													"pos": 1070,
+													"start": 1073,
+													"children": [
+														{
+															"end": 1085,
+															"kind": "BinaryExpression",
+															"pos": 1080,
+															"start": 1080,
+															"children": [
+																{
+																	"end": 1081,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 1080,
+																	"start": 1080
+																},
+																{
+																	"end": 1083,
+																	"kind": "GreaterThanToken",
+																	"pos": 1081,
+																	"start": 1082
+																},
+																{
+																	"end": 1085,
+																	"kind": "Literal",
+																	"pos": 1083,
+																	"start": 1084
+																}
+															]
+														},
+														{
+															"end": 1152,
+															"kind": "Block",
+															"pos": 1086,
+															"start": 1087,
+															"children": [
+																{
+																	"end": 1150,
+																	"kind": "ExpressionStatement",
+																	"pos": 1088,
+																	"start": 1089,
+																	"children": [
+																		{
+																			"end": 1149,
+																			"kind": "BinaryExpression",
+																			"pos": 1088,
+																			"start": 1089,
+																			"children": [
+																				{
+																					"end": 1090,
+																					"kind": "Identifier",
+																					"name": "n",
+																					"pos": 1088,
+																					"start": 1089
+																				},
+																				{
+																					"end": 1092,
+																					"kind": "EqualsToken",
+																					"pos": 1090,
+																					"start": 1091
+																				},
+																				{
+																					"end": 1149,
+																					"kind": "CallExpression",
+																					"pos": 1092,
+																					"start": 1093,
+																					"children": [
+																						{
+																							"end": 1116,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 1092,
+																							"start": 1093,
+																							"children": [
+																								{
+																									"end": 1109,
+																									"kind": "CallExpression",
+																									"pos": 1092,
+																									"start": 1093,
+																									"children": [
+																										{
+																											"end": 1105,
+																											"kind": "PropertyAccessExpression",
+																											"pos": 1092,
+																											"start": 1093,
+																											"children": [
+																												{
+																													"end": 1099,
+																													"kind": "ParenthesizedExpression",
+																													"pos": 1092,
+																													"start": 1093,
+																													"children": [
+																														{
+																															"end": 1098,
+																															"kind": "BinaryExpression",
+																															"pos": 1094,
+																															"start": 1094,
+																															"children": [
+																																{
+																																	"end": 1096,
+																																	"kind": "Literal",
+																																	"pos": 1094,
+																																	"start": 1094
+																																},
+																																{
+																																	"end": 1097,
+																																	"kind": "PlusToken",
+																																	"pos": 1096,
+																																	"start": 1096
+																																},
+																																{
+																																	"end": 1098,
+																																	"kind": "Identifier",
+																																	"name": "n",
+																																	"pos": 1097,
+																																	"start": 1097
+																																}
+																															]
+																														}
+																													]
+																												},
+																												{
+																													"end": 1105,
+																													"kind": "Identifier",
+																													"name": "split",
+																													"pos": 1100,
+																													"start": 1100,
+																													"type": "function"
+																												}
+																											]
+																										},
+																										{
+																											"end": 1108,
+																											"kind": "Literal",
+																											"pos": 1106,
+																											"start": 1106
+																										}
+																									]
+																								},
+																								{
+																									"end": 1116,
+																									"kind": "Identifier",
+																									"name": "reduce",
+																									"pos": 1110,
+																									"start": 1110,
+																									"type": "function"
+																								}
+																							]
+																						},
+																						{
+																							"end": 1148,
+																							"kind": "FunctionExpression",
+																							"pos": 1117,
+																							"start": 1117,
+																							"children": [
+																								{
+																									"end": 1127,
+																									"kind": "Parameter",
+																									"name": "s",
+																									"pos": 1126,
+																									"start": 1126,
+																									"children": [
+																										{
+																											"end": 1127,
+																											"kind": "Identifier",
+																											"name": "s",
+																											"pos": 1126,
+																											"start": 1126
+																										}
+																									]
+																								},
+																								{
+																									"end": 1129,
+																									"kind": "Parameter",
+																									"name": "d",
+																									"pos": 1128,
+																									"start": 1128,
+																									"children": [
+																										{
+																											"end": 1129,
+																											"kind": "Identifier",
+																											"name": "d",
+																											"pos": 1128,
+																											"start": 1128
+																										}
+																									]
+																								},
+																								{
+																									"end": 1148,
+																									"kind": "Block",
+																									"pos": 1130,
+																									"start": 1131,
+																									"children": [
+																										{
+																											"end": 1147,
+																											"kind": "Keyword",
+																											"pos": 1132,
+																											"start": 1132,
+																											"children": [
+																												{
+																													"end": 1146,
+																													"kind": "BinaryExpression",
+																													"pos": 1138,
+																													"start": 1139,
+																													"children": [
+																														{
+																															"end": 1141,
+																															"kind": "PrefixUnaryExpression",
+																															"pos": 1138,
+																															"start": 1139,
+																															"children": [
+																																{
+																																	"end": 1141,
+																																	"kind": "Identifier",
+																																	"name": "s",
+																																	"pos": 1140,
+																																	"start": 1140
+																																}
+																															]
+																														},
+																														{
+																															"end": 1143,
+																															"kind": "PlusToken",
+																															"pos": 1141,
+																															"start": 1142
+																														},
+																														{
+																															"end": 1146,
+																															"kind": "PrefixUnaryExpression",
+																															"pos": 1143,
+																															"start": 1144,
+																															"children": [
+																																{
+																																	"end": 1146,
+																																	"kind": "Identifier",
+																																	"name": "d",
+																																	"pos": 1145,
+																																	"start": 1145
+																																}
+																															]
+																														}
+																													]
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 1164,
+													"kind": "Keyword",
+													"pos": 1152,
+													"start": 1155,
+													"children": [
+														{
+															"end": 1163,
+															"kind": "Identifier",
+															"name": "n",
+															"pos": 1161,
+															"start": 1162
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"end": 1418,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 1166,
+									"start": 1168,
+									"children": [
+										{
+											"end": 1189,
+											"kind": "Identifier",
+											"name": "digital_root",
+											"pos": 1176,
+											"start": 1177
+										},
+										{
+											"end": 1191,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 1190,
+											"start": 1190,
+											"children": [
+												{
+													"end": 1191,
+													"kind": "Identifier",
+													"name": "n",
+													"pos": 1190,
+													"start": 1190
+												}
+											]
+										},
+										{
+											"end": 1418,
+											"kind": "Block",
+											"pos": 1192,
+											"start": 1193,
+											"children": [
+												{
+													"end": 1227,
+													"kind": "VariableStatement",
+													"pos": 1194,
+													"start": 1196,
+													"type": "NumericLiteral",
+													"children": [
+														{
+															"end": 1226,
+															"kind": "VariableDeclarationList",
+															"pos": 1194,
+															"start": 1196,
+															"children": [
+																{
+																	"end": 1213,
+																	"kind": "VariableDeclaration",
+																	"pos": 1199,
+																	"start": 1200,
+																	"children": [
+																		{
+																			"end": 1208,
+																			"kind": "Identifier",
+																			"name": "finalSum",
+																			"pos": 1199,
+																			"start": 1200
+																		},
+																		{
+																			"end": 1213,
+																			"kind": "Literal",
+																			"pos": 1210,
+																			"start": 1211
+																		}
+																	]
+																},
+																{
+																	"end": 1226,
+																	"kind": "VariableDeclaration",
+																	"pos": 1214,
+																	"start": 1215,
+																	"children": [
+																		{
+																			"end": 1222,
+																			"kind": "Identifier",
+																			"name": "tempSum",
+																			"pos": 1214,
+																			"start": 1215
+																		},
+																		{
+																			"end": 1226,
+																			"kind": "Literal",
+																			"pos": 1224,
+																			"start": 1225
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 1397,
+													"kind": "WhileStatement",
+													"pos": 1227,
+													"start": 1230,
+													"children": [
+														{
+															"end": 1249,
+															"kind": "BinaryExpression",
+															"pos": 1237,
+															"start": 1237,
+															"children": [
+																{
+																	"end": 1245,
+																	"kind": "Identifier",
+																	"name": "finalSum",
+																	"pos": 1237,
+																	"start": 1237
+																},
+																{
+																	"end": 1247,
+																	"kind": "GreaterThanToken",
+																	"pos": 1245,
+																	"start": 1246
+																},
+																{
+																	"end": 1249,
+																	"kind": "Literal",
+																	"pos": 1247,
+																	"start": 1248
+																}
+															]
+														},
+														{
+															"end": 1397,
+															"kind": "Block",
+															"pos": 1250,
+															"start": 1251,
+															"children": [
+																{
+																	"end": 1317,
+																	"kind": "WhileStatement",
+																	"pos": 1252,
+																	"start": 1255,
+																	"children": [
+																		{
+																			"end": 1267,
+																			"kind": "BinaryExpression",
+																			"pos": 1262,
+																			"start": 1262,
+																			"children": [
+																				{
+																					"end": 1263,
+																					"kind": "Identifier",
+																					"name": "n",
+																					"pos": 1262,
+																					"start": 1262
+																				},
+																				{
+																					"end": 1265,
+																					"kind": "GreaterThanToken",
+																					"pos": 1263,
+																					"start": 1264
+																				},
+																				{
+																					"end": 1267,
+																					"kind": "Literal",
+																					"pos": 1265,
+																					"start": 1266
+																				}
+																			]
+																		},
+																		{
+																			"end": 1317,
+																			"kind": "Block",
+																			"pos": 1268,
+																			"start": 1269,
+																			"children": [
+																				{
+																					"end": 1290,
+																					"kind": "ExpressionStatement",
+																					"pos": 1270,
+																					"start": 1274,
+																					"children": [
+																						{
+																							"end": 1289,
+																							"kind": "BinaryExpression",
+																							"pos": 1270,
+																							"start": 1274,
+																							"children": [
+																								{
+																									"end": 1281,
+																									"kind": "Identifier",
+																									"name": "tempSum",
+																									"pos": 1270,
+																									"start": 1274
+																								},
+																								{
+																									"end": 1284,
+																									"kind": "PlusEqualsToken",
+																									"pos": 1281,
+																									"start": 1282
+																								},
+																								{
+																									"end": 1289,
+																									"kind": "BinaryExpression",
+																									"pos": 1284,
+																									"start": 1285,
+																									"children": [
+																										{
+																											"end": 1286,
+																											"kind": "Identifier",
+																											"name": "n",
+																											"pos": 1284,
+																											"start": 1285
+																										},
+																										{
+																											"end": 1287,
+																											"kind": "PercentToken",
+																											"pos": 1286,
+																											"start": 1286
+																										},
+																										{
+																											"end": 1289,
+																											"kind": "Literal",
+																											"pos": 1287,
+																											"start": 1287
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				},
+																				{
+																					"end": 1313,
+																					"kind": "ExpressionStatement",
+																					"pos": 1290,
+																					"start": 1294,
+																					"children": [
+																						{
+																							"end": 1312,
+																							"kind": "BinaryExpression",
+																							"pos": 1290,
+																							"start": 1294,
+																							"children": [
+																								{
+																									"end": 1295,
+																									"kind": "Identifier",
+																									"name": "n",
+																									"pos": 1290,
+																									"start": 1294
+																								},
+																								{
+																									"end": 1297,
+																									"kind": "EqualsToken",
+																									"pos": 1295,
+																									"start": 1296
+																								},
+																								{
+																									"end": 1312,
+																									"kind": "CallExpression",
+																									"pos": 1297,
+																									"start": 1298,
+																									"children": [
+																										{
+																											"end": 1306,
+																											"kind": "Identifier",
+																											"name": "parseInt",
+																											"pos": 1297,
+																											"start": 1298,
+																											"type": "function"
+																										},
+																										{
+																											"end": 1311,
+																											"kind": "BinaryExpression",
+																											"pos": 1307,
+																											"start": 1307,
+																											"children": [
+																												{
+																													"end": 1308,
+																													"kind": "Identifier",
+																													"name": "n",
+																													"pos": 1307,
+																													"start": 1307
+																												},
+																												{
+																													"end": 1309,
+																													"kind": "SlashToken",
+																													"pos": 1308,
+																													"start": 1308
+																												},
+																												{
+																													"end": 1311,
+																													"kind": "Literal",
+																													"pos": 1309,
+																													"start": 1309
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 1335,
+																	"kind": "ExpressionStatement",
+																	"pos": 1317,
+																	"start": 1322,
+																	"children": [
+																		{
+																			"end": 1334,
+																			"kind": "BinaryExpression",
+																			"pos": 1317,
+																			"start": 1322,
 																			"children": [
 																				{
 																					"end": 1329,
 																					"kind": "Identifier",
-																					"name": "Math",
-																					"pos": 1325,
-																					"start": 1325
+																					"name": "tempSum",
+																					"pos": 1317,
+																					"start": 1322
 																				},
 																				{
-																					"end": 1333,
+																					"end": 1332,
+																					"kind": "PlusEqualsToken",
+																					"pos": 1329,
+																					"start": 1330
+																				},
+																				{
+																					"end": 1334,
 																					"kind": "Identifier",
-																					"name": "max",
-																					"pos": 1330,
-																					"start": 1330,
+																					"name": "n",
+																					"pos": 1332,
+																					"start": 1333
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 1359,
+																	"kind": "ExpressionStatement",
+																	"pos": 1335,
+																	"start": 1340,
+																	"children": [
+																		{
+																			"end": 1358,
+																			"kind": "BinaryExpression",
+																			"pos": 1335,
+																			"start": 1340,
+																			"children": [
+																				{
+																					"end": 1348,
+																					"kind": "Identifier",
+																					"name": "finalSum",
+																					"pos": 1335,
+																					"start": 1340
+																				},
+																				{
+																					"end": 1350,
+																					"kind": "EqualsToken",
+																					"pos": 1348,
+																					"start": 1349
+																				},
+																				{
+																					"end": 1358,
+																					"kind": "Identifier",
+																					"name": "tempSum",
+																					"pos": 1350,
+																					"start": 1351
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 1377,
+																	"kind": "ExpressionStatement",
+																	"pos": 1359,
+																	"start": 1364,
+																	"children": [
+																		{
+																			"end": 1376,
+																			"kind": "BinaryExpression",
+																			"pos": 1359,
+																			"start": 1364,
+																			"children": [
+																				{
+																					"end": 1365,
+																					"kind": "Identifier",
+																					"name": "n",
+																					"pos": 1359,
+																					"start": 1364
+																				},
+																				{
+																					"end": 1367,
+																					"kind": "EqualsToken",
+																					"pos": 1365,
+																					"start": 1366
+																				},
+																				{
+																					"end": 1376,
+																					"kind": "Identifier",
+																					"name": "finalSum",
+																					"pos": 1367,
+																					"start": 1368
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 1394,
+																	"kind": "ExpressionStatement",
+																	"pos": 1377,
+																	"start": 1382,
+																	"children": [
+																		{
+																			"end": 1393,
+																			"kind": "BinaryExpression",
+																			"pos": 1377,
+																			"start": 1382,
+																			"children": [
+																				{
+																					"end": 1389,
+																					"kind": "Identifier",
+																					"name": "tempSum",
+																					"pos": 1377,
+																					"start": 1382
+																				},
+																				{
+																					"end": 1391,
+																					"kind": "EqualsToken",
+																					"pos": 1389,
+																					"start": 1390
+																				},
+																				{
+																					"end": 1393,
+																					"kind": "Literal",
+																					"pos": 1391,
+																					"start": 1392
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 1416,
+													"kind": "Keyword",
+													"pos": 1397,
+													"start": 1400,
+													"children": [
+														{
+															"end": 1415,
+															"kind": "Identifier",
+															"name": "finalSum",
+															"pos": 1406,
+															"start": 1407
+														}
+													]
+												}
+											]
+										}
+									]
+								},
+								{
+									"end": 1655,
+									"kind": "FunctionDeclaration",
+									"name": "digital_root",
+									"pos": 1418,
+									"start": 1420,
+									"children": [
+										{
+											"end": 1441,
+											"kind": "Identifier",
+											"name": "digital_root",
+											"pos": 1428,
+											"start": 1429
+										},
+										{
+											"end": 1443,
+											"kind": "Parameter",
+											"name": "n",
+											"pos": 1442,
+											"start": 1442,
+											"children": [
+												{
+													"end": 1443,
+													"kind": "Identifier",
+													"name": "n",
+													"pos": 1442,
+													"start": 1442
+												}
+											]
+										},
+										{
+											"end": 1655,
+											"kind": "Block",
+											"pos": 1444,
+											"start": 1445,
+											"children": [
+												{
+													"end": 1479,
+													"kind": "IfStatement",
+													"pos": 1446,
+													"start": 1449,
+													"children": [
+														{
+															"end": 1458,
+															"kind": "BinaryExpression",
+															"pos": 1452,
+															"start": 1452,
+															"children": [
+																{
+																	"end": 1453,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 1452,
+																	"start": 1452
+																},
+																{
+																	"end": 1455,
+																	"kind": "LessThanToken",
+																	"pos": 1453,
+																	"start": 1454
+																},
+																{
+																	"end": 1458,
+																	"kind": "Literal",
+																	"pos": 1455,
+																	"start": 1456
+																}
+															]
+														},
+														{
+															"end": 1479,
+															"kind": "Block",
+															"pos": 1459,
+															"start": 1460,
+															"children": [
+																{
+																	"end": 1475,
+																	"kind": "Keyword",
+																	"pos": 1461,
+																	"start": 1466,
+																	"children": [
+																		{
+																			"end": 1474,
+																			"kind": "Identifier",
+																			"name": "n",
+																			"pos": 1472,
+																			"start": 1473
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 1509,
+													"kind": "ExpressionStatement",
+													"pos": 1479,
+													"start": 1482,
+													"children": [
+														{
+															"end": 1508,
+															"kind": "BinaryExpression",
+															"pos": 1479,
+															"start": 1482,
+															"children": [
+																{
+																	"end": 1483,
+																	"kind": "Identifier",
+																	"name": "n",
+																	"pos": 1479,
+																	"start": 1482
+																},
+																{
+																	"end": 1485,
+																	"kind": "EqualsToken",
+																	"pos": 1483,
+																	"start": 1484
+																},
+																{
+																	"end": 1508,
+																	"kind": "CallExpression",
+																	"pos": 1485,
+																	"start": 1486,
+																	"children": [
+																		{
+																			"end": 1504,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 1485,
+																			"start": 1486,
+																			"children": [
+																				{
+																					"end": 1498,
+																					"kind": "CallExpression",
+																					"pos": 1485,
+																					"start": 1486,
+																					"children": [
+																						{
+																							"end": 1496,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 1485,
+																							"start": 1486,
+																							"children": [
+																								{
+																									"end": 1487,
+																									"kind": "Identifier",
+																									"name": "n",
+																									"pos": 1485,
+																									"start": 1486
+																								},
+																								{
+																									"end": 1496,
+																									"kind": "Identifier",
+																									"name": "toString",
+																									"pos": 1488,
+																									"start": 1488,
+																									"type": "function"
+																								}
+																							]
+																						}
+																					]
+																				},
+																				{
+																					"end": 1504,
+																					"kind": "Identifier",
+																					"name": "split",
+																					"pos": 1499,
+																					"start": 1499,
 																					"type": "function"
 																				}
 																			]
 																		},
 																		{
-																			"end": 1335,
-																			"kind": "Identifier",
-																			"name": "a",
-																			"pos": 1334,
-																			"start": 1334
-																		},
-																		{
-																			"end": 1337,
-																			"kind": "Identifier",
-																			"name": "b",
-																			"pos": 1336,
-																			"start": 1336
+																			"end": 1507,
+																			"kind": "Literal",
+																			"pos": 1505,
+																			"start": 1505
 																		}
 																	]
-																}
-															]
-														},
-														{
-															"end": 1342,
-															"kind": "EqualsGreaterThanToken",
-															"pos": 1339,
-															"start": 1340
-														},
-														{
-															"end": 1358,
-															"kind": "BinaryExpression",
-															"pos": 1342,
-															"start": 1343,
-															"children": [
-																{
-																	"end": 1356,
-																	"kind": "BinaryExpression",
-																	"pos": 1342,
-																	"start": 1343,
-																	"children": [
-																		{
-																			"end": 1350,
-																			"kind": "ParenthesizedExpression",
-																			"pos": 1342,
-																			"start": 1343,
-																			"children": [
-																				{
-																					"end": 1349,
-																					"kind": "BinaryExpression",
-																					"pos": 1344,
-																					"start": 1344,
-																					"children": [
-																						{
-																							"end": 1347,
-																							"kind": "BinaryExpression",
-																							"pos": 1344,
-																							"start": 1344,
-																							"children": [
-																								{
-																									"end": 1345,
-																									"kind": "Identifier",
-																									"name": "y",
-																									"pos": 1344,
-																									"start": 1344
-																								},
-																								{
-																									"end": 1346,
-																									"kind": "MinusToken",
-																									"pos": 1345,
-																									"start": 1345
-																								},
-																								{
-																									"end": 1347,
-																									"kind": "Identifier",
-																									"name": "x",
-																									"pos": 1346,
-																									"start": 1346
-																								}
-																							]
-																						},
-																						{
-																							"end": 1348,
-																							"kind": "PlusToken",
-																							"pos": 1347,
-																							"start": 1347
-																						},
-																						{
-																							"end": 1349,
-																							"kind": "Literal",
-																							"pos": 1348,
-																							"start": 1348
-																						}
-																					]
-																				}
-																			]
-																		},
-																		{
-																			"end": 1351,
-																			"kind": "AsteriskToken",
-																			"pos": 1350,
-																			"start": 1350
-																		},
-																		{
-																			"end": 1356,
-																			"kind": "ParenthesizedExpression",
-																			"pos": 1351,
-																			"start": 1351,
-																			"children": [
-																				{
-																					"end": 1355,
-																					"kind": "BinaryExpression",
-																					"pos": 1352,
-																					"start": 1352,
-																					"children": [
-																						{
-																							"end": 1353,
-																							"kind": "Identifier",
-																							"name": "x",
-																							"pos": 1352,
-																							"start": 1352
-																						},
-																						{
-																							"end": 1354,
-																							"kind": "PlusToken",
-																							"pos": 1353,
-																							"start": 1353
-																						},
-																						{
-																							"end": 1355,
-																							"kind": "Identifier",
-																							"name": "y",
-																							"pos": 1354,
-																							"start": 1354
-																						}
-																					]
-																				}
-																			]
-																		}
-																	]
-																},
-																{
-																	"end": 1357,
-																	"kind": "SlashToken",
-																	"pos": 1356,
-																	"start": 1356
-																},
-																{
-																	"end": 1358,
-																	"kind": "Literal",
-																	"pos": 1357,
-																	"start": 1357
 																}
 															]
 														}
 													]
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							"end": 1445,
-							"kind": "FunctionDeclaration",
-							"name": "GetSum",
-							"pos": 1358,
-							"start": 1360,
-							"children": [
-								{
-									"end": 1375,
-									"kind": "Identifier",
-									"name": "GetSum",
-									"pos": 1368,
-									"start": 1369
-								},
-								{
-									"end": 1377,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 1376,
-									"start": 1376,
-									"children": [
-										{
-											"end": 1377,
-											"kind": "Identifier",
-											"name": "a",
-											"pos": 1376,
-											"start": 1376
-										}
-									]
-								},
-								{
-									"end": 1380,
-									"kind": "Parameter",
-									"name": "b",
-									"pos": 1378,
-									"start": 1379,
-									"children": [
-										{
-											"end": 1380,
-											"kind": "Identifier",
-											"name": "b",
-											"pos": 1378,
-											"start": 1379
-										}
-									]
-								},
-								{
-									"end": 1445,
-									"kind": "Block",
-									"pos": 1381,
-									"start": 1382,
-									"children": [
-										{
-											"end": 1443,
-											"kind": "Keyword",
-											"pos": 1383,
-											"start": 1387,
-											"children": [
+												},
 												{
-													"end": 1442,
-													"kind": "ConditionalExpression",
-													"pos": 1393,
-													"start": 1394,
+													"end": 1527,
+													"kind": "VariableStatement",
+													"pos": 1509,
+													"start": 1512,
+													"type": "NumericLiteral",
 													"children": [
 														{
-															"end": 1399,
-															"kind": "BinaryExpression",
-															"pos": 1393,
-															"start": 1394,
+															"end": 1526,
+															"kind": "VariableDeclarationList",
+															"pos": 1509,
+															"start": 1512,
 															"children": [
 																{
-																	"end": 1395,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 1393,
-																	"start": 1394
-																},
-																{
-																	"end": 1397,
-																	"kind": "GreaterThanToken",
-																	"pos": 1395,
-																	"start": 1396
-																},
-																{
-																	"end": 1399,
-																	"kind": "Identifier",
-																	"name": "b",
-																	"pos": 1397,
-																	"start": 1398
-																}
-															]
-														},
-														{
-															"end": 1401,
-															"kind": "QuestionToken",
-															"pos": 1399,
-															"start": 1400
-														},
-														{
-															"end": 1414,
-															"kind": "CallExpression",
-															"pos": 1401,
-															"start": 1402,
-															"children": [
-																{
-																	"end": 1408,
-																	"kind": "Identifier",
-																	"name": "GetSum",
-																	"pos": 1401,
-																	"start": 1402,
-																	"type": "function"
-																},
-																{
-																	"end": 1410,
-																	"kind": "Identifier",
-																	"name": "b",
-																	"pos": 1409,
-																	"start": 1409
-																},
-																{
-																	"end": 1413,
-																	"kind": "Identifier",
-																	"name": "a",
-																	"pos": 1411,
-																	"start": 1412
-																}
-															]
-														},
-														{
-															"end": 1416,
-															"kind": "ColonToken",
-															"pos": 1414,
-															"start": 1415
-														},
-														{
-															"end": 1442,
-															"kind": "BinaryExpression",
-															"pos": 1416,
-															"start": 1417,
-															"children": [
-																{
-																	"end": 1438,
-																	"kind": "BinaryExpression",
-																	"pos": 1416,
-																	"start": 1417,
+																	"end": 1526,
+																	"kind": "VariableDeclaration",
+																	"pos": 1515,
+																	"start": 1516,
 																	"children": [
 																		{
-																			"end": 1428,
-																			"kind": "ParenthesizedExpression",
-																			"pos": 1416,
-																			"start": 1417,
+																			"end": 1522,
+																			"kind": "Identifier",
+																			"name": "result",
+																			"pos": 1515,
+																			"start": 1516
+																		},
+																		{
+																			"end": 1526,
+																			"kind": "Literal",
+																			"pos": 1524,
+																			"start": 1525
+																		}
+																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 1599,
+													"kind": "ForStatement",
+													"pos": 1527,
+													"start": 1530,
+													"children": [
+														{
+															"end": 1543,
+															"kind": "VariableDeclarationList",
+															"pos": 1534,
+															"start": 1534,
+															"children": [
+																{
+																	"end": 1543,
+																	"kind": "VariableDeclaration",
+																	"pos": 1537,
+																	"start": 1538,
+																	"children": [
+																		{
+																			"end": 1539,
+																			"kind": "Identifier",
+																			"name": "i",
+																			"pos": 1537,
+																			"start": 1538
+																		},
+																		{
+																			"end": 1543,
+																			"kind": "Literal",
+																			"pos": 1541,
+																			"start": 1542
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 1557,
+															"kind": "BinaryExpression",
+															"pos": 1544,
+															"start": 1545,
+															"children": [
+																{
+																	"end": 1546,
+																	"kind": "Identifier",
+																	"name": "i",
+																	"pos": 1544,
+																	"start": 1545
+																},
+																{
+																	"end": 1548,
+																	"kind": "LessThanToken",
+																	"pos": 1546,
+																	"start": 1547
+																},
+																{
+																	"end": 1557,
+																	"kind": "PropertyAccessExpression",
+																	"pos": 1548,
+																	"start": 1549,
+																	"children": [
+																		{
+																			"end": 1550,
+																			"kind": "Identifier",
+																			"name": "n",
+																			"pos": 1548,
+																			"start": 1549
+																		},
+																		{
+																			"end": 1557,
+																			"kind": "Identifier",
+																			"name": "length",
+																			"pos": 1551,
+																			"start": 1551
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 1562,
+															"kind": "PostfixUnaryExpression",
+															"pos": 1558,
+															"start": 1559,
+															"children": [
+																{
+																	"end": 1560,
+																	"kind": "Identifier",
+																	"name": "i",
+																	"pos": 1558,
+																	"start": 1559
+																}
+															]
+														},
+														{
+															"end": 1599,
+															"kind": "Block",
+															"pos": 1563,
+															"start": 1564,
+															"children": [
+																{
+																	"end": 1595,
+																	"kind": "ExpressionStatement",
+																	"pos": 1565,
+																	"start": 1570,
+																	"children": [
+																		{
+																			"end": 1594,
+																			"kind": "BinaryExpression",
+																			"pos": 1565,
+																			"start": 1570,
 																			"children": [
 																				{
-																					"end": 1427,
-																					"kind": "BinaryExpression",
-																					"pos": 1418,
-																					"start": 1418,
+																					"end": 1576,
+																					"kind": "Identifier",
+																					"name": "result",
+																					"pos": 1565,
+																					"start": 1570
+																				},
+																				{
+																					"end": 1579,
+																					"kind": "PlusEqualsToken",
+																					"pos": 1576,
+																					"start": 1577
+																				},
+																				{
+																					"end": 1594,
+																					"kind": "CallExpression",
+																					"pos": 1579,
+																					"start": 1580,
 																					"children": [
 																						{
-																							"end": 1423,
-																							"kind": "BinaryExpression",
-																							"pos": 1418,
-																							"start": 1418,
+																							"end": 1588,
+																							"kind": "Identifier",
+																							"name": "parseInt",
+																							"pos": 1579,
+																							"start": 1580,
+																							"type": "function"
+																						},
+																						{
+																							"end": 1593,
+																							"kind": "ElementAccessExpression",
+																							"pos": 1589,
+																							"start": 1589,
 																							"children": [
 																								{
-																									"end": 1419,
+																									"end": 1590,
 																									"kind": "Identifier",
-																									"name": "b",
-																									"pos": 1418,
-																									"start": 1418
+																									"name": "n",
+																									"pos": 1589,
+																									"start": 1589
 																								},
 																								{
-																									"end": 1421,
-																									"kind": "MinusToken",
-																									"pos": 1419,
-																									"start": 1420
-																								},
-																								{
-																									"end": 1423,
+																									"end": 1592,
 																									"kind": "Identifier",
-																									"name": "a",
-																									"pos": 1421,
-																									"start": 1422
+																									"name": "i",
+																									"pos": 1591,
+																									"start": 1591
 																								}
 																							]
-																						},
-																						{
-																							"end": 1425,
-																							"kind": "PlusToken",
-																							"pos": 1423,
-																							"start": 1424
-																						},
-																						{
-																							"end": 1427,
-																							"kind": "Literal",
-																							"pos": 1425,
-																							"start": 1426
-																						}
-																					]
-																				}
-																			]
-																		},
-																		{
-																			"end": 1430,
-																			"kind": "AsteriskToken",
-																			"pos": 1428,
-																			"start": 1429
-																		},
-																		{
-																			"end": 1438,
-																			"kind": "ParenthesizedExpression",
-																			"pos": 1430,
-																			"start": 1431,
-																			"children": [
-																				{
-																					"end": 1437,
-																					"kind": "BinaryExpression",
-																					"pos": 1432,
-																					"start": 1432,
-																					"children": [
-																						{
-																							"end": 1433,
-																							"kind": "Identifier",
-																							"name": "b",
-																							"pos": 1432,
-																							"start": 1432
-																						},
-																						{
-																							"end": 1435,
-																							"kind": "PlusToken",
-																							"pos": 1433,
-																							"start": 1434
-																						},
-																						{
-																							"end": 1437,
-																							"kind": "Identifier",
-																							"name": "a",
-																							"pos": 1435,
-																							"start": 1436
 																						}
 																					]
 																				}
 																			]
 																		}
 																	]
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 1653,
+													"kind": "Keyword",
+													"pos": 1599,
+													"start": 1602,
+													"children": [
+														{
+															"end": 1652,
+															"kind": "ConditionalExpression",
+															"pos": 1608,
+															"start": 1609,
+															"children": [
+																{
+																	"end": 1620,
+																	"kind": "BinaryExpression",
+																	"pos": 1608,
+																	"start": 1609,
+																	"children": [
+																		{
+																			"end": 1615,
+																			"kind": "Identifier",
+																			"name": "result",
+																			"pos": 1608,
+																			"start": 1609
+																		},
+																		{
+																			"end": 1617,
+																			"kind": "LessThanToken",
+																			"pos": 1615,
+																			"start": 1616
+																		},
+																		{
+																			"end": 1620,
+																			"kind": "Literal",
+																			"pos": 1617,
+																			"start": 1618
+																		}
+																	]
 																},
 																{
-																	"end": 1440,
-																	"kind": "SlashToken",
-																	"pos": 1438,
-																	"start": 1439
+																	"end": 1622,
+																	"kind": "QuestionToken",
+																	"pos": 1620,
+																	"start": 1621
 																},
 																{
-																	"end": 1442,
-																	"kind": "Literal",
-																	"pos": 1440,
-																	"start": 1441
+																	"end": 1629,
+																	"kind": "Identifier",
+																	"name": "result",
+																	"pos": 1622,
+																	"start": 1623
+																},
+																{
+																	"end": 1631,
+																	"kind": "ColonToken",
+																	"pos": 1629,
+																	"start": 1630
+																},
+																{
+																	"end": 1652,
+																	"kind": "CallExpression",
+																	"pos": 1631,
+																	"start": 1632,
+																	"children": [
+																		{
+																			"end": 1644,
+																			"kind": "Identifier",
+																			"name": "digital_root",
+																			"pos": 1631,
+																			"start": 1632,
+																			"type": "function"
+																		},
+																		{
+																			"end": 1651,
+																			"kind": "Identifier",
+																			"name": "result",
+																			"pos": 1645,
+																			"start": 1645
+																		}
+																	]
 																}
 															]
 														}
@@ -3418,17 +3281,17 @@
 											]
 										}
 									]
+								},
+								{
+									"end": 1657,
+									"kind": "EndOfFileToken",
+									"pos": 1655,
+									"start": 1657
 								}
 							]
-						},
-						{
-							"end": 1447,
-							"kind": "EndOfFileToken",
-							"pos": 1445,
-							"start": 1447
 						}
-					]
-				}
+					}
+				]
 			}
 		]
 	}
