@@ -1,0 +1,3476 @@
+{
+	"astFolder": {
+		"path": "/Users/utilisateur/Documents/these/cpx-codewars/dist/solutions/",
+		"astFiles": [
+			{
+				"name": "your-order,-please.js",
+				"text": "function order(words){\n\n  return words.split(' ').sort(function(a, b){\n      return a.match(/\\d/) - b.match(/\\d/);\n   }).join(' ');\n}\n\nvar reg = /\\d/;\n\nfunction order(words){\n  return words.split(' ').sort(comparator).join(' ');\n}\n\nfunction comparator(word, nextWord) {\n  return +word.match(reg) - +nextWord.match(reg)\n}\n\nfunction order(words){\n  var array = words.split(' ');\n  var sortedArray = [];\n  for(i = 0; i <= array.length; i++) {\n    for(j = 0; j < array.length; j++) {\n      if(array[j].indexOf(i) >= 0) {\n        sortedArray.push(array[j]);\n      }\n    }\n  }\n  return sortedArray.join(' ');\n}\n\nfunction order(words) {\n  return words.split(' ').sort((wordA, wordB) => wordA.match(/\\d+/) > wordB.match(/\\d+/)).join(' ')\n}\n\nfunction order(words){\n  // ...\n  return words && words.split(' ')\n    .map(word => word.match(/\\d/) + word)\n    .sort()\n    .map(word => word.slice(1))\n    .join(' ');\n}\n\nconst order = w => w.split(' ').sort((a, b) => /\\d/.exec(a) - /\\d/.exec(b)).join(' ');\n\nfunction order(str)\n{\n\tstr=str.split(\" \");\n\tvar index, result=new Array(str.length);\n\tfor(var i in str)\n\t{\n\t\tindex=str[i].match(/\\d/);\n\t\tresult[index-1]=str[i];\n\t}\n\treturn result.join(\" \");\n}\n\nfunction order(words) {\n  return words.split(\" \").sort((a, b) => a.replace(/[^\\d]/g, \"\") - b.replace(/[^\\d]/g, \"\")).join(\" \")\n}\n\nfunction order(words){\n  return words.split(' ').sort(function(a, b){\n    return a.match(/\\d+/g) - b.match(/\\d+/g);\n  }).join(' ');\n}\n\n\n\nfunction order(string){\n  // ...\n  return string.split(' ').reduce((acc,el,i) => {\n    acc[el.match(/\\d/)-1]=el\n    return acc;\n  },[]).join(' ')\n\n\n\n\n}\n",
+				"astNode": {
+					"end": 1604,
+					"kind": "SourceFile",
+					"pos": 0,
+					"start": 0,
+					"children": [
+						{
+							"end": 133,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 0,
+							"start": 0,
+							"children": [
+								{
+									"end": 14,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 8,
+									"start": 9
+								},
+								{
+									"end": 20,
+									"kind": "Parameter",
+									"name": "words",
+									"pos": 15,
+									"start": 15,
+									"children": [
+										{
+											"end": 20,
+											"kind": "Identifier",
+											"name": "words",
+											"pos": 15,
+											"start": 15
+										}
+									]
+								},
+								{
+									"end": 133,
+									"kind": "Block",
+									"pos": 21,
+									"start": 21,
+									"children": [
+										{
+											"end": 131,
+											"kind": "Keyword",
+											"pos": 22,
+											"start": 26,
+											"children": [
+												{
+													"end": 130,
+													"kind": "CallExpression",
+													"pos": 32,
+													"start": 33,
+													"children": [
+														{
+															"end": 125,
+															"kind": "PropertyAccessExpression",
+															"pos": 32,
+															"start": 33,
+															"children": [
+																{
+																	"end": 120,
+																	"kind": "CallExpression",
+																	"pos": 32,
+																	"start": 33,
+																	"children": [
+																		{
+																			"end": 54,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 32,
+																			"start": 33,
+																			"children": [
+																				{
+																					"end": 49,
+																					"kind": "CallExpression",
+																					"pos": 32,
+																					"start": 33,
+																					"children": [
+																						{
+																							"end": 44,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 32,
+																							"start": 33,
+																							"children": [
+																								{
+																									"end": 38,
+																									"kind": "Identifier",
+																									"name": "words",
+																									"pos": 32,
+																									"start": 33
+																								},
+																								{
+																									"end": 44,
+																									"kind": "Identifier",
+																									"name": "split",
+																									"pos": 39,
+																									"start": 39,
+																									"type": "function"
+																								}
+																							]
+																						},
+																						{
+																							"end": 48,
+																							"kind": "Literal",
+																							"pos": 45,
+																							"start": 45
+																						}
+																					]
+																				},
+																				{
+																					"end": 54,
+																					"kind": "Identifier",
+																					"name": "sort",
+																					"pos": 50,
+																					"start": 50,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 119,
+																			"kind": "FunctionExpression",
+																			"pos": 55,
+																			"start": 55,
+																			"children": [
+																				{
+																					"end": 65,
+																					"kind": "Parameter",
+																					"name": "a",
+																					"pos": 64,
+																					"start": 64,
+																					"children": [
+																						{
+																							"end": 65,
+																							"kind": "Identifier",
+																							"name": "a",
+																							"pos": 64,
+																							"start": 64
+																						}
+																					]
+																				},
+																				{
+																					"end": 68,
+																					"kind": "Parameter",
+																					"name": "b",
+																					"pos": 66,
+																					"start": 67,
+																					"children": [
+																						{
+																							"end": 68,
+																							"kind": "Identifier",
+																							"name": "b",
+																							"pos": 66,
+																							"start": 67
+																						}
+																					]
+																				},
+																				{
+																					"end": 119,
+																					"kind": "Block",
+																					"pos": 69,
+																					"start": 69,
+																					"children": [
+																						{
+																							"end": 114,
+																							"kind": "Keyword",
+																							"pos": 70,
+																							"start": 77,
+																							"children": [
+																								{
+																									"end": 113,
+																									"kind": "BinaryExpression",
+																									"pos": 83,
+																									"start": 84,
+																									"children": [
+																										{
+																											"end": 97,
+																											"kind": "CallExpression",
+																											"pos": 83,
+																											"start": 84,
+																											"children": [
+																												{
+																													"end": 91,
+																													"kind": "PropertyAccessExpression",
+																													"pos": 83,
+																													"start": 84,
+																													"children": [
+																														{
+																															"end": 85,
+																															"kind": "Identifier",
+																															"name": "a",
+																															"pos": 83,
+																															"start": 84
+																														},
+																														{
+																															"end": 91,
+																															"kind": "Identifier",
+																															"name": "match",
+																															"pos": 86,
+																															"start": 86,
+																															"type": "function"
+																														}
+																													]
+																												},
+																												{
+																													"end": 96,
+																													"kind": "RegularExpressionLiteral",
+																													"pos": 92,
+																													"start": 92
+																												}
+																											]
+																										},
+																										{
+																											"end": 99,
+																											"kind": "MinusToken",
+																											"pos": 97,
+																											"start": 98
+																										},
+																										{
+																											"end": 113,
+																											"kind": "CallExpression",
+																											"pos": 99,
+																											"start": 100,
+																											"children": [
+																												{
+																													"end": 107,
+																													"kind": "PropertyAccessExpression",
+																													"pos": 99,
+																													"start": 100,
+																													"children": [
+																														{
+																															"end": 101,
+																															"kind": "Identifier",
+																															"name": "b",
+																															"pos": 99,
+																															"start": 100
+																														},
+																														{
+																															"end": 107,
+																															"kind": "Identifier",
+																															"name": "match",
+																															"pos": 102,
+																															"start": 102,
+																															"type": "function"
+																														}
+																													]
+																												},
+																												{
+																													"end": 112,
+																													"kind": "RegularExpressionLiteral",
+																													"pos": 108,
+																													"start": 108
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 125,
+																	"kind": "Identifier",
+																	"name": "join",
+																	"pos": 121,
+																	"start": 121,
+																	"type": "function"
+																}
+															]
+														},
+														{
+															"end": 129,
+															"kind": "Literal",
+															"pos": 126,
+															"start": 126
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 150,
+							"kind": "VariableStatement",
+							"pos": 133,
+							"start": 135,
+							"type": "",
+							"children": [
+								{
+									"end": 149,
+									"kind": "VariableDeclarationList",
+									"pos": 133,
+									"start": 135,
+									"children": [
+										{
+											"end": 149,
+											"kind": "VariableDeclaration",
+											"pos": 138,
+											"start": 139,
+											"children": [
+												{
+													"end": 142,
+													"kind": "Identifier",
+													"name": "reg",
+													"pos": 138,
+													"start": 139
+												},
+												{
+													"end": 149,
+													"kind": "RegularExpressionLiteral",
+													"pos": 144,
+													"start": 145
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 230,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 150,
+							"start": 152,
+							"children": [
+								{
+									"end": 166,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 160,
+									"start": 161
+								},
+								{
+									"end": 172,
+									"kind": "Parameter",
+									"name": "words",
+									"pos": 167,
+									"start": 167,
+									"children": [
+										{
+											"end": 172,
+											"kind": "Identifier",
+											"name": "words",
+											"pos": 167,
+											"start": 167
+										}
+									]
+								},
+								{
+									"end": 230,
+									"kind": "Block",
+									"pos": 173,
+									"start": 173,
+									"children": [
+										{
+											"end": 228,
+											"kind": "Keyword",
+											"pos": 174,
+											"start": 177,
+											"children": [
+												{
+													"end": 227,
+													"kind": "CallExpression",
+													"pos": 183,
+													"start": 184,
+													"children": [
+														{
+															"end": 222,
+															"kind": "PropertyAccessExpression",
+															"pos": 183,
+															"start": 184,
+															"children": [
+																{
+																	"end": 217,
+																	"kind": "CallExpression",
+																	"pos": 183,
+																	"start": 184,
+																	"children": [
+																		{
+																			"end": 205,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 183,
+																			"start": 184,
+																			"children": [
+																				{
+																					"end": 200,
+																					"kind": "CallExpression",
+																					"pos": 183,
+																					"start": 184,
+																					"children": [
+																						{
+																							"end": 195,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 183,
+																							"start": 184,
+																							"children": [
+																								{
+																									"end": 189,
+																									"kind": "Identifier",
+																									"name": "words",
+																									"pos": 183,
+																									"start": 184
+																								},
+																								{
+																									"end": 195,
+																									"kind": "Identifier",
+																									"name": "split",
+																									"pos": 190,
+																									"start": 190,
+																									"type": "function"
+																								}
+																							]
+																						},
+																						{
+																							"end": 199,
+																							"kind": "Literal",
+																							"pos": 196,
+																							"start": 196
+																						}
+																					]
+																				},
+																				{
+																					"end": 205,
+																					"kind": "Identifier",
+																					"name": "sort",
+																					"pos": 201,
+																					"start": 201,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 216,
+																			"kind": "Identifier",
+																			"name": "comparator",
+																			"pos": 206,
+																			"start": 206
+																		}
+																	]
+																},
+																{
+																	"end": 222,
+																	"kind": "Identifier",
+																	"name": "join",
+																	"pos": 218,
+																	"start": 218,
+																	"type": "function"
+																}
+															]
+														},
+														{
+															"end": 226,
+															"kind": "Literal",
+															"pos": 223,
+															"start": 223
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 320,
+							"kind": "FunctionDeclaration",
+							"name": "comparator",
+							"pos": 230,
+							"start": 232,
+							"children": [
+								{
+									"end": 251,
+									"kind": "Identifier",
+									"name": "comparator",
+									"pos": 240,
+									"start": 241
+								},
+								{
+									"end": 256,
+									"kind": "Parameter",
+									"name": "word",
+									"pos": 252,
+									"start": 252,
+									"children": [
+										{
+											"end": 256,
+											"kind": "Identifier",
+											"name": "word",
+											"pos": 252,
+											"start": 252
+										}
+									]
+								},
+								{
+									"end": 266,
+									"kind": "Parameter",
+									"name": "nextWord",
+									"pos": 257,
+									"start": 258,
+									"children": [
+										{
+											"end": 266,
+											"kind": "Identifier",
+											"name": "nextWord",
+											"pos": 257,
+											"start": 258
+										}
+									]
+								},
+								{
+									"end": 320,
+									"kind": "Block",
+									"pos": 267,
+									"start": 268,
+									"children": [
+										{
+											"end": 318,
+											"kind": "Keyword",
+											"pos": 269,
+											"start": 272,
+											"children": [
+												{
+													"end": 318,
+													"kind": "BinaryExpression",
+													"pos": 278,
+													"start": 279,
+													"children": [
+														{
+															"end": 295,
+															"kind": "PrefixUnaryExpression",
+															"pos": 278,
+															"start": 279,
+															"children": [
+																{
+																	"end": 295,
+																	"kind": "CallExpression",
+																	"pos": 280,
+																	"start": 280,
+																	"children": [
+																		{
+																			"end": 290,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 280,
+																			"start": 280,
+																			"children": [
+																				{
+																					"end": 284,
+																					"kind": "Identifier",
+																					"name": "word",
+																					"pos": 280,
+																					"start": 280
+																				},
+																				{
+																					"end": 290,
+																					"kind": "Identifier",
+																					"name": "match",
+																					"pos": 285,
+																					"start": 285,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 294,
+																			"kind": "Identifier",
+																			"name": "reg",
+																			"pos": 291,
+																			"start": 291
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 297,
+															"kind": "MinusToken",
+															"pos": 295,
+															"start": 296
+														},
+														{
+															"end": 318,
+															"kind": "PrefixUnaryExpression",
+															"pos": 297,
+															"start": 298,
+															"children": [
+																{
+																	"end": 318,
+																	"kind": "CallExpression",
+																	"pos": 299,
+																	"start": 299,
+																	"children": [
+																		{
+																			"end": 313,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 299,
+																			"start": 299,
+																			"children": [
+																				{
+																					"end": 307,
+																					"kind": "Identifier",
+																					"name": "nextWord",
+																					"pos": 299,
+																					"start": 299
+																				},
+																				{
+																					"end": 313,
+																					"kind": "Identifier",
+																					"name": "match",
+																					"pos": 308,
+																					"start": 308,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 317,
+																			"kind": "Identifier",
+																			"name": "reg",
+																			"pos": 314,
+																			"start": 314
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 604,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 320,
+							"start": 322,
+							"children": [
+								{
+									"end": 336,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 330,
+									"start": 331
+								},
+								{
+									"end": 342,
+									"kind": "Parameter",
+									"name": "words",
+									"pos": 337,
+									"start": 337,
+									"children": [
+										{
+											"end": 342,
+											"kind": "Identifier",
+											"name": "words",
+											"pos": 337,
+											"start": 337
+										}
+									]
+								},
+								{
+									"end": 604,
+									"kind": "Block",
+									"pos": 343,
+									"start": 343,
+									"children": [
+										{
+											"end": 376,
+											"kind": "VariableStatement",
+											"pos": 344,
+											"start": 347,
+											"type": "",
+											"children": [
+												{
+													"end": 375,
+													"kind": "VariableDeclarationList",
+													"pos": 344,
+													"start": 347,
+													"children": [
+														{
+															"end": 375,
+															"kind": "VariableDeclaration",
+															"pos": 350,
+															"start": 351,
+															"children": [
+																{
+																	"end": 356,
+																	"kind": "Identifier",
+																	"name": "array",
+																	"pos": 350,
+																	"start": 351
+																},
+																{
+																	"end": 375,
+																	"kind": "CallExpression",
+																	"pos": 358,
+																	"start": 359,
+																	"children": [
+																		{
+																			"end": 370,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 358,
+																			"start": 359,
+																			"children": [
+																				{
+																					"end": 364,
+																					"kind": "Identifier",
+																					"name": "words",
+																					"pos": 358,
+																					"start": 359
+																				},
+																				{
+																					"end": 370,
+																					"kind": "Identifier",
+																					"name": "split",
+																					"pos": 365,
+																					"start": 365,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 374,
+																			"kind": "Literal",
+																			"pos": 371,
+																			"start": 371
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"end": 400,
+											"kind": "VariableStatement",
+											"pos": 376,
+											"start": 379,
+											"type": "",
+											"children": [
+												{
+													"end": 399,
+													"kind": "VariableDeclarationList",
+													"pos": 376,
+													"start": 379,
+													"children": [
+														{
+															"end": 399,
+															"kind": "VariableDeclaration",
+															"pos": 382,
+															"start": 383,
+															"children": [
+																{
+																	"end": 394,
+																	"kind": "Identifier",
+																	"name": "sortedArray",
+																	"pos": 382,
+																	"start": 383
+																},
+																{
+																	"end": 399,
+																	"kind": "ArrayLiteralExpression",
+																	"pos": 396,
+																	"start": 397
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"end": 570,
+											"kind": "ForStatement",
+											"pos": 400,
+											"start": 403,
+											"children": [
+												{
+													"end": 412,
+													"kind": "BinaryExpression",
+													"pos": 407,
+													"start": 407,
+													"children": [
+														{
+															"end": 408,
+															"kind": "Identifier",
+															"name": "i",
+															"pos": 407,
+															"start": 407
+														},
+														{
+															"end": 410,
+															"kind": "EqualsToken",
+															"pos": 408,
+															"start": 409
+														},
+														{
+															"end": 412,
+															"kind": "Literal",
+															"pos": 410,
+															"start": 411
+														}
+													]
+												},
+												{
+													"end": 431,
+													"kind": "BinaryExpression",
+													"pos": 413,
+													"start": 414,
+													"children": [
+														{
+															"end": 415,
+															"kind": "Identifier",
+															"name": "i",
+															"pos": 413,
+															"start": 414
+														},
+														{
+															"end": 418,
+															"kind": "LessThanEqualsToken",
+															"pos": 415,
+															"start": 416
+														},
+														{
+															"end": 431,
+															"kind": "PropertyAccessExpression",
+															"pos": 418,
+															"start": 419,
+															"children": [
+																{
+																	"end": 424,
+																	"kind": "Identifier",
+																	"name": "array",
+																	"pos": 418,
+																	"start": 419
+																},
+																{
+																	"end": 431,
+																	"kind": "Identifier",
+																	"name": "length",
+																	"pos": 425,
+																	"start": 425
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 436,
+													"kind": "PostfixUnaryExpression",
+													"pos": 432,
+													"start": 433,
+													"children": [
+														{
+															"end": 434,
+															"kind": "Identifier",
+															"name": "i",
+															"pos": 432,
+															"start": 433
+														}
+													]
+												},
+												{
+													"end": 570,
+													"kind": "Block",
+													"pos": 437,
+													"start": 438,
+													"children": [
+														{
+															"end": 566,
+															"kind": "ForStatement",
+															"pos": 439,
+															"start": 444,
+															"children": [
+																{
+																	"end": 453,
+																	"kind": "BinaryExpression",
+																	"pos": 448,
+																	"start": 448,
+																	"children": [
+																		{
+																			"end": 449,
+																			"kind": "Identifier",
+																			"name": "j",
+																			"pos": 448,
+																			"start": 448
+																		},
+																		{
+																			"end": 451,
+																			"kind": "EqualsToken",
+																			"pos": 449,
+																			"start": 450
+																		},
+																		{
+																			"end": 453,
+																			"kind": "Literal",
+																			"pos": 451,
+																			"start": 452
+																		}
+																	]
+																},
+																{
+																	"end": 471,
+																	"kind": "BinaryExpression",
+																	"pos": 454,
+																	"start": 455,
+																	"children": [
+																		{
+																			"end": 456,
+																			"kind": "Identifier",
+																			"name": "j",
+																			"pos": 454,
+																			"start": 455
+																		},
+																		{
+																			"end": 458,
+																			"kind": "LessThanToken",
+																			"pos": 456,
+																			"start": 457
+																		},
+																		{
+																			"end": 471,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 458,
+																			"start": 459,
+																			"children": [
+																				{
+																					"end": 464,
+																					"kind": "Identifier",
+																					"name": "array",
+																					"pos": 458,
+																					"start": 459
+																				},
+																				{
+																					"end": 471,
+																					"kind": "Identifier",
+																					"name": "length",
+																					"pos": 465,
+																					"start": 465
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 476,
+																	"kind": "PostfixUnaryExpression",
+																	"pos": 472,
+																	"start": 473,
+																	"children": [
+																		{
+																			"end": 474,
+																			"kind": "Identifier",
+																			"name": "j",
+																			"pos": 472,
+																			"start": 473
+																		}
+																	]
+																},
+																{
+																	"end": 566,
+																	"kind": "Block",
+																	"pos": 477,
+																	"start": 478,
+																	"children": [
+																		{
+																			"end": 560,
+																			"kind": "IfStatement",
+																			"pos": 479,
+																			"start": 486,
+																			"children": [
+																				{
+																					"end": 513,
+																					"kind": "BinaryExpression",
+																					"pos": 489,
+																					"start": 489,
+																					"children": [
+																						{
+																							"end": 508,
+																							"kind": "CallExpression",
+																							"pos": 489,
+																							"start": 489,
+																							"children": [
+																								{
+																									"end": 505,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 489,
+																									"start": 489,
+																									"children": [
+																										{
+																											"end": 497,
+																											"kind": "ElementAccessExpression",
+																											"pos": 489,
+																											"start": 489,
+																											"children": [
+																												{
+																													"end": 494,
+																													"kind": "Identifier",
+																													"name": "array",
+																													"pos": 489,
+																													"start": 489
+																												},
+																												{
+																													"end": 496,
+																													"kind": "Identifier",
+																													"name": "j",
+																													"pos": 495,
+																													"start": 495
+																												}
+																											]
+																										},
+																										{
+																											"end": 505,
+																											"kind": "Identifier",
+																											"name": "indexOf",
+																											"pos": 498,
+																											"start": 498,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 507,
+																									"kind": "Identifier",
+																									"name": "i",
+																									"pos": 506,
+																									"start": 506
+																								}
+																							]
+																						},
+																						{
+																							"end": 511,
+																							"kind": "GreaterThanEqualsToken",
+																							"pos": 508,
+																							"start": 509
+																						},
+																						{
+																							"end": 513,
+																							"kind": "Literal",
+																							"pos": 511,
+																							"start": 512
+																						}
+																					]
+																				},
+																				{
+																					"end": 560,
+																					"kind": "Block",
+																					"pos": 514,
+																					"start": 515,
+																					"children": [
+																						{
+																							"end": 552,
+																							"kind": "ExpressionStatement",
+																							"pos": 516,
+																							"start": 525,
+																							"children": [
+																								{
+																									"end": 551,
+																									"kind": "CallExpression",
+																									"pos": 516,
+																									"start": 525,
+																									"children": [
+																										{
+																											"end": 541,
+																											"kind": "PropertyAccessExpression",
+																											"pos": 516,
+																											"start": 525,
+																											"children": [
+																												{
+																													"end": 536,
+																													"kind": "Identifier",
+																													"name": "sortedArray",
+																													"pos": 516,
+																													"start": 525
+																												},
+																												{
+																													"end": 541,
+																													"kind": "Identifier",
+																													"name": "push",
+																													"pos": 537,
+																													"start": 537,
+																													"type": "function"
+																												}
+																											]
+																										},
+																										{
+																											"end": 550,
+																											"kind": "ElementAccessExpression",
+																											"pos": 542,
+																											"start": 542,
+																											"children": [
+																												{
+																													"end": 547,
+																													"kind": "Identifier",
+																													"name": "array",
+																													"pos": 542,
+																													"start": 542
+																												},
+																												{
+																													"end": 549,
+																													"kind": "Identifier",
+																													"name": "j",
+																													"pos": 548,
+																													"start": 548
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"end": 602,
+											"kind": "Keyword",
+											"pos": 570,
+											"start": 573,
+											"children": [
+												{
+													"end": 601,
+													"kind": "CallExpression",
+													"pos": 579,
+													"start": 580,
+													"children": [
+														{
+															"end": 596,
+															"kind": "PropertyAccessExpression",
+															"pos": 579,
+															"start": 580,
+															"children": [
+																{
+																	"end": 591,
+																	"kind": "Identifier",
+																	"name": "sortedArray",
+																	"pos": 579,
+																	"start": 580
+																},
+																{
+																	"end": 596,
+																	"kind": "Identifier",
+																	"name": "join",
+																	"pos": 592,
+																	"start": 592,
+																	"type": "function"
+																}
+															]
+														},
+														{
+															"end": 600,
+															"kind": "Literal",
+															"pos": 597,
+															"start": 597
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 731,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 604,
+							"start": 606,
+							"children": [
+								{
+									"end": 620,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 614,
+									"start": 615
+								},
+								{
+									"end": 626,
+									"kind": "Parameter",
+									"name": "words",
+									"pos": 621,
+									"start": 621,
+									"children": [
+										{
+											"end": 626,
+											"kind": "Identifier",
+											"name": "words",
+											"pos": 621,
+											"start": 621
+										}
+									]
+								},
+								{
+									"end": 731,
+									"kind": "Block",
+									"pos": 627,
+									"start": 628,
+									"children": [
+										{
+											"end": 729,
+											"kind": "Keyword",
+											"pos": 629,
+											"start": 632,
+											"children": [
+												{
+													"end": 729,
+													"kind": "CallExpression",
+													"pos": 638,
+													"start": 639,
+													"children": [
+														{
+															"end": 724,
+															"kind": "PropertyAccessExpression",
+															"pos": 638,
+															"start": 639,
+															"children": [
+																{
+																	"end": 719,
+																	"kind": "CallExpression",
+																	"pos": 638,
+																	"start": 639,
+																	"children": [
+																		{
+																			"end": 660,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 638,
+																			"start": 639,
+																			"children": [
+																				{
+																					"end": 655,
+																					"kind": "CallExpression",
+																					"pos": 638,
+																					"start": 639,
+																					"children": [
+																						{
+																							"end": 650,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 638,
+																							"start": 639,
+																							"children": [
+																								{
+																									"end": 644,
+																									"kind": "Identifier",
+																									"name": "words",
+																									"pos": 638,
+																									"start": 639
+																								},
+																								{
+																									"end": 650,
+																									"kind": "Identifier",
+																									"name": "split",
+																									"pos": 645,
+																									"start": 645,
+																									"type": "function"
+																								}
+																							]
+																						},
+																						{
+																							"end": 654,
+																							"kind": "Literal",
+																							"pos": 651,
+																							"start": 651
+																						}
+																					]
+																				},
+																				{
+																					"end": 660,
+																					"kind": "Identifier",
+																					"name": "sort",
+																					"pos": 656,
+																					"start": 656,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 718,
+																			"kind": "ArrowFunction",
+																			"pos": 661,
+																			"start": 661,
+																			"children": [
+																				{
+																					"end": 667,
+																					"kind": "Parameter",
+																					"name": "wordA",
+																					"pos": 662,
+																					"start": 662,
+																					"children": [
+																						{
+																							"end": 667,
+																							"kind": "Identifier",
+																							"name": "wordA",
+																							"pos": 662,
+																							"start": 662
+																						}
+																					]
+																				},
+																				{
+																					"end": 674,
+																					"kind": "Parameter",
+																					"name": "wordB",
+																					"pos": 668,
+																					"start": 669,
+																					"children": [
+																						{
+																							"end": 674,
+																							"kind": "Identifier",
+																							"name": "wordB",
+																							"pos": 668,
+																							"start": 669
+																						}
+																					]
+																				},
+																				{
+																					"end": 678,
+																					"kind": "EqualsGreaterThanToken",
+																					"pos": 675,
+																					"start": 676
+																				},
+																				{
+																					"end": 718,
+																					"kind": "BinaryExpression",
+																					"pos": 678,
+																					"start": 679,
+																					"children": [
+																						{
+																							"end": 697,
+																							"kind": "CallExpression",
+																							"pos": 678,
+																							"start": 679,
+																							"children": [
+																								{
+																									"end": 690,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 678,
+																									"start": 679,
+																									"children": [
+																										{
+																											"end": 684,
+																											"kind": "Identifier",
+																											"name": "wordA",
+																											"pos": 678,
+																											"start": 679
+																										},
+																										{
+																											"end": 690,
+																											"kind": "Identifier",
+																											"name": "match",
+																											"pos": 685,
+																											"start": 685,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 696,
+																									"kind": "RegularExpressionLiteral",
+																									"pos": 691,
+																									"start": 691
+																								}
+																							]
+																						},
+																						{
+																							"end": 699,
+																							"kind": "GreaterThanToken",
+																							"pos": 697,
+																							"start": 698
+																						},
+																						{
+																							"end": 718,
+																							"kind": "CallExpression",
+																							"pos": 699,
+																							"start": 700,
+																							"children": [
+																								{
+																									"end": 711,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 699,
+																									"start": 700,
+																									"children": [
+																										{
+																											"end": 705,
+																											"kind": "Identifier",
+																											"name": "wordB",
+																											"pos": 699,
+																											"start": 700
+																										},
+																										{
+																											"end": 711,
+																											"kind": "Identifier",
+																											"name": "match",
+																											"pos": 706,
+																											"start": 706,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 717,
+																									"kind": "RegularExpressionLiteral",
+																									"pos": 712,
+																									"start": 712
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 724,
+																	"kind": "Identifier",
+																	"name": "join",
+																	"pos": 720,
+																	"start": 720,
+																	"type": "function"
+																}
+															]
+														},
+														{
+															"end": 728,
+															"kind": "Literal",
+															"pos": 725,
+															"start": 725
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 903,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 731,
+							"start": 733,
+							"children": [
+								{
+									"end": 747,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 741,
+									"start": 742
+								},
+								{
+									"end": 753,
+									"kind": "Parameter",
+									"name": "words",
+									"pos": 748,
+									"start": 748,
+									"children": [
+										{
+											"end": 753,
+											"kind": "Identifier",
+											"name": "words",
+											"pos": 748,
+											"start": 748
+										}
+									]
+								},
+								{
+									"end": 903,
+									"kind": "Block",
+									"pos": 754,
+									"start": 754,
+									"children": [
+										{
+											"end": 901,
+											"kind": "Keyword",
+											"pos": 755,
+											"start": 767,
+											"children": [
+												{
+													"end": 900,
+													"kind": "BinaryExpression",
+													"pos": 773,
+													"start": 774,
+													"children": [
+														{
+															"end": 779,
+															"kind": "Identifier",
+															"name": "words",
+															"pos": 773,
+															"start": 774
+														},
+														{
+															"end": 782,
+															"kind": "AmpersandAmpersandToken",
+															"pos": 779,
+															"start": 780
+														},
+														{
+															"end": 900,
+															"kind": "CallExpression",
+															"pos": 782,
+															"start": 783,
+															"children": [
+																{
+																	"end": 895,
+																	"kind": "PropertyAccessExpression",
+																	"pos": 782,
+																	"start": 783,
+																	"children": [
+																		{
+																			"end": 885,
+																			"kind": "CallExpression",
+																			"pos": 782,
+																			"start": 783,
+																			"children": [
+																				{
+																					"end": 862,
+																					"kind": "PropertyAccessExpression",
+																					"pos": 782,
+																					"start": 783,
+																					"children": [
+																						{
+																							"end": 853,
+																							"kind": "CallExpression",
+																							"pos": 782,
+																							"start": 783,
+																							"children": [
+																								{
+																									"end": 851,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 782,
+																									"start": 783,
+																									"children": [
+																										{
+																											"end": 841,
+																											"kind": "CallExpression",
+																											"pos": 782,
+																											"start": 783,
+																											"children": [
+																												{
+																													"end": 808,
+																													"kind": "PropertyAccessExpression",
+																													"pos": 782,
+																													"start": 783,
+																													"children": [
+																														{
+																															"end": 799,
+																															"kind": "CallExpression",
+																															"pos": 782,
+																															"start": 783,
+																															"children": [
+																																{
+																																	"end": 794,
+																																	"kind": "PropertyAccessExpression",
+																																	"pos": 782,
+																																	"start": 783,
+																																	"children": [
+																																		{
+																																			"end": 788,
+																																			"kind": "Identifier",
+																																			"name": "words",
+																																			"pos": 782,
+																																			"start": 783
+																																		},
+																																		{
+																																			"end": 794,
+																																			"kind": "Identifier",
+																																			"name": "split",
+																																			"pos": 789,
+																																			"start": 789,
+																																			"type": "function"
+																																		}
+																																	]
+																																},
+																																{
+																																	"end": 798,
+																																	"kind": "Literal",
+																																	"pos": 795,
+																																	"start": 795
+																																}
+																															]
+																														},
+																														{
+																															"end": 808,
+																															"kind": "Identifier",
+																															"name": "map",
+																															"pos": 805,
+																															"start": 805,
+																															"type": "function"
+																														}
+																													]
+																												},
+																												{
+																													"end": 840,
+																													"kind": "ArrowFunction",
+																													"pos": 809,
+																													"start": 809,
+																													"children": [
+																														{
+																															"end": 813,
+																															"kind": "Parameter",
+																															"name": "word",
+																															"pos": 809,
+																															"start": 809,
+																															"children": [
+																																{
+																																	"end": 813,
+																																	"kind": "Identifier",
+																																	"name": "word",
+																																	"pos": 809,
+																																	"start": 809
+																																}
+																															]
+																														},
+																														{
+																															"end": 816,
+																															"kind": "EqualsGreaterThanToken",
+																															"pos": 813,
+																															"start": 814
+																														},
+																														{
+																															"end": 840,
+																															"kind": "BinaryExpression",
+																															"pos": 816,
+																															"start": 817,
+																															"children": [
+																																{
+																																	"end": 833,
+																																	"kind": "CallExpression",
+																																	"pos": 816,
+																																	"start": 817,
+																																	"children": [
+																																		{
+																																			"end": 827,
+																																			"kind": "PropertyAccessExpression",
+																																			"pos": 816,
+																																			"start": 817,
+																																			"children": [
+																																				{
+																																					"end": 821,
+																																					"kind": "Identifier",
+																																					"name": "word",
+																																					"pos": 816,
+																																					"start": 817
+																																				},
+																																				{
+																																					"end": 827,
+																																					"kind": "Identifier",
+																																					"name": "match",
+																																					"pos": 822,
+																																					"start": 822,
+																																					"type": "function"
+																																				}
+																																			]
+																																		},
+																																		{
+																																			"end": 832,
+																																			"kind": "RegularExpressionLiteral",
+																																			"pos": 828,
+																																			"start": 828
+																																		}
+																																	]
+																																},
+																																{
+																																	"end": 835,
+																																	"kind": "PlusToken",
+																																	"pos": 833,
+																																	"start": 834
+																																},
+																																{
+																																	"end": 840,
+																																	"kind": "Identifier",
+																																	"name": "word",
+																																	"pos": 835,
+																																	"start": 836
+																																}
+																															]
+																														}
+																													]
+																												}
+																											]
+																										},
+																										{
+																											"end": 851,
+																											"kind": "Identifier",
+																											"name": "sort",
+																											"pos": 847,
+																											"start": 847,
+																											"type": "function"
+																										}
+																									]
+																								}
+																							]
+																						},
+																						{
+																							"end": 862,
+																							"kind": "Identifier",
+																							"name": "map",
+																							"pos": 859,
+																							"start": 859,
+																							"type": "function"
+																						}
+																					]
+																				},
+																				{
+																					"end": 884,
+																					"kind": "ArrowFunction",
+																					"pos": 863,
+																					"start": 863,
+																					"children": [
+																						{
+																							"end": 867,
+																							"kind": "Parameter",
+																							"name": "word",
+																							"pos": 863,
+																							"start": 863,
+																							"children": [
+																								{
+																									"end": 867,
+																									"kind": "Identifier",
+																									"name": "word",
+																									"pos": 863,
+																									"start": 863
+																								}
+																							]
+																						},
+																						{
+																							"end": 870,
+																							"kind": "EqualsGreaterThanToken",
+																							"pos": 867,
+																							"start": 868
+																						},
+																						{
+																							"end": 884,
+																							"kind": "CallExpression",
+																							"pos": 870,
+																							"start": 871,
+																							"children": [
+																								{
+																									"end": 881,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 870,
+																									"start": 871,
+																									"children": [
+																										{
+																											"end": 875,
+																											"kind": "Identifier",
+																											"name": "word",
+																											"pos": 870,
+																											"start": 871
+																										},
+																										{
+																											"end": 881,
+																											"kind": "Identifier",
+																											"name": "slice",
+																											"pos": 876,
+																											"start": 876,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 883,
+																									"kind": "Literal",
+																									"pos": 882,
+																									"start": 882
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		},
+																		{
+																			"end": 895,
+																			"kind": "Identifier",
+																			"name": "join",
+																			"pos": 891,
+																			"start": 891,
+																			"type": "function"
+																		}
+																	]
+																},
+																{
+																	"end": 899,
+																	"kind": "Literal",
+																	"pos": 896,
+																	"start": 896
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 991,
+							"kind": "VariableStatement",
+							"pos": 903,
+							"start": 905,
+							"type": "",
+							"children": [
+								{
+									"end": 990,
+									"kind": "VariableDeclarationList",
+									"pos": 903,
+									"start": 905,
+									"children": [
+										{
+											"end": 990,
+											"kind": "VariableDeclaration",
+											"pos": 910,
+											"start": 911,
+											"children": [
+												{
+													"end": 916,
+													"kind": "Identifier",
+													"name": "order",
+													"pos": 910,
+													"start": 911
+												},
+												{
+													"end": 990,
+													"kind": "ArrowFunction",
+													"pos": 918,
+													"start": 919,
+													"children": [
+														{
+															"end": 920,
+															"kind": "Parameter",
+															"name": "w",
+															"pos": 918,
+															"start": 919,
+															"children": [
+																{
+																	"end": 920,
+																	"kind": "Identifier",
+																	"name": "w",
+																	"pos": 918,
+																	"start": 919
+																}
+															]
+														},
+														{
+															"end": 923,
+															"kind": "EqualsGreaterThanToken",
+															"pos": 920,
+															"start": 921
+														},
+														{
+															"end": 990,
+															"kind": "CallExpression",
+															"pos": 923,
+															"start": 924,
+															"children": [
+																{
+																	"end": 985,
+																	"kind": "PropertyAccessExpression",
+																	"pos": 923,
+																	"start": 924,
+																	"children": [
+																		{
+																			"end": 980,
+																			"kind": "CallExpression",
+																			"pos": 923,
+																			"start": 924,
+																			"children": [
+																				{
+																					"end": 941,
+																					"kind": "PropertyAccessExpression",
+																					"pos": 923,
+																					"start": 924,
+																					"children": [
+																						{
+																							"end": 936,
+																							"kind": "CallExpression",
+																							"pos": 923,
+																							"start": 924,
+																							"children": [
+																								{
+																									"end": 931,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 923,
+																									"start": 924,
+																									"children": [
+																										{
+																											"end": 925,
+																											"kind": "Identifier",
+																											"name": "w",
+																											"pos": 923,
+																											"start": 924
+																										},
+																										{
+																											"end": 931,
+																											"kind": "Identifier",
+																											"name": "split",
+																											"pos": 926,
+																											"start": 926,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 935,
+																									"kind": "Literal",
+																									"pos": 932,
+																									"start": 932
+																								}
+																							]
+																						},
+																						{
+																							"end": 941,
+																							"kind": "Identifier",
+																							"name": "sort",
+																							"pos": 937,
+																							"start": 937,
+																							"type": "function"
+																						}
+																					]
+																				},
+																				{
+																					"end": 979,
+																					"kind": "ArrowFunction",
+																					"pos": 942,
+																					"start": 942,
+																					"children": [
+																						{
+																							"end": 944,
+																							"kind": "Parameter",
+																							"name": "a",
+																							"pos": 943,
+																							"start": 943,
+																							"children": [
+																								{
+																									"end": 944,
+																									"kind": "Identifier",
+																									"name": "a",
+																									"pos": 943,
+																									"start": 943
+																								}
+																							]
+																						},
+																						{
+																							"end": 947,
+																							"kind": "Parameter",
+																							"name": "b",
+																							"pos": 945,
+																							"start": 946,
+																							"children": [
+																								{
+																									"end": 947,
+																									"kind": "Identifier",
+																									"name": "b",
+																									"pos": 945,
+																									"start": 946
+																								}
+																							]
+																						},
+																						{
+																							"end": 951,
+																							"kind": "EqualsGreaterThanToken",
+																							"pos": 948,
+																							"start": 949
+																						},
+																						{
+																							"end": 979,
+																							"kind": "BinaryExpression",
+																							"pos": 951,
+																							"start": 952,
+																							"children": [
+																								{
+																									"end": 964,
+																									"kind": "CallExpression",
+																									"pos": 951,
+																									"start": 952,
+																									"children": [
+																										{
+																											"end": 961,
+																											"kind": "PropertyAccessExpression",
+																											"pos": 951,
+																											"start": 952,
+																											"children": [
+																												{
+																													"end": 956,
+																													"kind": "RegularExpressionLiteral",
+																													"pos": 951,
+																													"start": 952
+																												},
+																												{
+																													"end": 961,
+																													"kind": "Identifier",
+																													"name": "exec",
+																													"pos": 957,
+																													"start": 957,
+																													"type": "function"
+																												}
+																											]
+																										},
+																										{
+																											"end": 963,
+																											"kind": "Identifier",
+																											"name": "a",
+																											"pos": 962,
+																											"start": 962
+																										}
+																									]
+																								},
+																								{
+																									"end": 966,
+																									"kind": "MinusToken",
+																									"pos": 964,
+																									"start": 965
+																								},
+																								{
+																									"end": 979,
+																									"kind": "CallExpression",
+																									"pos": 966,
+																									"start": 967,
+																									"children": [
+																										{
+																											"end": 976,
+																											"kind": "PropertyAccessExpression",
+																											"pos": 966,
+																											"start": 967,
+																											"children": [
+																												{
+																													"end": 971,
+																													"kind": "RegularExpressionLiteral",
+																													"pos": 966,
+																													"start": 967
+																												},
+																												{
+																													"end": 976,
+																													"kind": "Identifier",
+																													"name": "exec",
+																													"pos": 972,
+																													"start": 972,
+																													"type": "function"
+																												}
+																											]
+																										},
+																										{
+																											"end": 978,
+																											"kind": "Identifier",
+																											"name": "b",
+																											"pos": 977,
+																											"start": 977
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		},
+																		{
+																			"end": 985,
+																			"kind": "Identifier",
+																			"name": "join",
+																			"pos": 981,
+																			"start": 981,
+																			"type": "function"
+																		}
+																	]
+																},
+																{
+																	"end": 989,
+																	"kind": "Literal",
+																	"pos": 986,
+																	"start": 986
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 1184,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 991,
+							"start": 993,
+							"children": [
+								{
+									"end": 1007,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 1001,
+									"start": 1002
+								},
+								{
+									"end": 1011,
+									"kind": "Parameter",
+									"name": "str",
+									"pos": 1008,
+									"start": 1008,
+									"children": [
+										{
+											"end": 1011,
+											"kind": "Identifier",
+											"name": "str",
+											"pos": 1008,
+											"start": 1008
+										}
+									]
+								},
+								{
+									"end": 1184,
+									"kind": "Block",
+									"pos": 1012,
+									"start": 1013,
+									"children": [
+										{
+											"end": 1035,
+											"kind": "ExpressionStatement",
+											"pos": 1014,
+											"start": 1016,
+											"children": [
+												{
+													"end": 1034,
+													"kind": "BinaryExpression",
+													"pos": 1014,
+													"start": 1016,
+													"children": [
+														{
+															"end": 1019,
+															"kind": "Identifier",
+															"name": "str",
+															"pos": 1014,
+															"start": 1016
+														},
+														{
+															"end": 1020,
+															"kind": "EqualsToken",
+															"pos": 1019,
+															"start": 1019
+														},
+														{
+															"end": 1034,
+															"kind": "CallExpression",
+															"pos": 1020,
+															"start": 1020,
+															"children": [
+																{
+																	"end": 1029,
+																	"kind": "PropertyAccessExpression",
+																	"pos": 1020,
+																	"start": 1020,
+																	"children": [
+																		{
+																			"end": 1023,
+																			"kind": "Identifier",
+																			"name": "str",
+																			"pos": 1020,
+																			"start": 1020
+																		},
+																		{
+																			"end": 1029,
+																			"kind": "Identifier",
+																			"name": "split",
+																			"pos": 1024,
+																			"start": 1024,
+																			"type": "function"
+																		}
+																	]
+																},
+																{
+																	"end": 1033,
+																	"kind": "Literal",
+																	"pos": 1030,
+																	"start": 1030
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"end": 1077,
+											"kind": "VariableStatement",
+											"pos": 1035,
+											"start": 1037,
+											"type": "",
+											"children": [
+												{
+													"end": 1076,
+													"kind": "VariableDeclarationList",
+													"pos": 1035,
+													"start": 1037,
+													"children": [
+														{
+															"end": 1046,
+															"kind": "VariableDeclaration",
+															"pos": 1040,
+															"start": 1041,
+															"children": [
+																{
+																	"end": 1046,
+																	"kind": "Identifier",
+																	"name": "index",
+																	"pos": 1040,
+																	"start": 1041
+																}
+															]
+														},
+														{
+															"end": 1076,
+															"kind": "VariableDeclaration",
+															"pos": 1047,
+															"start": 1048,
+															"children": [
+																{
+																	"end": 1054,
+																	"kind": "Identifier",
+																	"name": "result",
+																	"pos": 1047,
+																	"start": 1048
+																},
+																{
+																	"end": 1076,
+																	"kind": "Keyword",
+																	"pos": 1055,
+																	"start": 1055,
+																	"children": [
+																		{
+																			"end": 1064,
+																			"kind": "Identifier",
+																			"name": "Array",
+																			"pos": 1058,
+																			"start": 1059
+																		},
+																		{
+																			"end": 1075,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 1065,
+																			"start": 1065,
+																			"children": [
+																				{
+																					"end": 1068,
+																					"kind": "Identifier",
+																					"name": "str",
+																					"pos": 1065,
+																					"start": 1065
+																				},
+																				{
+																					"end": 1075,
+																					"kind": "Identifier",
+																					"name": "length",
+																					"pos": 1069,
+																					"start": 1069
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"end": 1156,
+											"kind": "ForInStatement",
+											"pos": 1077,
+											"start": 1079,
+											"children": [
+												{
+													"end": 1088,
+													"kind": "VariableDeclarationList",
+													"pos": 1083,
+													"start": 1083,
+													"children": [
+														{
+															"end": 1088,
+															"kind": "VariableDeclaration",
+															"pos": 1086,
+															"start": 1087,
+															"children": [
+																{
+																	"end": 1088,
+																	"kind": "Identifier",
+																	"name": "i",
+																	"pos": 1086,
+																	"start": 1087
+																}
+															]
+														}
+													]
+												},
+												{
+													"end": 1095,
+													"kind": "Identifier",
+													"name": "str",
+													"pos": 1091,
+													"start": 1092
+												},
+												{
+													"end": 1156,
+													"kind": "Block",
+													"pos": 1096,
+													"start": 1098,
+													"children": [
+														{
+															"end": 1127,
+															"kind": "ExpressionStatement",
+															"pos": 1099,
+															"start": 1102,
+															"children": [
+																{
+																	"end": 1126,
+																	"kind": "BinaryExpression",
+																	"pos": 1099,
+																	"start": 1102,
+																	"children": [
+																		{
+																			"end": 1107,
+																			"kind": "Identifier",
+																			"name": "index",
+																			"pos": 1099,
+																			"start": 1102
+																		},
+																		{
+																			"end": 1108,
+																			"kind": "EqualsToken",
+																			"pos": 1107,
+																			"start": 1107
+																		},
+																		{
+																			"end": 1126,
+																			"kind": "CallExpression",
+																			"pos": 1108,
+																			"start": 1108,
+																			"children": [
+																				{
+																					"end": 1120,
+																					"kind": "PropertyAccessExpression",
+																					"pos": 1108,
+																					"start": 1108,
+																					"children": [
+																						{
+																							"end": 1114,
+																							"kind": "ElementAccessExpression",
+																							"pos": 1108,
+																							"start": 1108,
+																							"children": [
+																								{
+																									"end": 1111,
+																									"kind": "Identifier",
+																									"name": "str",
+																									"pos": 1108,
+																									"start": 1108
+																								},
+																								{
+																									"end": 1113,
+																									"kind": "Identifier",
+																									"name": "i",
+																									"pos": 1112,
+																									"start": 1112
+																								}
+																							]
+																						},
+																						{
+																							"end": 1120,
+																							"kind": "Identifier",
+																							"name": "match",
+																							"pos": 1115,
+																							"start": 1115,
+																							"type": "function"
+																						}
+																					]
+																				},
+																				{
+																					"end": 1125,
+																					"kind": "RegularExpressionLiteral",
+																					"pos": 1121,
+																					"start": 1121
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														},
+														{
+															"end": 1153,
+															"kind": "ExpressionStatement",
+															"pos": 1127,
+															"start": 1130,
+															"children": [
+																{
+																	"end": 1152,
+																	"kind": "BinaryExpression",
+																	"pos": 1127,
+																	"start": 1130,
+																	"children": [
+																		{
+																			"end": 1145,
+																			"kind": "ElementAccessExpression",
+																			"pos": 1127,
+																			"start": 1130,
+																			"children": [
+																				{
+																					"end": 1136,
+																					"kind": "Identifier",
+																					"name": "result",
+																					"pos": 1127,
+																					"start": 1130
+																				},
+																				{
+																					"end": 1144,
+																					"kind": "BinaryExpression",
+																					"pos": 1137,
+																					"start": 1137,
+																					"children": [
+																						{
+																							"end": 1142,
+																							"kind": "Identifier",
+																							"name": "index",
+																							"pos": 1137,
+																							"start": 1137
+																						},
+																						{
+																							"end": 1143,
+																							"kind": "MinusToken",
+																							"pos": 1142,
+																							"start": 1142
+																						},
+																						{
+																							"end": 1144,
+																							"kind": "Literal",
+																							"pos": 1143,
+																							"start": 1143
+																						}
+																					]
+																				}
+																			]
+																		},
+																		{
+																			"end": 1146,
+																			"kind": "EqualsToken",
+																			"pos": 1145,
+																			"start": 1145
+																		},
+																		{
+																			"end": 1152,
+																			"kind": "ElementAccessExpression",
+																			"pos": 1146,
+																			"start": 1146,
+																			"children": [
+																				{
+																					"end": 1149,
+																					"kind": "Identifier",
+																					"name": "str",
+																					"pos": 1146,
+																					"start": 1146
+																				},
+																				{
+																					"end": 1151,
+																					"kind": "Identifier",
+																					"name": "i",
+																					"pos": 1150,
+																					"start": 1150
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										},
+										{
+											"end": 1182,
+											"kind": "Keyword",
+											"pos": 1156,
+											"start": 1158,
+											"children": [
+												{
+													"end": 1181,
+													"kind": "CallExpression",
+													"pos": 1164,
+													"start": 1165,
+													"children": [
+														{
+															"end": 1176,
+															"kind": "PropertyAccessExpression",
+															"pos": 1164,
+															"start": 1165,
+															"children": [
+																{
+																	"end": 1171,
+																	"kind": "Identifier",
+																	"name": "result",
+																	"pos": 1164,
+																	"start": 1165
+																},
+																{
+																	"end": 1176,
+																	"kind": "Identifier",
+																	"name": "join",
+																	"pos": 1172,
+																	"start": 1172,
+																	"type": "function"
+																}
+															]
+														},
+														{
+															"end": 1180,
+															"kind": "Literal",
+															"pos": 1177,
+															"start": 1177
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 1313,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 1184,
+							"start": 1186,
+							"children": [
+								{
+									"end": 1200,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 1194,
+									"start": 1195
+								},
+								{
+									"end": 1206,
+									"kind": "Parameter",
+									"name": "words",
+									"pos": 1201,
+									"start": 1201,
+									"children": [
+										{
+											"end": 1206,
+											"kind": "Identifier",
+											"name": "words",
+											"pos": 1201,
+											"start": 1201
+										}
+									]
+								},
+								{
+									"end": 1313,
+									"kind": "Block",
+									"pos": 1207,
+									"start": 1208,
+									"children": [
+										{
+											"end": 1311,
+											"kind": "Keyword",
+											"pos": 1209,
+											"start": 1212,
+											"children": [
+												{
+													"end": 1311,
+													"kind": "CallExpression",
+													"pos": 1218,
+													"start": 1219,
+													"children": [
+														{
+															"end": 1306,
+															"kind": "PropertyAccessExpression",
+															"pos": 1218,
+															"start": 1219,
+															"children": [
+																{
+																	"end": 1301,
+																	"kind": "CallExpression",
+																	"pos": 1218,
+																	"start": 1219,
+																	"children": [
+																		{
+																			"end": 1240,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 1218,
+																			"start": 1219,
+																			"children": [
+																				{
+																					"end": 1235,
+																					"kind": "CallExpression",
+																					"pos": 1218,
+																					"start": 1219,
+																					"children": [
+																						{
+																							"end": 1230,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 1218,
+																							"start": 1219,
+																							"children": [
+																								{
+																									"end": 1224,
+																									"kind": "Identifier",
+																									"name": "words",
+																									"pos": 1218,
+																									"start": 1219
+																								},
+																								{
+																									"end": 1230,
+																									"kind": "Identifier",
+																									"name": "split",
+																									"pos": 1225,
+																									"start": 1225,
+																									"type": "function"
+																								}
+																							]
+																						},
+																						{
+																							"end": 1234,
+																							"kind": "Literal",
+																							"pos": 1231,
+																							"start": 1231
+																						}
+																					]
+																				},
+																				{
+																					"end": 1240,
+																					"kind": "Identifier",
+																					"name": "sort",
+																					"pos": 1236,
+																					"start": 1236,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 1300,
+																			"kind": "ArrowFunction",
+																			"pos": 1241,
+																			"start": 1241,
+																			"children": [
+																				{
+																					"end": 1243,
+																					"kind": "Parameter",
+																					"name": "a",
+																					"pos": 1242,
+																					"start": 1242,
+																					"children": [
+																						{
+																							"end": 1243,
+																							"kind": "Identifier",
+																							"name": "a",
+																							"pos": 1242,
+																							"start": 1242
+																						}
+																					]
+																				},
+																				{
+																					"end": 1246,
+																					"kind": "Parameter",
+																					"name": "b",
+																					"pos": 1244,
+																					"start": 1245,
+																					"children": [
+																						{
+																							"end": 1246,
+																							"kind": "Identifier",
+																							"name": "b",
+																							"pos": 1244,
+																							"start": 1245
+																						}
+																					]
+																				},
+																				{
+																					"end": 1250,
+																					"kind": "EqualsGreaterThanToken",
+																					"pos": 1247,
+																					"start": 1248
+																				},
+																				{
+																					"end": 1300,
+																					"kind": "BinaryExpression",
+																					"pos": 1250,
+																					"start": 1251,
+																					"children": [
+																						{
+																							"end": 1274,
+																							"kind": "CallExpression",
+																							"pos": 1250,
+																							"start": 1251,
+																							"children": [
+																								{
+																									"end": 1260,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 1250,
+																									"start": 1251,
+																									"children": [
+																										{
+																											"end": 1252,
+																											"kind": "Identifier",
+																											"name": "a",
+																											"pos": 1250,
+																											"start": 1251
+																										},
+																										{
+																											"end": 1260,
+																											"kind": "Identifier",
+																											"name": "replace",
+																											"pos": 1253,
+																											"start": 1253,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 1269,
+																									"kind": "RegularExpressionLiteral",
+																									"pos": 1261,
+																									"start": 1261
+																								},
+																								{
+																									"end": 1273,
+																									"kind": "Literal",
+																									"pos": 1270,
+																									"start": 1271
+																								}
+																							]
+																						},
+																						{
+																							"end": 1276,
+																							"kind": "MinusToken",
+																							"pos": 1274,
+																							"start": 1275
+																						},
+																						{
+																							"end": 1300,
+																							"kind": "CallExpression",
+																							"pos": 1276,
+																							"start": 1277,
+																							"children": [
+																								{
+																									"end": 1286,
+																									"kind": "PropertyAccessExpression",
+																									"pos": 1276,
+																									"start": 1277,
+																									"children": [
+																										{
+																											"end": 1278,
+																											"kind": "Identifier",
+																											"name": "b",
+																											"pos": 1276,
+																											"start": 1277
+																										},
+																										{
+																											"end": 1286,
+																											"kind": "Identifier",
+																											"name": "replace",
+																											"pos": 1279,
+																											"start": 1279,
+																											"type": "function"
+																										}
+																									]
+																								},
+																								{
+																									"end": 1295,
+																									"kind": "RegularExpressionLiteral",
+																									"pos": 1287,
+																									"start": 1287
+																								},
+																								{
+																									"end": 1299,
+																									"kind": "Literal",
+																									"pos": 1296,
+																									"start": 1297
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 1306,
+																	"kind": "Identifier",
+																	"name": "join",
+																	"pos": 1302,
+																	"start": 1302,
+																	"type": "function"
+																}
+															]
+														},
+														{
+															"end": 1310,
+															"kind": "Literal",
+															"pos": 1307,
+															"start": 1307
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 1448,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 1313,
+							"start": 1315,
+							"children": [
+								{
+									"end": 1329,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 1323,
+									"start": 1324
+								},
+								{
+									"end": 1335,
+									"kind": "Parameter",
+									"name": "words",
+									"pos": 1330,
+									"start": 1330,
+									"children": [
+										{
+											"end": 1335,
+											"kind": "Identifier",
+											"name": "words",
+											"pos": 1330,
+											"start": 1330
+										}
+									]
+								},
+								{
+									"end": 1448,
+									"kind": "Block",
+									"pos": 1336,
+									"start": 1336,
+									"children": [
+										{
+											"end": 1446,
+											"kind": "Keyword",
+											"pos": 1337,
+											"start": 1340,
+											"children": [
+												{
+													"end": 1445,
+													"kind": "CallExpression",
+													"pos": 1346,
+													"start": 1347,
+													"children": [
+														{
+															"end": 1440,
+															"kind": "PropertyAccessExpression",
+															"pos": 1346,
+															"start": 1347,
+															"children": [
+																{
+																	"end": 1435,
+																	"kind": "CallExpression",
+																	"pos": 1346,
+																	"start": 1347,
+																	"children": [
+																		{
+																			"end": 1368,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 1346,
+																			"start": 1347,
+																			"children": [
+																				{
+																					"end": 1363,
+																					"kind": "CallExpression",
+																					"pos": 1346,
+																					"start": 1347,
+																					"children": [
+																						{
+																							"end": 1358,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 1346,
+																							"start": 1347,
+																							"children": [
+																								{
+																									"end": 1352,
+																									"kind": "Identifier",
+																									"name": "words",
+																									"pos": 1346,
+																									"start": 1347
+																								},
+																								{
+																									"end": 1358,
+																									"kind": "Identifier",
+																									"name": "split",
+																									"pos": 1353,
+																									"start": 1353,
+																									"type": "function"
+																								}
+																							]
+																						},
+																						{
+																							"end": 1362,
+																							"kind": "Literal",
+																							"pos": 1359,
+																							"start": 1359
+																						}
+																					]
+																				},
+																				{
+																					"end": 1368,
+																					"kind": "Identifier",
+																					"name": "sort",
+																					"pos": 1364,
+																					"start": 1364,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 1434,
+																			"kind": "FunctionExpression",
+																			"pos": 1369,
+																			"start": 1369,
+																			"children": [
+																				{
+																					"end": 1379,
+																					"kind": "Parameter",
+																					"name": "a",
+																					"pos": 1378,
+																					"start": 1378,
+																					"children": [
+																						{
+																							"end": 1379,
+																							"kind": "Identifier",
+																							"name": "a",
+																							"pos": 1378,
+																							"start": 1378
+																						}
+																					]
+																				},
+																				{
+																					"end": 1382,
+																					"kind": "Parameter",
+																					"name": "b",
+																					"pos": 1380,
+																					"start": 1381,
+																					"children": [
+																						{
+																							"end": 1382,
+																							"kind": "Identifier",
+																							"name": "b",
+																							"pos": 1380,
+																							"start": 1381
+																						}
+																					]
+																				},
+																				{
+																					"end": 1434,
+																					"kind": "Block",
+																					"pos": 1383,
+																					"start": 1383,
+																					"children": [
+																						{
+																							"end": 1430,
+																							"kind": "Keyword",
+																							"pos": 1384,
+																							"start": 1389,
+																							"children": [
+																								{
+																									"end": 1429,
+																									"kind": "BinaryExpression",
+																									"pos": 1395,
+																									"start": 1396,
+																									"children": [
+																										{
+																											"end": 1411,
+																											"kind": "CallExpression",
+																											"pos": 1395,
+																											"start": 1396,
+																											"children": [
+																												{
+																													"end": 1403,
+																													"kind": "PropertyAccessExpression",
+																													"pos": 1395,
+																													"start": 1396,
+																													"children": [
+																														{
+																															"end": 1397,
+																															"kind": "Identifier",
+																															"name": "a",
+																															"pos": 1395,
+																															"start": 1396
+																														},
+																														{
+																															"end": 1403,
+																															"kind": "Identifier",
+																															"name": "match",
+																															"pos": 1398,
+																															"start": 1398,
+																															"type": "function"
+																														}
+																													]
+																												},
+																												{
+																													"end": 1410,
+																													"kind": "RegularExpressionLiteral",
+																													"pos": 1404,
+																													"start": 1404
+																												}
+																											]
+																										},
+																										{
+																											"end": 1413,
+																											"kind": "MinusToken",
+																											"pos": 1411,
+																											"start": 1412
+																										},
+																										{
+																											"end": 1429,
+																											"kind": "CallExpression",
+																											"pos": 1413,
+																											"start": 1414,
+																											"children": [
+																												{
+																													"end": 1421,
+																													"kind": "PropertyAccessExpression",
+																													"pos": 1413,
+																													"start": 1414,
+																													"children": [
+																														{
+																															"end": 1415,
+																															"kind": "Identifier",
+																															"name": "b",
+																															"pos": 1413,
+																															"start": 1414
+																														},
+																														{
+																															"end": 1421,
+																															"kind": "Identifier",
+																															"name": "match",
+																															"pos": 1416,
+																															"start": 1416,
+																															"type": "function"
+																														}
+																													]
+																												},
+																												{
+																													"end": 1428,
+																													"kind": "RegularExpressionLiteral",
+																													"pos": 1422,
+																													"start": 1422
+																												}
+																											]
+																										}
+																									]
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		}
+																	]
+																},
+																{
+																	"end": 1440,
+																	"kind": "Identifier",
+																	"name": "join",
+																	"pos": 1436,
+																	"start": 1436,
+																	"type": "function"
+																}
+															]
+														},
+														{
+															"end": 1444,
+															"kind": "Literal",
+															"pos": 1441,
+															"start": 1441
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 1603,
+							"kind": "FunctionDeclaration",
+							"name": "order",
+							"pos": 1448,
+							"start": 1452,
+							"children": [
+								{
+									"end": 1466,
+									"kind": "Identifier",
+									"name": "order",
+									"pos": 1460,
+									"start": 1461
+								},
+								{
+									"end": 1473,
+									"kind": "Parameter",
+									"name": "string",
+									"pos": 1467,
+									"start": 1467,
+									"children": [
+										{
+											"end": 1473,
+											"kind": "Identifier",
+											"name": "string",
+											"pos": 1467,
+											"start": 1467
+										}
+									]
+								},
+								{
+									"end": 1603,
+									"kind": "Block",
+									"pos": 1474,
+									"start": 1474,
+									"children": [
+										{
+											"end": 1597,
+											"kind": "Keyword",
+											"pos": 1475,
+											"start": 1487,
+											"children": [
+												{
+													"end": 1597,
+													"kind": "CallExpression",
+													"pos": 1493,
+													"start": 1494,
+													"children": [
+														{
+															"end": 1592,
+															"kind": "PropertyAccessExpression",
+															"pos": 1493,
+															"start": 1494,
+															"children": [
+																{
+																	"end": 1587,
+																	"kind": "CallExpression",
+																	"pos": 1493,
+																	"start": 1494,
+																	"children": [
+																		{
+																			"end": 1518,
+																			"kind": "PropertyAccessExpression",
+																			"pos": 1493,
+																			"start": 1494,
+																			"children": [
+																				{
+																					"end": 1511,
+																					"kind": "CallExpression",
+																					"pos": 1493,
+																					"start": 1494,
+																					"children": [
+																						{
+																							"end": 1506,
+																							"kind": "PropertyAccessExpression",
+																							"pos": 1493,
+																							"start": 1494,
+																							"children": [
+																								{
+																									"end": 1500,
+																									"kind": "Identifier",
+																									"name": "string",
+																									"pos": 1493,
+																									"start": 1494
+																								},
+																								{
+																									"end": 1506,
+																									"kind": "Identifier",
+																									"name": "split",
+																									"pos": 1501,
+																									"start": 1501,
+																									"type": "function"
+																								}
+																							]
+																						},
+																						{
+																							"end": 1510,
+																							"kind": "Literal",
+																							"pos": 1507,
+																							"start": 1507
+																						}
+																					]
+																				},
+																				{
+																					"end": 1518,
+																					"kind": "Identifier",
+																					"name": "reduce",
+																					"pos": 1512,
+																					"start": 1512,
+																					"type": "function"
+																				}
+																			]
+																		},
+																		{
+																			"end": 1583,
+																			"kind": "ArrowFunction",
+																			"pos": 1519,
+																			"start": 1519,
+																			"children": [
+																				{
+																					"end": 1523,
+																					"kind": "Parameter",
+																					"name": "acc",
+																					"pos": 1520,
+																					"start": 1520,
+																					"children": [
+																						{
+																							"end": 1523,
+																							"kind": "Identifier",
+																							"name": "acc",
+																							"pos": 1520,
+																							"start": 1520
+																						}
+																					]
+																				},
+																				{
+																					"end": 1526,
+																					"kind": "Parameter",
+																					"name": "el",
+																					"pos": 1524,
+																					"start": 1524,
+																					"children": [
+																						{
+																							"end": 1526,
+																							"kind": "Identifier",
+																							"name": "el",
+																							"pos": 1524,
+																							"start": 1524
+																						}
+																					]
+																				},
+																				{
+																					"end": 1528,
+																					"kind": "Parameter",
+																					"name": "i",
+																					"pos": 1527,
+																					"start": 1527,
+																					"children": [
+																						{
+																							"end": 1528,
+																							"kind": "Identifier",
+																							"name": "i",
+																							"pos": 1527,
+																							"start": 1527
+																						}
+																					]
+																				},
+																				{
+																					"end": 1532,
+																					"kind": "EqualsGreaterThanToken",
+																					"pos": 1529,
+																					"start": 1530
+																				},
+																				{
+																					"end": 1583,
+																					"kind": "Block",
+																					"pos": 1532,
+																					"start": 1533,
+																					"children": [
+																						{
+																							"end": 1563,
+																							"kind": "ExpressionStatement",
+																							"pos": 1534,
+																							"start": 1539,
+																							"children": [
+																								{
+																									"end": 1563,
+																									"kind": "BinaryExpression",
+																									"pos": 1534,
+																									"start": 1539,
+																									"children": [
+																										{
+																											"end": 1560,
+																											"kind": "ElementAccessExpression",
+																											"pos": 1534,
+																											"start": 1539,
+																											"children": [
+																												{
+																													"end": 1542,
+																													"kind": "Identifier",
+																													"name": "acc",
+																													"pos": 1534,
+																													"start": 1539
+																												},
+																												{
+																													"end": 1559,
+																													"kind": "BinaryExpression",
+																													"pos": 1543,
+																													"start": 1543,
+																													"children": [
+																														{
+																															"end": 1557,
+																															"kind": "CallExpression",
+																															"pos": 1543,
+																															"start": 1543,
+																															"children": [
+																																{
+																																	"end": 1551,
+																																	"kind": "PropertyAccessExpression",
+																																	"pos": 1543,
+																																	"start": 1543,
+																																	"children": [
+																																		{
+																																			"end": 1545,
+																																			"kind": "Identifier",
+																																			"name": "el",
+																																			"pos": 1543,
+																																			"start": 1543
+																																		},
+																																		{
+																																			"end": 1551,
+																																			"kind": "Identifier",
+																																			"name": "match",
+																																			"pos": 1546,
+																																			"start": 1546,
+																																			"type": "function"
+																																		}
+																																	]
+																																},
+																																{
+																																	"end": 1556,
+																																	"kind": "RegularExpressionLiteral",
+																																	"pos": 1552,
+																																	"start": 1552
+																																}
+																															]
+																														},
+																														{
+																															"end": 1558,
+																															"kind": "MinusToken",
+																															"pos": 1557,
+																															"start": 1557
+																														},
+																														{
+																															"end": 1559,
+																															"kind": "Literal",
+																															"pos": 1558,
+																															"start": 1558
+																														}
+																													]
+																												}
+																											]
+																										},
+																										{
+																											"end": 1561,
+																											"kind": "EqualsToken",
+																											"pos": 1560,
+																											"start": 1560
+																										},
+																										{
+																											"end": 1563,
+																											"kind": "Identifier",
+																											"name": "el",
+																											"pos": 1561,
+																											"start": 1561
+																										}
+																									]
+																								}
+																							]
+																						},
+																						{
+																							"end": 1579,
+																							"kind": "Keyword",
+																							"pos": 1563,
+																							"start": 1568,
+																							"children": [
+																								{
+																									"end": 1578,
+																									"kind": "Identifier",
+																									"name": "acc",
+																									"pos": 1574,
+																									"start": 1575
+																								}
+																							]
+																						}
+																					]
+																				}
+																			]
+																		},
+																		{
+																			"end": 1586,
+																			"kind": "ArrayLiteralExpression",
+																			"pos": 1584,
+																			"start": 1584
+																		}
+																	]
+																},
+																{
+																	"end": 1592,
+																	"kind": "Identifier",
+																	"name": "join",
+																	"pos": 1588,
+																	"start": 1588,
+																	"type": "function"
+																}
+															]
+														},
+														{
+															"end": 1596,
+															"kind": "Literal",
+															"pos": 1593,
+															"start": 1593
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 1604,
+							"kind": "EndOfFileToken",
+							"pos": 1603,
+							"start": 1604
+						}
+					]
+				}
+			}
+		]
+	}
+}

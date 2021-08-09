@@ -14,10 +14,15 @@ export class KataLanguageEntityService {
     }
 
     static async findAllKataLanguage(language: string): Promise<KataLanguageEntity[]> {
-        console.log(chalk.blueBright('NAMEEEEE kataEntityId'), language);
+        console.log(chalk.blueBright('find all KL language'), language);
         const zzz = await db.connection.getRepository(KataLanguageEntity)
-            .find( { language: language })
-        console.log(chalk.blueBright('NAMEEEEE zzzzz'), zzz);
+            .createQueryBuilder('kle')
+            .having('kle.language = :language', { language: language })
+            .innerJoinAndSelect('kle.kataEntity', 'kataEntity')
+            .innerJoinAndSelect('kle.solutionEntities', 'solutionEntities')
+            .getMany();
+        console.log(chalk.blueBright('NAMEEEEE zzzzz'), zzz?.length);
         return zzz
+        // return undefined
     }
 }
