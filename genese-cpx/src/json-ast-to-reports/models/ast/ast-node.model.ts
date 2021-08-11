@@ -17,6 +17,7 @@ import { IdentifierType } from '../../../core/interfaces/identifier-type.type';
 import { CpxFactorsInterface } from '../../../core/interfaces/cpx-factors.interface';
 import { FactorCategory } from '../../enums/factor-category.enum';
 import { TypingCpx } from '../../../core/models/cpx-factor/typing-cpx.model';
+import { Options } from '../../../core/models/options.model';
 
 export class AstNode implements AstNodeInterface, Evaluate, Logg {
 
@@ -438,7 +439,7 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
      * @private
      */
     private setTypingCpxFactors(): void {
-        if (this.shouldBeTyped && !this.type) {
+        if (this.shouldBeTyped && !this.type && Options.typing) {
             const category: string = this.isCallDeclaration ? 'func' : this.factorCategory;
             this.cpxFactors.typing[category] = cpxFactors.typing[category];
         }

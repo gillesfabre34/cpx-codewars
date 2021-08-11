@@ -24,7 +24,7 @@ export class InitGenerationService {
      */
     generateAll(path: string, language: Language): JsonAstInterface {
         if (!path) {
-            console.log('ERROR: no path.');
+            console.log('HIGH: no path.');
             return undefined;
         }
         return {

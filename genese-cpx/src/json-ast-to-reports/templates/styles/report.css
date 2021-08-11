@@ -110,15 +110,15 @@
     height: 100% !important;
 }
 
-.correct {
+.lowLvl {
     color: #99ccff;
 }
 
-.warning {
+.mediumLvl {
     color: #ffa31a;
 }
 
-.error {
+.highLvl {
     color: #ff3300;
 }
 
@@ -164,15 +164,15 @@ th {
     background-color: white;
 }
 
-.array-report .bgcorrect {
+.array-report .bglowLvl {
     background-color: #99ccff;
 }
 
-.array-report .bgwarning {
+.array-report .bgmediumLvl {
     background-color: #ffa31a;
 }
 
-.array-report .bgerror {
+.array-report .bghighLvl {
     background-color: #ff3300;
 }
 
