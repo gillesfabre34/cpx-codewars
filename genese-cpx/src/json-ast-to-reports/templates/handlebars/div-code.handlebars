@@ -6,9 +6,9 @@
                 <span class="strong">{{methodName}}</span>
             </th>
             <th class="right bgwhite">Complexity Index</th>
-            <th class="bg{{method.cognitiveColor}}">{{method.cpxIndex}}</th>
+            <th class="bg{{divCode.cognitiveColor}}">{{divCode.cpxIndex}}</th>
             <th class="right bgwhite">Cyclomatic complexity</th>
-            <th class="bg{{method.cyclomaticColor}}">{{method.cyclomaticValue}}</th>
+            <th class="bg{{divCode.cyclomaticColor}}">{{divCode.cyclomaticValue}}</th>
         </tr>
         </thead>
         <tbody class="method-body">
@@ -16,7 +16,7 @@
             <td colspan="5">
                     <pre>
                 <code class="language-js">
-                    {{method.code}}
+                    {{divCode.code}}
                 </code>
             </pre>
             </td>
