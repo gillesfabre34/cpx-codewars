@@ -112,7 +112,7 @@ export class AstFolderReportService {
                     cyclomaticColor: astMethod.cyclomaticStatus.toLowerCase(),
                     cyclomaticValue: astMethod.cyclomaticCpx,
                     filename: tsFile.name,
-                    linkFile: this.getFileLink(tsFile),
+                    linkFileWithMethods: this.getFileLink(tsFile),
                     methodName: astMethod.name
                 });
             }
@@ -146,7 +146,7 @@ export class AstFolderReportService {
                         cyclomaticColor: astMethod.cyclomaticStatus.toLowerCase(),
                         cyclomaticValue: astMethod.cyclomaticCpx,
                         filename: tsFile.name,
-                        linkFile: this.getFileLink(tsFile),
+                        linkFileWithMethods: this.getFileLink(tsFile),
                         methodName: astMethod.name
                     })
                 }

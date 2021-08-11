@@ -82,7 +82,7 @@ export class AstFolderMarkdownReportService {
                 cyclomaticColor: astMethod.cyclomaticStatus.toLowerCase(),
                 cyclomaticValue: astMethod.cyclomaticCpx,
                 filename: astFile.name,
-                linkFile: undefined,
+                linkFileWithMethods: undefined,
                 methodName: astMethod.name
             })
         }

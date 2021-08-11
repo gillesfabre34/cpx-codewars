@@ -84,7 +84,7 @@ export class AstFolderConsoleReportService {
                 cyclomaticColor: astMethod.cyclomaticStatus.toLowerCase(),
                 cyclomaticValue: astMethod.cyclomaticCpx,
                 filename: `file://${astFile.astFolder.path}/${astFile.name}`,
-                linkFile: `${astFile.astFolder.path}/${astFile.name}`,
+                linkFileWithMethods: `${astFile.astFolder.path}/${astFile.name}`,
                 methodName: astMethod.name,
             })
         }
