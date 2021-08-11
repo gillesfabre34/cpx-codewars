@@ -4,137 +4,38 @@
 		"astFiles": [
 			{
 				"name": "whole-file.js",
-				"text": "const b = 3;\nfunction first() {\n    return 2;\n}\nfunction second(a) {\n    return a;\n}\n",
+				"text": "let a;\nconst b = 3;\nconst c = b + a.filter(elt => elt > 3);\n// function first() {\n//     return 2;\n// }\n//\n// function second(a) {\n//     return a;\n// }\n",
 				"astNode": {
-					"end": 85,
+					"end": 153,
 					"kind": "SourceFile",
 					"pos": 0,
 					"start": 0,
 					"children": [
 						{
-							"end": 12,
+							"end": 6,
 							"kind": "VariableStatement",
 							"pos": 0,
 							"start": 0,
-							"type": "NumericLiteral",
+							"type": "",
 							"children": [
 								{
-									"end": 11,
+									"end": 5,
 									"kind": "VariableDeclarationList",
 									"pos": 0,
 									"start": 0,
 									"children": [
 										{
-											"end": 11,
+											"end": 5,
 											"kind": "VariableDeclaration",
-											"pos": 5,
-											"start": 6,
+											"pos": 3,
+											"start": 4,
 											"children": [
 												{
-													"end": 7,
-													"kind": "Identifier",
-													"name": "b",
-													"pos": 5,
-													"start": 6
-												},
-												{
-													"end": 11,
-													"kind": "Literal",
-													"pos": 9,
-													"start": 10
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							"end": 47,
-							"kind": "FunctionDeclaration",
-							"name": "first",
-							"pos": 12,
-							"start": 13,
-							"children": [
-								{
-									"end": 27,
-									"kind": "Identifier",
-									"name": "first",
-									"pos": 21,
-									"start": 22
-								},
-								{
-									"end": 47,
-									"kind": "Block",
-									"pos": 29,
-									"start": 30,
-									"children": [
-										{
-											"end": 45,
-											"kind": "Keyword",
-											"pos": 31,
-											"start": 36,
-											"children": [
-												{
-													"end": 44,
-													"kind": "Literal",
-													"pos": 42,
-													"start": 43
-												}
-											]
-										}
-									]
-								}
-							]
-						},
-						{
-							"end": 84,
-							"kind": "FunctionDeclaration",
-							"name": "second",
-							"pos": 47,
-							"start": 48,
-							"children": [
-								{
-									"end": 63,
-									"kind": "Identifier",
-									"name": "second",
-									"pos": 56,
-									"start": 57
-								},
-								{
-									"end": 65,
-									"kind": "Parameter",
-									"name": "a",
-									"pos": 64,
-									"start": 64,
-									"children": [
-										{
-											"end": 65,
-											"kind": "Identifier",
-											"name": "a",
-											"pos": 64,
-											"start": 64
-										}
-									]
-								},
-								{
-									"end": 84,
-									"kind": "Block",
-									"pos": 66,
-									"start": 67,
-									"children": [
-										{
-											"end": 82,
-											"kind": "Keyword",
-											"pos": 68,
-											"start": 73,
-											"children": [
-												{
-													"end": 81,
+													"end": 5,
 													"kind": "Identifier",
 													"name": "a",
-													"pos": 79,
-													"start": 80
+													"pos": 3,
+													"start": 4
 												}
 											]
 										}
@@ -143,10 +44,189 @@
 							]
 						},
 						{
-							"end": 85,
+							"end": 19,
+							"kind": "VariableStatement",
+							"pos": 6,
+							"start": 7,
+							"type": "NumericLiteral",
+							"children": [
+								{
+									"end": 18,
+									"kind": "VariableDeclarationList",
+									"pos": 6,
+									"start": 7,
+									"children": [
+										{
+											"end": 18,
+											"kind": "VariableDeclaration",
+											"pos": 12,
+											"start": 13,
+											"children": [
+												{
+													"end": 14,
+													"kind": "Identifier",
+													"name": "b",
+													"pos": 12,
+													"start": 13
+												},
+												{
+													"end": 18,
+													"kind": "Literal",
+													"pos": 16,
+													"start": 17
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 59,
+							"kind": "VariableStatement",
+							"pos": 19,
+							"start": 20,
+							"type": "",
+							"children": [
+								{
+									"end": 58,
+									"kind": "VariableDeclarationList",
+									"pos": 19,
+									"start": 20,
+									"children": [
+										{
+											"end": 58,
+											"kind": "VariableDeclaration",
+											"pos": 25,
+											"start": 26,
+											"children": [
+												{
+													"end": 27,
+													"kind": "Identifier",
+													"name": "c",
+													"pos": 25,
+													"start": 26
+												},
+												{
+													"end": 58,
+													"kind": "BinaryExpression",
+													"pos": 29,
+													"start": 30,
+													"children": [
+														{
+															"end": 31,
+															"kind": "Identifier",
+															"name": "b",
+															"pos": 29,
+															"start": 30
+														},
+														{
+															"end": 33,
+															"kind": "PlusToken",
+															"pos": 31,
+															"start": 32
+														},
+														{
+															"end": 58,
+															"kind": "CallExpression",
+															"pos": 33,
+															"start": 34,
+															"children": [
+																{
+																	"end": 42,
+																	"kind": "PropertyAccessExpression",
+																	"pos": 33,
+																	"start": 34,
+																	"children": [
+																		{
+																			"end": 35,
+																			"kind": "Identifier",
+																			"name": "a",
+																			"pos": 33,
+																			"start": 34
+																		},
+																		{
+																			"end": 42,
+																			"kind": "Identifier",
+																			"name": "filter",
+																			"pos": 36,
+																			"start": 36,
+																			"type": "function"
+																		}
+																	]
+																},
+																{
+																	"end": 57,
+																	"kind": "ArrowFunction",
+																	"pos": 43,
+																	"start": 43,
+																	"children": [
+																		{
+																			"end": 46,
+																			"kind": "Parameter",
+																			"name": "elt",
+																			"pos": 43,
+																			"start": 43,
+																			"children": [
+																				{
+																					"end": 46,
+																					"kind": "Identifier",
+																					"name": "elt",
+																					"pos": 43,
+																					"start": 43
+																				}
+																			]
+																		},
+																		{
+																			"end": 49,
+																			"kind": "EqualsGreaterThanToken",
+																			"pos": 46,
+																			"start": 47
+																		},
+																		{
+																			"end": 57,
+																			"kind": "BinaryExpression",
+																			"pos": 49,
+																			"start": 50,
+																			"children": [
+																				{
+																					"end": 53,
+																					"kind": "Identifier",
+																					"name": "elt",
+																					"pos": 49,
+																					"start": 50
+																				},
+																				{
+																					"end": 55,
+																					"kind": "GreaterThanToken",
+																					"pos": 53,
+																					"start": 54
+																				},
+																				{
+																					"end": 57,
+																					"kind": "Literal",
+																					"pos": 55,
+																					"start": 56
+																				}
+																			]
+																		}
+																	]
+																}
+															]
+														}
+													]
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 153,
 							"kind": "EndOfFileToken",
-							"pos": 84,
-							"start": 85
+							"pos": 59,
+							"start": 153
 						}
 					]
 				}
