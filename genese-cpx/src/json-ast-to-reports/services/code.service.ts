@@ -47,9 +47,6 @@ export class CodeService {
         if (position < 0 || position > code?.end) {
             return 0;
         }
-        // console.log(chalk.yellowBright('CODEEEEE'), code);
-        // console.log(chalk.magentaBright('CODE LINESSSSS'), code.lines?.length, position);
-        // console.log(chalk.magentaBright('FILTERRRR'), code.lines.filter(l => l.start <= position && l.end > position));
         const line: CodeLine = code.lines.filter(l => l.start <= position && l.end > position)?.[0];
         return line ? line.issue : 0;
     }
