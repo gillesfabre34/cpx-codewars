@@ -1,7 +1,7 @@
 const b = 3;
 
 function first() {
-    return b;
+    return 2;
 }
 
 function second(a) {

@@ -14,6 +14,8 @@ import { AstFileInterface } from '../../../core/interfaces/ast/ast-file.interfac
 import { NestingCpx } from '../../../core/models/cpx-factor/nesting-cpx.model';
 import { DepthCpx } from '../../../core/models/cpx-factor/depth-cpx.model';
 import { addObjects } from '../../../core/services/tools.service';
+import { AstOutsideNodes } from './ast-outside-code.model';
+import { AstMethodOrOutsideNode, isAstMethod } from '../../types/ast-method-or-outside-node.type';
 
 export class AstFile implements AstFileInterface, Evaluate, Logg {
 
@@ -21,6 +23,8 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
     private _astMethods?: AstMethod[] = [];                             // The AstMethods included in this AstFile
     private _astNode?: AstNode = undefined;                             // The AstNode corresponding to the file itself
     private _astNodes?: AstNode[] = undefined;                          // Array of all the AstNodes which are children of this.AstNode (including itself)
+    private _astOutsideNodes?: AstNode[] = [];             // The AstNodes outside classes and functions
+    // private _astOutsideNodes?: AstOutsideNodes = undefined;             // The AstNodes outside classes and functions
     private _code?: Code = undefined;                                   // The Code object corresponding to the AstFile
     private _complexitiesByStatus?: ComplexitiesByStatus = undefined;   // The file complexities spread by complexity status
     private _cpxFactors?: CpxFactors = undefined;                       // The complexity factors of the AstFile
@@ -77,6 +81,26 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
     set astNodes(astNodes: AstNode[])  {
         this._astNodes = astNodes;
     }
+
+
+    get astOutsideNodes(): AstNode[] {
+        return this._astOutsideNodes;
+    }
+
+
+    set astOutsideNodes(astOutsideNodes: AstNode[]) {
+        this._astOutsideNodes = astOutsideNodes;
+    }
+
+
+    // get astOutsideNodes(): AstOutsideNodes {
+    //     return this._astOutsideNodes;
+    // }
+    //
+    //
+    // set astOutsideNodes(astOutsideNodes: AstOutsideNodes) {
+    //     this._astOutsideNodes = astOutsideNodes;
+    // }
 
 
     get code() : Code {
@@ -168,13 +192,27 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
      */
     evaluate(): void {
         this.cpxFactors = new CpxFactors();
-        const astMethodService = new AstMethodService();
         this.astNode.evaluate();
-        for (const method of this.astMethods) {
-            method.evaluate();
-            this.cpxFactors = this.cpxFactors.add(method.cpxFactors);
-            this.cyclomaticCpx = this.cyclomaticCpx + method.cyclomaticCpx;
-            this.complexitiesByStatus = astMethodService.addMethodCpxByStatus(this.complexitiesByStatus, method);
+        // console.log(chalk.magentaBright('FILE CPX FACTORSSSSS'), this.astNode.cpxFactors);
+        const methodsAndOutsideNodes: AstMethodOrOutsideNode[] = (this.astMethods as AstMethodOrOutsideNode[]).concat(this.astOutsideNodes);
+        for (const methodOrOutsideNode of methodsAndOutsideNodes) {
+        // for (const methodOrOutsideNode of this.astMethods) {
+            this.evaluateMethodOrOutsideNode(methodOrOutsideNode);
+            // method.evaluate();
+            // this.cpxFactors = this.cpxFactors.add(method.cpxFactors);
+            // this.cyclomaticCpx = this.cyclomaticCpx + method.cyclomaticCpx;
+            // this.complexitiesByStatus = astMethodService.addMethodCpxByStatus(this.complexitiesByStatus, method);
+        }
+    }
+
+
+    private evaluateMethodOrOutsideNode(methodOrOutsideNode: AstMethodOrOutsideNode): void {
+        methodOrOutsideNode.evaluate();
+        this.cpxFactors = this.cpxFactors.add(methodOrOutsideNode.cpxFactors);
+        this.cyclomaticCpx = this.cyclomaticCpx + methodOrOutsideNode.cyclomaticCpx;
+        if (isAstMethod(methodOrOutsideNode)) {
+            const astMethodService = new AstMethodService();
+            this.complexitiesByStatus = astMethodService.addMethodCpxByStatus(this.complexitiesByStatus, methodOrOutsideNode as AstMethod);
         }
     }
 

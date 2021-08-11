@@ -31,7 +31,6 @@ if (path.isAbsolute(PATH_TO_ANALYSE)) {
     pathToAnalyse = `${process.cwd()}/${PATH_TO_ANALYSE}`.split('/').filter(e => e !== '.').join('/');
 }
 
-//         "build": "tsc && cp -r src/json-ast-to-reports/templates dist/src/json-ast-to-reports/templates && cp -r src/automatic-refactoring/templates dist/src/automatic-refactoring/templates && cp -r src/core/chartjs dist/src/core/chartjs",
 
 start()
     .then(exitCode => {
@@ -44,7 +43,7 @@ start()
 
 async function start(): Promise<number> {
     if (DEBUG) {
-        pathToAnalyse = `${process.cwd()}/dist/solutions`;
+        pathToAnalyse = `${process.cwd()}/dist/genese-cpx/src/core/mocks/whole-file`;
         // pathToAnalyse = `${process.cwd()}/genese-cpx/src/core/mocks`;
         FRAMEWORK = 'react';
     }

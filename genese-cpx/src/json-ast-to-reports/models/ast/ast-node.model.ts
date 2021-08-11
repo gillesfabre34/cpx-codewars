@@ -217,6 +217,15 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
     }
 
 
+    get isCodeOutsideClassesAndFunctions(): boolean {
+        return Ast.isSourceFile(this.parent)
+            && !this.isVarArrowFunction
+            && !Ast.isClassDeclaration(this)
+            && !Ast.isFunctionDeclaration(this)
+            && !Ast.isEndOfFileToken(this);
+    }
+
+
     get isParam(): boolean {
         return Ast.isParam(this);
     }

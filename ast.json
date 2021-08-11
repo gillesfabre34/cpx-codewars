@@ -1,12 +1,12 @@
 {
 	"astFolder": {
-		"path": "/Users/utilisateur/Documents/these/cpx-codewars/genese-cpx/src/core/mocks/whole-file/",
+		"path": "/Users/utilisateur/Documents/these/cpx-codewars/dist/genese-cpx/src/core/mocks/whole-file/",
 		"astFiles": [
 			{
-				"name": "whole-file.ts",
-				"text": "const b = 3;\n\nfunction first() {\n    return b;\n}\n\nfunction second(a) {\n    return a;\n}\n",
+				"name": "whole-file.js",
+				"text": "const b = 3;\nfunction first() {\n    return 2;\n}\nfunction second(a) {\n    return a;\n}\n",
 				"astNode": {
-					"end": 87,
+					"end": 85,
 					"kind": "SourceFile",
 					"pos": 0,
 					"start": 0,
@@ -50,37 +50,36 @@
 							]
 						},
 						{
-							"end": 48,
+							"end": 47,
 							"kind": "FunctionDeclaration",
 							"name": "first",
 							"pos": 12,
-							"start": 14,
+							"start": 13,
 							"children": [
 								{
-									"end": 28,
+									"end": 27,
 									"kind": "Identifier",
 									"name": "first",
-									"pos": 22,
-									"start": 23
+									"pos": 21,
+									"start": 22
 								},
 								{
-									"end": 48,
+									"end": 47,
 									"kind": "Block",
-									"pos": 30,
-									"start": 31,
+									"pos": 29,
+									"start": 30,
 									"children": [
 										{
-											"end": 46,
+											"end": 45,
 											"kind": "Keyword",
-											"pos": 32,
-											"start": 37,
+											"pos": 31,
+											"start": 36,
 											"children": [
 												{
-													"end": 45,
-													"kind": "Identifier",
-													"name": "b",
-													"pos": 43,
-													"start": 44
+													"end": 44,
+													"kind": "Literal",
+													"pos": 42,
+													"start": 43
 												}
 											]
 										}
@@ -89,53 +88,53 @@
 							]
 						},
 						{
-							"end": 86,
+							"end": 84,
 							"kind": "FunctionDeclaration",
 							"name": "second",
-							"pos": 48,
-							"start": 50,
+							"pos": 47,
+							"start": 48,
 							"children": [
 								{
-									"end": 65,
+									"end": 63,
 									"kind": "Identifier",
 									"name": "second",
-									"pos": 58,
-									"start": 59
+									"pos": 56,
+									"start": 57
 								},
 								{
-									"end": 67,
+									"end": 65,
 									"kind": "Parameter",
 									"name": "a",
-									"pos": 66,
-									"start": 66,
+									"pos": 64,
+									"start": 64,
 									"children": [
 										{
-											"end": 67,
+											"end": 65,
 											"kind": "Identifier",
 											"name": "a",
-											"pos": 66,
-											"start": 66
+											"pos": 64,
+											"start": 64
 										}
 									]
 								},
 								{
-									"end": 86,
+									"end": 84,
 									"kind": "Block",
-									"pos": 68,
-									"start": 69,
+									"pos": 66,
+									"start": 67,
 									"children": [
 										{
-											"end": 84,
+											"end": 82,
 											"kind": "Keyword",
-											"pos": 70,
-											"start": 75,
+											"pos": 68,
+											"start": 73,
 											"children": [
 												{
-													"end": 83,
+													"end": 81,
 													"kind": "Identifier",
 													"name": "a",
-													"pos": 81,
-													"start": 82
+													"pos": 79,
+													"start": 80
 												}
 											]
 										}
@@ -144,10 +143,10 @@
 							]
 						},
 						{
-							"end": 87,
+							"end": 85,
 							"kind": "EndOfFileToken",
-							"pos": 86,
-							"start": 87
+							"pos": 84,
+							"start": 85
 						}
 					]
 				}
