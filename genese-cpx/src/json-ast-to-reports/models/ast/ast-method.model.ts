@@ -3,14 +3,13 @@ import { AstNode } from './ast-node.model';
 import { Code } from '../code/code.model';
 import { Ast } from '../../services/ast/ast.service';
 import { Evaluate } from '../../interfaces/evaluate.interface';
-import { MethodStatus } from '../../enums/evaluation-status.enum';
+import { CpxLevel } from '../../enums/evaluation-status.enum';
 import { CpxFactors } from '../../../core/models/cpx-factor/cpx-factors.model';
 import { ComplexityType } from '../../enums/complexity-type.enum';
 import { CodeLine } from '../code/code-line.model';
 import { cpxFactors } from '../../../core/const/cpx-factors';
 import { FactorCategory } from '../../enums/factor-category.enum';
 import { Options } from '../../../core/models/options.model';
-import * as chalk from 'chalk';
 
 /**
  * Element of the AstNode structure corresponding to a given method
@@ -19,13 +18,13 @@ export class AstMethod implements Evaluate {
 
     private _astNode?: AstNode = undefined;                                     // The AST of the method itself
     private _codeLines?: CodeLine[] = [];                                       // The array of CodeLine of the AstMethod (elements of the array of CodeLine of the corresponding AstFile)
-    private _cognitiveStatus: MethodStatus = MethodStatus.CORRECT;              // The cognitive status of the method
+    private _cognitiveLevel: CpxLevel = CpxLevel.LOW;                           // The cognitive level of the method
     private _cpxFactors?: CpxFactors = undefined;                               // The complexity factors of the AstMethod
     private _cyclomaticCpx ?= 0;                                                // The cyclomatic complexity of the AstMethod
     private _cpxIndex = undefined;                                              // The complexity index of the method
-    private _cyclomaticStatus: MethodStatus = MethodStatus.CORRECT;             // The cyclomatic status of the method
+    private _cyclomaticLevel: CpxLevel = CpxLevel.LOW;                          // The cyclomatic level of the method
     private _displayedCode?: Code = undefined;                                  // The code to display in the report
-    private _isArrowFunction ?= false;
+    private _isArrowFunction ?= false;                                          // True if this is an ArrowFunction, false if not
     private _maxLineLength ?= 0;                                                // The max length of the lines of the code
     private _name: string = undefined;                                          // The name of the method
 
@@ -56,13 +55,13 @@ export class AstMethod implements Evaluate {
     }
 
 
-    get cognitiveStatus(): MethodStatus {
-        return this._cognitiveStatus;
+    get cognitiveLevel(): CpxLevel {
+        return this._cognitiveLevel;
     }
 
 
-    set cognitiveStatus(cognitiveStatus: MethodStatus) {
-        this._cognitiveStatus = cognitiveStatus;
+    set cognitiveLevel(cognitiveStatus: CpxLevel) {
+        this._cognitiveLevel = cognitiveStatus;
     }
 
 
@@ -91,13 +90,13 @@ export class AstMethod implements Evaluate {
     }
 
 
-    get cyclomaticStatus(): MethodStatus {
-        return this._cyclomaticStatus;
+    get cyclomaticLevel(): CpxLevel {
+        return this._cyclomaticLevel;
     }
 
 
-    set cyclomaticStatus(cyclomaticStatus: MethodStatus) {
-        this._cyclomaticStatus = cyclomaticStatus;
+    set cyclomaticLevel(cyclomaticStatus: CpxLevel) {
+        this._cyclomaticLevel = cyclomaticStatus;
     }
 
 
@@ -167,9 +166,9 @@ export class AstMethod implements Evaluate {
     evaluate(): void {
         this.createDisplayedCodeAndCalculateCpxFactors();
         // LogService.logMethod(this);
-        this.cognitiveStatus = this.getComplexityStatus(ComplexityType.COGNITIVE);
+        this.cognitiveLevel = this.getComplexityStatus(ComplexityType.COGNITIVE);
         this.cyclomaticCpx = CS.calculateCyclomaticCpx(this.astNode);
-        this.cyclomaticStatus = this.getComplexityStatus(ComplexityType.CYCLOMATIC);
+        this.cyclomaticLevel = this.getComplexityStatus(ComplexityType.CYCLOMATIC);
     }
 
 
@@ -177,18 +176,18 @@ export class AstMethod implements Evaluate {
      * Gets the complexity status of the method for a given complexity type
      * @param cpxType
      */
-    getComplexityStatus(cpxType: ComplexityType): MethodStatus {
-        let status = MethodStatus.WARNING;
+    getComplexityStatus(cpxType: ComplexityType): CpxLevel {
+        let status = CpxLevel.MEDIUM;
         if (
             (cpxType === ComplexityType.COGNITIVE && this.cpxIndex <= Options.cognitiveCpx.warningThreshold)
             ||
             (cpxType === ComplexityType.CYCLOMATIC && this.cyclomaticCpx <= Options.cyclomaticCpx.warningThreshold)) {
-            status = MethodStatus.CORRECT;
+            status = CpxLevel.LOW;
         } else if (
             (cpxType === ComplexityType.COGNITIVE && Math.round(this.cpxIndex) > Options.cognitiveCpx.errorThreshold)
             ||
             (cpxType === ComplexityType.CYCLOMATIC && this.cyclomaticCpx > Options.cyclomaticCpx.errorThreshold)) {
-            status = MethodStatus.ERROR;
+            status = CpxLevel.HIGH;
         }
         return status;
     }

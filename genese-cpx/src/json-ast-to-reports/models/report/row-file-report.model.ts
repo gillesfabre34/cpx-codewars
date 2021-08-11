@@ -9,7 +9,7 @@ export class RowFileReport {
     cyclomaticValue ?= 0;           // The cyclomatic complexity score of the method analysed in the row
     filename ?= '';                 // The name of the file
     linkFileGlobal ?= '';           // The relative link to the report of a whole file
-    linkFileWithMethods ?= '';      // The relative link to the report of a file with detailed methods
+    linkFile ?= '';      // The relative link to the report of a file with detailed methods
     methodName ?= '';               // The name of the method analysed in the row
 
 }

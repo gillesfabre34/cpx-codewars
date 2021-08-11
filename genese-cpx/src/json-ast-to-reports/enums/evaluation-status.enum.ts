@@ -1,8 +1,8 @@
 /**
- * Status of methods for cognitive or cyclomatic complexity
+ * Complexity level for cognitive or cyclomatic complexity
  */
-export enum MethodStatus {
-    CORRECT = 'CORRECT',
-    WARNING = 'WARNING',
-    ERROR = 'ERROR'
+export enum CpxLevel {
+    LOW = 'lowLvl',
+    MEDIUM = 'mediumLvl',
+    HIGH = 'highLvl'
 }

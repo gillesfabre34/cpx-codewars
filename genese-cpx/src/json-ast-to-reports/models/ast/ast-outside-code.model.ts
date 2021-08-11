@@ -2,7 +2,7 @@ import { AstNode } from './ast-node.model';
 import { Code } from '../code/code.model';
 import { Ast } from '../../services/ast/ast.service';
 import { Evaluate } from '../../interfaces/evaluate.interface';
-import { MethodStatus } from '../../enums/evaluation-status.enum';
+import { CpxLevel } from '../../enums/evaluation-status.enum';
 import { CpxFactors } from '../../../core/models/cpx-factor/cpx-factors.model';
 import { CodeLine } from '../code/code-line.model';
 import { cpxFactors } from '../../../core/const/cpx-factors';
@@ -18,7 +18,7 @@ export class AstOutsideNodes implements Evaluate {
     private _cpxFactors?: CpxFactors = undefined;                               // The complexity factors of the AstMethod
     private _cyclomaticCpx ?= 0;                                                // The cyclomatic complexity of the AstMethod
     private _cpxIndex = undefined;                                              // The complexity index of the method
-    private _cyclomaticStatus: MethodStatus = MethodStatus.CORRECT;             // The cyclomatic status of the method
+    private _cyclomaticStatus: CpxLevel = CpxLevel.LOW;             // The cyclomatic status of the method
     private _displayedCode?: Code = undefined;                                  // The code to display in the report
     private _maxLineLength ?= 0;                                                // The max length of the lines of the code
 
@@ -74,12 +74,12 @@ export class AstOutsideNodes implements Evaluate {
     }
 
 
-    get cyclomaticStatus(): MethodStatus {
+    get cyclomaticStatus(): CpxLevel {
         return this._cyclomaticStatus;
     }
 
 
-    set cyclomaticStatus(cyclomaticStatus: MethodStatus) {
+    set cyclomaticStatus(cyclomaticStatus: CpxLevel) {
         this._cyclomaticStatus = cyclomaticStatus;
     }
 
@@ -112,7 +112,7 @@ export class AstOutsideNodes implements Evaluate {
         // this.createDisplayedCodeAndCalculateCpxFactors();
         // LogService.logMethod(this);
         // this.cyclomaticCpx = CS.calculateCyclomaticCpx(this.astNode);
-        // this.cyclomaticStatus = this.getComplexityStatus(ComplexityType.CYCLOMATIC);
+        // this.cyclomaticLevel = this.getComplexityStatus(ComplexityType.CYCLOMATIC);
     }
 
 

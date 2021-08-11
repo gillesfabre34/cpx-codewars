@@ -203,8 +203,7 @@
         <table class="array-report short-table">
             <thead>
             <tr>
-                <th style="width: 40%;">File</th>
-                <th style="width: 40%;"></th>
+                <th style="width: 80%;">File</th>
                 <th style="width: 10%;">Cognitive complexity</th>
                 <th style="width: 10%;">Cyclomatic complexity</th>
             </tr>
@@ -234,7 +233,7 @@
             </tr>
             </thead>
             {{#each methodsArray}}
-                {{>rowFile rowFile=.}}
+                {{>rowMethod rowMethod=.}}
             {{/each}}
         </table>
     </div>

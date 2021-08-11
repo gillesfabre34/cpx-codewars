@@ -35,9 +35,9 @@ export class AstFileReportService {
         for (const method of this.astFile.astMethods) {
             const methodReport: MethodReport = {
                 code: method.displayedCode?.text,
-                cognitiveColor: method.cognitiveStatus.toLowerCase(),
+                cognitiveColor: method.cognitiveLevel,
                 cpxIndex: method.cpxIndex,
-                cyclomaticColor: method.cyclomaticStatus.toLowerCase(),
+                cyclomaticColor: method.cyclomaticLevel,
                 cyclomaticValue: method.cyclomaticCpx,
                 methodName: method.name,
             };
@@ -56,7 +56,7 @@ export class AstFileReportService {
         this.registerPartial("cyclomaticBarchartScript", 'cyclomatic-barchart');
         this.registerPartial("cognitiveDoughnutScript", 'cognitive-doughnut');
         this.registerPartial("cyclomaticDoughnutScript", 'cyclomatic-doughnut');
-        this.registerPartial("method", 'methods');
+        this.registerPartial("method", 'method');
         const reportTemplate = eol.auto(fs.readFileSync(`${Options.pathGeneseNodeJs}/json-ast-to-reports/templates/handlebars/file-report.handlebars`, 'utf-8'));
         this.template = Handlebars.compile(reportTemplate);
         this.writeReport();
