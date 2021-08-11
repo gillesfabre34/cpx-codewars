@@ -1,0 +1,157 @@
+{
+	"astFolder": {
+		"path": "/Users/utilisateur/Documents/these/cpx-codewars/genese-cpx/src/core/mocks/whole-file/",
+		"astFiles": [
+			{
+				"name": "whole-file.ts",
+				"text": "const b = 3;\n\nfunction first() {\n    return b;\n}\n\nfunction second(a) {\n    return a;\n}\n",
+				"astNode": {
+					"end": 87,
+					"kind": "SourceFile",
+					"pos": 0,
+					"start": 0,
+					"children": [
+						{
+							"end": 12,
+							"kind": "VariableStatement",
+							"pos": 0,
+							"start": 0,
+							"type": "NumericLiteral",
+							"children": [
+								{
+									"end": 11,
+									"kind": "VariableDeclarationList",
+									"pos": 0,
+									"start": 0,
+									"children": [
+										{
+											"end": 11,
+											"kind": "VariableDeclaration",
+											"pos": 5,
+											"start": 6,
+											"children": [
+												{
+													"end": 7,
+													"kind": "Identifier",
+													"name": "b",
+													"pos": 5,
+													"start": 6
+												},
+												{
+													"end": 11,
+													"kind": "Literal",
+													"pos": 9,
+													"start": 10
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 48,
+							"kind": "FunctionDeclaration",
+							"name": "first",
+							"pos": 12,
+							"start": 14,
+							"children": [
+								{
+									"end": 28,
+									"kind": "Identifier",
+									"name": "first",
+									"pos": 22,
+									"start": 23
+								},
+								{
+									"end": 48,
+									"kind": "Block",
+									"pos": 30,
+									"start": 31,
+									"children": [
+										{
+											"end": 46,
+											"kind": "Keyword",
+											"pos": 32,
+											"start": 37,
+											"children": [
+												{
+													"end": 45,
+													"kind": "Identifier",
+													"name": "b",
+													"pos": 43,
+													"start": 44
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 86,
+							"kind": "FunctionDeclaration",
+							"name": "second",
+							"pos": 48,
+							"start": 50,
+							"children": [
+								{
+									"end": 65,
+									"kind": "Identifier",
+									"name": "second",
+									"pos": 58,
+									"start": 59
+								},
+								{
+									"end": 67,
+									"kind": "Parameter",
+									"name": "a",
+									"pos": 66,
+									"start": 66,
+									"children": [
+										{
+											"end": 67,
+											"kind": "Identifier",
+											"name": "a",
+											"pos": 66,
+											"start": 66
+										}
+									]
+								},
+								{
+									"end": 86,
+									"kind": "Block",
+									"pos": 68,
+									"start": 69,
+									"children": [
+										{
+											"end": 84,
+											"kind": "Keyword",
+											"pos": 70,
+											"start": 75,
+											"children": [
+												{
+													"end": 83,
+													"kind": "Identifier",
+													"name": "a",
+													"pos": 81,
+													"start": 82
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"end": 87,
+							"kind": "EndOfFileToken",
+							"pos": 86,
+							"start": 87
+						}
+					]
+				}
+			}
+		]
+	}
+}

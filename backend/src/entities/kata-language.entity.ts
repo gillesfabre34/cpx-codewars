@@ -14,7 +14,7 @@ export class KataLanguageEntity extends BaseEntity {
     kataEntity: KataEntity;
 
     @OneToMany(() => SolutionEntity, solution => solution.kataLanguageEntity, { cascade: true })
-    solutions: SolutionEntity[];
+    solutionEntities: SolutionEntity[];
 
     @Column('text')
     completions: string;
@@ -31,10 +31,9 @@ export class KataLanguageEntity extends BaseEntity {
     }
 
     get path(): string {
-        console.log(chalk.blueBright('this.kataEntityyyy'), this.kataEntity);
         const fileName: string = this.kataEntity.name.toLowerCase()
-            .replace(' ', '-');
-        return `${CONFIG.root}/dist/solutions/${fileName}`;
+            .replace(/\s/g, '-');
+        return `${CONFIG.root}/dist/solutions/${fileName}.ts`;
     }
 
 }

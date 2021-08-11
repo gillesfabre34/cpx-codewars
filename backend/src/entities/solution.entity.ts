@@ -7,7 +7,7 @@ export class SolutionEntity extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => KataLanguageEntity, kle => kle.solutions, { onDelete: 'CASCADE' })
+    @ManyToOne(() => KataLanguageEntity, kle => kle.solutionEntities, { onDelete: 'CASCADE' })
     kataLanguageEntity: KataLanguageEntity;
 
     @Column('text')

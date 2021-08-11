@@ -22,7 +22,7 @@ export class KataService {
         const kataEntity: KataEntity = this.parseToKataEntity(html);
         await this.save(kataEntity);
         console.log(chalk.greenBright('KATA SAVEED'), kataEntity.name);
-        // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity.kataLanguageEntities.map(k => k.solutions));
+        // console.log(chalk.magentaBright('KATA ENTITYYYYY'), kataEntity.kataLanguageEntities.map(k => k.solutionEntities));
     }
 
     private static async getHtml(): Promise<string> {
@@ -61,7 +61,7 @@ export class KataService {
         kataEntity.stars = this.getStars(stats);
         kataEntity.description = this.getDescription(afterHeader);
         const kle = new KataLanguageEntity();
-        kle.solutions = this.getSolutions(html);
+        kle.solutionEntities = this.getSolutions(html);
         kle.testCases = this.getTestCases(afterHeader);
         this.setCompletions(kataEntity, kle, stats);
         // console.log(chalk.redBright('kataEntity.kataLanguageEntities'), kataEntity);

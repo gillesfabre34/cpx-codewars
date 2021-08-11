@@ -22,8 +22,8 @@ export function startBackend(clear: boolean) {
                     await dropSystemUT();
                 }
                 // await bootstrap();
-                await KataService.getKata();
-                // await SolutionsFilesService.createFiles();
+                // await KataService.getKata();
+                await SolutionsFilesService.createFiles();
                 console.log(chalk.yellowBright('Launched backend'));
             } catch (err) {
                 console.error(chalk.redBright("Error in process : "), err);
