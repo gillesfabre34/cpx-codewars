@@ -8,6 +8,7 @@ import { CodeService } from './code.service';
 import { AstNodeService } from './ast/ast-node.service';
 import { Ast } from './ast/ast.service';
 import { ArrowFunctionsService } from './ast/arrow-functions.service';
+import { OutsideCodeService } from './ast/outside-code.service';
 
 /**
  * - AstFolders generation from Abstract Syntax Tree of a folder
@@ -94,6 +95,7 @@ export class InitService {
             .map(e => e.astMethod);
         const arrowFunctions: AstMethod[] = ArrowFunctionsService.getArrowFunctions(newAstFile.astNode);
         newAstFile.astMethods = newAstFile.astMethods.concat(arrowFunctions);
+        newAstFile.astOutsideCode = OutsideCodeService.getCode(newAstFile.astNode);
         return newAstFile;
     }
 

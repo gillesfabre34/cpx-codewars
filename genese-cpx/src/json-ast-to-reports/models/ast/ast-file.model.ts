@@ -14,6 +14,7 @@ import { AstFileInterface } from '../../../core/interfaces/ast/ast-file.interfac
 import { NestingCpx } from '../../../core/models/cpx-factor/nesting-cpx.model';
 import { DepthCpx } from '../../../core/models/cpx-factor/depth-cpx.model';
 import { addObjects } from '../../../core/services/tools.service';
+import { AstOutsideCode } from './ast-outside-code.model';
 
 export class AstFile implements AstFileInterface, Evaluate, Logg {
 
@@ -21,6 +22,7 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
     private _astMethods?: AstMethod[] = [];                             // The AstMethods included in this AstFile
     private _astNode?: AstNode = undefined;                             // The AstNode corresponding to the file itself
     private _astNodes?: AstNode[] = undefined;                          // Array of all the AstNodes which are children of this.AstNode (including itself)
+    private _astOutsideCode?: AstOutsideCode = undefined;    // The AstNodes outside classes and functions
     private _code?: Code = undefined;                                   // The Code object corresponding to the AstFile
     private _complexitiesByStatus?: ComplexitiesByStatus = undefined;   // The file complexities spread by complexity status
     private _cpxFactors?: CpxFactors = undefined;                       // The complexity factors of the AstFile
@@ -76,6 +78,16 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
 
     set astNodes(astNodes: AstNode[])  {
         this._astNodes = astNodes;
+    }
+
+
+    get astOutsideCode(): AstOutsideCode {
+        return this._astOutsideCode;
+    }
+
+
+    set astOutsideCode(astOutsideCode: AstOutsideCode) {
+        this._astOutsideCode = astOutsideCode;
     }
 
 

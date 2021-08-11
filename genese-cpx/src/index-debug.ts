@@ -44,7 +44,7 @@ start()
 
 async function start(): Promise<number> {
     if (DEBUG) {
-        pathToAnalyse = `${process.cwd()}/dist/solutions`;
+        pathToAnalyse = `${process.cwd()}/dist/genese-cpx/src/core/mocks/whole-file`;
         // pathToAnalyse = `${process.cwd()}/genese-cpx/src/core/mocks`;
         FRAMEWORK = 'react';
     }
