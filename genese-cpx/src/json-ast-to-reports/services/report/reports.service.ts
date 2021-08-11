@@ -50,7 +50,7 @@ export class ReportsService {
      * Generates reports of children recursively
      * @param astFolder        // The AstFolder to analyse
      */
-    private static generateSubfoldersReports(astFolder: AstFolder): void{
+    private static generateSubfoldersReports(astFolder: AstFolder): void {
         ReportsService.generateFolderReport(astFolder);
         for (const subFolder of astFolder.children) {
             ReportsService.generateSubfoldersReports(subFolder);

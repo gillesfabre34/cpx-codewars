@@ -15,7 +15,7 @@ export class SolutionsFilesService {
             console.log(chalk.magentaBright('KLE IDDDD'), kle.path);
             console.log(chalk.cyanBright('KLE SOLSSSS'), kle.solutionEntities.length);
 
-            // console.log(chalk.magentaBright('KLE CODDDDD'), this.getCode(kle));
+            // console.log(chalk.magentaBright('KLE CODDDDD'), this.getOutsideNodes(kle));
             await writeFile(kle.path, this.getCode(kle));
             // if (!existsSync(kle.path)) {
             //     await this.createFile(kle);

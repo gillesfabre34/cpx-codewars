@@ -95,7 +95,7 @@ export class InitService {
             .map(e => e.astMethod);
         const arrowFunctions: AstMethod[] = ArrowFunctionsService.getArrowFunctions(newAstFile.astNode);
         newAstFile.astMethods = newAstFile.astMethods.concat(arrowFunctions);
-        newAstFile.astOutsideCode = OutsideCodeService.getCode(newAstFile.astNode);
+        newAstFile.astOutsideNodes = OutsideCodeService.getOutsideNodes(newAstFile.astNode);
         return newAstFile;
     }
 

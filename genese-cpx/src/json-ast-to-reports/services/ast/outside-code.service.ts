@@ -1,7 +1,7 @@
 import { AstMethod } from '../../models/ast/ast-method.model';
 import { AstNode } from '../../models/ast/ast-node.model';
 import { AstNodeService } from './ast-node.service';
-import { AstOutsideCode } from '../../models/ast/ast-outside-code.model';
+import { AstOutsideNodes } from '../../models/ast/ast-outside-code.model';
 import { Ast } from './ast.service';
 import * as chalk from 'chalk';
 
@@ -14,14 +14,17 @@ export class OutsideCodeService {
      * Returns the astNodes of the code which is not inside classes or functions
      * @param astFileNode       // The node of the AstFile
      */
-    static getCode(astFileNode: AstNode): AstOutsideCode {
-        const astFileChildren: AstNode[] = this.getAstFileChildrenOutsideClassesAndFunctions(astFileNode);
-        const astOutsideCode = new AstOutsideCode();
-        for (const child of astFileChildren) {
-            astOutsideCode.astNodes.push(child);
-        }
-        return astOutsideCode;
+    static getOutsideNodes(astFileNode: AstNode): AstNode[] {
+        return astFileNode.children?.filter(n => n.isCodeOutsideClassesAndFunctions);
     }
+    // static getOutsideNodes(astFileNode: AstNode): AstOutsideNodes {
+    //     const astFileChildren: AstNode[] = this.getAstFileChildrenOutsideClassesAndFunctions(astFileNode);
+    //     const astOutsideCode = new AstOutsideNodes();
+    //     for (const child of astFileChildren) {
+    //         astOutsideCode.astNodes.push(child);
+    //     }
+    //     return astOutsideCode;
+    // }
 
     /**
      * Returns the children of a given AstNode which are statements which are arrow function declarations or function assignments
@@ -32,9 +35,9 @@ export class OutsideCodeService {
      * @private
      */
     private static getAstFileChildrenOutsideClassesAndFunctions(astFileNode: AstNode): AstNode[] {
-        console.log(chalk.cyanBright('ASTFILENODEEEE CHILDREN'), astFileNode?.children.map(a => a.kind));
+        // console.log(chalk.cyanBright('ASTFILENODEEEE CHILDREN'), astFileNode?.children.map(a => a.kind));
         const zzz: AstNode[] = astFileNode.children?.filter(n => n.isCodeOutsideClassesAndFunctions);
-        console.log(chalk.blueBright('NODES OUTSIDEEEEEE'), zzz?.map(a => a.kind));
+        // console.log(chalk.blueBright('NODES OUTSIDEEEEEE'), zzz?.map(a => a.kind));
         return zzz;
     }
 

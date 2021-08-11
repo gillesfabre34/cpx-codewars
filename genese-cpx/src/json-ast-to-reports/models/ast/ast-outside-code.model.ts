@@ -1,11 +1,9 @@
-import { CyclomaticCpxService as CS } from '../../services/cyclomatic-cpx.service';
 import { AstNode } from './ast-node.model';
 import { Code } from '../code/code.model';
 import { Ast } from '../../services/ast/ast.service';
 import { Evaluate } from '../../interfaces/evaluate.interface';
 import { MethodStatus } from '../../enums/evaluation-status.enum';
 import { CpxFactors } from '../../../core/models/cpx-factor/cpx-factors.model';
-import { ComplexityType } from '../../enums/complexity-type.enum';
 import { CodeLine } from '../code/code-line.model';
 import { cpxFactors } from '../../../core/const/cpx-factors';
 import { FactorCategory } from '../../enums/factor-category.enum';
@@ -13,7 +11,7 @@ import { FactorCategory } from '../../enums/factor-category.enum';
 /**
  * Element of the AstNode structure corresponding to a given method
  */
-export class AstOutsideCode implements Evaluate {
+export class AstOutsideNodes implements Evaluate {
 
     private _astNodes?: AstNode[] = [];                                     // The AST of the method itself
     private _codeLines?: CodeLine[] = [];                                       // The array of CodeLine of the AstMethod (elements of the array of CodeLine of the corresponding AstFile)
