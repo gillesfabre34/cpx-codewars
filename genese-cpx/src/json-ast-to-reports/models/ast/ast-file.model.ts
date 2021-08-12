@@ -31,6 +31,7 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
     private _cpxIndex = undefined;                                      // The complexity index of the file
     private _cyclomaticCpx ?= 0;                                        // The complexity factors of the AstFile
     private _cyclomaticLevel: CpxLevel = CpxLevel.LOW;                  // The cyclomatic level of the file
+    private _displayedCode?: Code = undefined;                                  // The code to display in the report
     private _end: number = undefined;                                   // The pos of the end of the source code
     private _name: string = undefined;                                  // The name of the AstFile
     private _stats?: Stats = undefined;                                 // The statistics of the AstFile
@@ -160,6 +161,16 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
     }
 
 
+    get displayedCode(): Code {
+        return this._displayedCode;
+    }
+
+
+    set displayedCode(displayedCode: Code) {
+        this._displayedCode = displayedCode;
+    }
+
+
     get end(): number {
         return this._end ?? this._astNode?.end;
     }
@@ -209,17 +220,19 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
      */
     evaluate(): void {
         this.cpxFactors = new CpxFactors();
+        this.setDisplayedCode();
         this.astNode.evaluate();
-        // console.log(chalk.magentaBright('FILE CPX FACTORSSSSS'), this.astNode.cpxFactors);
         const methodsAndOutsideNodes: AstMethodOrOutsideNode[] = (this.astMethods as AstMethodOrOutsideNode[]).concat(this.astOutsideNodes);
         for (const methodOrOutsideNode of methodsAndOutsideNodes) {
-        // for (const methodOrOutsideNode of this.astMethods) {
             this.evaluateMethodOrOutsideNode(methodOrOutsideNode);
-            // method.evaluate();
-            // this.cpxFactors = this.cpxFactors.add(method.cpxFactors);
-            // this.cyclomaticCpx = this.cyclomaticCpx + method.cyclomaticCpx;
-            // this.complexitiesByStatus = astMethodService.addMethodCpxByStatus(this.complexitiesByStatus, method);
         }
+    }
+
+
+    private setDisplayedCode(): void {
+        const code = new Code();
+        code.text = this.astNode.text;
+        this.displayedCode = code;
     }
 
 
