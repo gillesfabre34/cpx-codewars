@@ -31,9 +31,9 @@ export class KataLanguageEntity extends BaseEntity {
     }
 
     get path(): string {
-        const fileName: string = this.kataEntity.name.toLowerCase()
+        const folderName: string = this.kataEntity.name.toLowerCase()
             .replace(/\s/g, '-');
-        return `${CONFIG.root}/dist/solutions/${fileName}.ts`;
+        return `${CONFIG.root}/dist/solutions/${folderName}`;
     }
 
 }

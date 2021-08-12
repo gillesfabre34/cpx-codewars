@@ -2,6 +2,7 @@ import * as fs from 'fs-extra';
 import { Dirent } from 'fs';
 import { isCapital } from '../../../shared/utils/strings.util';
 import * as chalk from 'chalk';
+import { lastElement } from '../../../shared/utils/arrays.util';
 
 const { resolve } = require('path');
 
@@ -50,6 +51,11 @@ export function classNameToFileName(className: string): string {
 
 export function getFolderPath(filePath: string): string {
     return filePath?.slice(0, -getFilename(filePath).length - 1) ?? undefined;
+}
+
+
+export function getFolderName(folderPath: string): string {
+    return lastElement(folderPath?.split('/')) ?? undefined;
 }
 
 
