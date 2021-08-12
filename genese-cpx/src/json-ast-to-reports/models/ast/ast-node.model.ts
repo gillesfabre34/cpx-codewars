@@ -159,8 +159,15 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
     }
 
 
-    get hasArrowFunctionDescendant(): boolean {
-        return !!Ast.getFirstDescendantOfKind(this, SyntaxKind.ArrowFunction);
+    get greatGrandParent(): AstNode {
+        return this.parent?.parent?.parent;
+    }
+
+
+    get isFunctionAssignation(): boolean {
+        const firstDescendantOfKindArrowFunction: AstNode = Ast.getFirstDescendantOfKind(this, SyntaxKind.ArrowFunction);
+        const firstDescendantOfKindFunction: AstNode = Ast.getFirstDescendantOfKind(this, SyntaxKind.FunctionExpression);
+        return firstDescendantOfKindArrowFunction?.greatGrandParent === this || firstDescendantOfKindFunction?.greatGrandParent === this;
     }
 
 

@@ -7,7 +7,7 @@ import { AstMethod } from '../models/ast/ast-method.model';
 import { CodeService } from './code.service';
 import { AstNodeService } from './ast/ast-node.service';
 import { Ast } from './ast/ast.service';
-import { ArrowFunctionsService } from './ast/arrow-functions.service';
+import { AssignedFunctionsService } from './ast/assigned-functions.service';
 import { OutsideCodeService } from './ast/outside-code.service';
 
 /**
@@ -93,8 +93,8 @@ export class InitService {
                 return Ast.isFunctionOrMethod(e)
             })
             .map(e => e.astMethod);
-        const arrowFunctions: AstMethod[] = ArrowFunctionsService.getArrowFunctions(newAstFile.astNode);
-        newAstFile.astMethods = newAstFile.astMethods.concat(arrowFunctions);
+        const functionsAssignedToVars: AstMethod[] = AssignedFunctionsService.getArrowFunctions(newAstFile.astNode);
+        newAstFile.astMethods = newAstFile.astMethods.concat(functionsAssignedToVars);
         newAstFile.astOutsideNodes = OutsideCodeService.getOutsideNodes(newAstFile.astNode);
         return newAstFile;
     }
