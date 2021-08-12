@@ -184,21 +184,6 @@ export class AstFolderReportService {
 
 
     /**
-     * Returns the path to the report's page of a given AstFile
-     * @param astFile
-     */
-    // private getFilesByFolderLink(): string {
-    //     const route = this.astFolderService.getRouteFromFolderToFile(
-    //         this.astFolder,
-    //         astFile
-    //     );
-    //     return `${deleteLastSlash(route)}/${getFilenameWithoutExtension(
-    //         astFile.name
-    //     )}.html`;
-    // }
-
-
-    /**
      * Generates the folder's report
      */
     generateReport(): void {
