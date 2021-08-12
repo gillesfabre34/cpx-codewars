@@ -37,7 +37,7 @@ export class AstFileReportService {
                 cpxIndex: method.cpxIndex,
                 cyclomaticColor: method.cyclomaticLevel,
                 cyclomaticValue: method.cyclomaticCpx,
-                methodName: method.name,
+                name: method.name,
             };
             report.push(methodReport);
         }

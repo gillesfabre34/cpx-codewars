@@ -4,14 +4,10 @@ import * as Handlebars from 'handlebars';
 import {
     constructLink,
     deleteLastSlash,
-    getFilenameWithoutExtension,
     getPathWithDotSlash,
     getRouteToRoot,
 } from '../../../core/services/file.service';
-import { AstFile } from '../../models/ast/ast-file.model';
 import { Options } from '../../../core/models/options.model';
-import { mainModule } from "process";
-import * as chalk from 'chalk';
 import { FileReport } from '../../models/report/file-report.model';
 import { AstFolder } from '../../models/ast/ast-folder.model';
 
@@ -40,7 +36,7 @@ export class AstFilesReportService {
                 cpxIndex: astFile.cpxIndex,
                 cyclomaticColor: astFile.cyclomaticLevel,
                 cyclomaticValue: astFile.cyclomaticCpx,
-                fileName: astFile.name,
+                name: astFile.name,
             };
             report.push(astFileReport);
         }
@@ -69,7 +65,7 @@ export class AstFilesReportService {
     private writeReport() {
         const template = this.template({
             colors: Options.colors,
-            methods: this.fileReports,
+            files: this.fileReports,
             relativeRootReports: getPathWithDotSlash(this.relativeRootReports),
             stats: this.astFolder.stats,
             thresholds: Options.getThresholds()

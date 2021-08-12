@@ -11,24 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<script>
-    function toggleFileCode() {
-        toggleVisibility(document.getElementById("spanDisplayFileCode"));
-        toggleVisibility(document.getElementById("spanHideFileCode"));
-        toggleVisibility(document.getElementById("fileCode"));
-    }
-
-    function toggleMethods() {
-        toggleVisibility(document.getElementById("spanDisplayMethodsArray"));
-        toggleVisibility(document.getElementById("spanHideMethodsArray"));
-        toggleVisibility(document.getElementById("methodsArray"));
-    }
-
-    function toggleVisibility(element) {
-        element.style.display = element.style.display === "none" ? "block" : "none";
-    }
-</script>
-
 <body>
 <div class="header">
     <div class="header-left">
@@ -168,40 +150,19 @@
 
 
     <!--        -------------------------------------------------------------------------------------->
-    <!--        -----------------------------------   Code of file   ------------------------------>
+    <!--        ------------------------------------   Code of files   ------------------------------->
     <!--        -------------------------------------------------------------------------------------->
 
 
     <div idclass="subfolders">
         <div class="clearfix file-methods-subtitle">
             <div class='fl pad1y space-right2'>
-                <span id="spanDisplayFileCode" class="spanToggleVisibility" onclick="toggleFileCode()" style="display: none">Display the code of the file <span class="italic">{{stats.subject}}</span></span>
-                <span id="spanHideFileCode" class="spanToggleVisibility" onclick="toggleFileCode()">Hide the code of the file of <span class="italic">{{stats.subject}}</span></span>
+                <span id="spanDisplayFilesArray" class="strong">Display files of <span class="italic">{{stats.subject}}</span></span>
             </div>
         </div>
 
-        <div id="fileCode">
-            // TODO
-        </div>
-    </div>
-
-
-
-    <!--        -------------------------------------------------------------------------------------->
-    <!--        -----------------------------------   Code of methods   ------------------------------>
-    <!--        -------------------------------------------------------------------------------------->
-
-
-    <div idclass="subfolders">
-        <div class="clearfix file-methods-subtitle">
-            <div class='fl pad1y space-right2'>
-                <span id="spanDisplayMethodsArray" class="spanToggleVisibility" onclick="toggleMethods()" style="display: none">Display methods of <span class="italic">{{stats.subject}}</span></span>
-                <span id="spanHideMethodsArray" class="spanToggleVisibility" onclick="toggleMethods()">Hide methods of <span class="italic">{{stats.subject}}</span></span>
-            </div>
-        </div>
-
-        <div id="methodsArray">
-            {{#each methods}}
+        <div id="filesArray">
+            {{#each files}}
                 {{>divCode divCode=.}}
             {{/each}}
         </div>

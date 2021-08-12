@@ -166,6 +166,11 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
     }
 
 
+    set displayedCode(displayedCode: Code) {
+        this._displayedCode = displayedCode;
+    }
+
+
     get end(): number {
         return this._end ?? this._astNode?.end;
     }
@@ -215,17 +220,19 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
      */
     evaluate(): void {
         this.cpxFactors = new CpxFactors();
+        this.setDisplayedCode();
         this.astNode.evaluate();
-        // console.log(chalk.magentaBright('FILE CPX FACTORSSSSS'), this.astNode.cpxFactors);
         const methodsAndOutsideNodes: AstMethodOrOutsideNode[] = (this.astMethods as AstMethodOrOutsideNode[]).concat(this.astOutsideNodes);
         for (const methodOrOutsideNode of methodsAndOutsideNodes) {
-        // for (const methodOrOutsideNode of this.astMethods) {
             this.evaluateMethodOrOutsideNode(methodOrOutsideNode);
-            // method.evaluate();
-            // this.cpxFactors = this.cpxFactors.add(method.cpxFactors);
-            // this.cyclomaticCpx = this.cyclomaticCpx + method.cyclomaticCpx;
-            // this.complexitiesByStatus = astMethodService.addMethodCpxByStatus(this.complexitiesByStatus, method);
         }
+    }
+
+
+    private setDisplayedCode(): void {
+        const code = new Code();
+        code.text = this.astNode.text;
+        this.displayedCode = code;
     }
 
 

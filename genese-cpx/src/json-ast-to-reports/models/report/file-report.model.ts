@@ -10,6 +10,6 @@ export class FileReport {
     cpxIndex ?= 0;                                      // The cognitive complexity score
     cyclomaticColor ?= CpxLevel.LOW;                    // The color of the file for cyclomatic complexity score
     cyclomaticValue ?= 0;                               // The cyclomatic complexity score
-    fileName ?= '';                                     // The name of the file
+    name ?= '';                                     // The name of the file
 
 }
