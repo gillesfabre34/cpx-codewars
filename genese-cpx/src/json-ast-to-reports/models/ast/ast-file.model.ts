@@ -31,6 +31,7 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
     private _cpxIndex = undefined;                                      // The complexity index of the file
     private _cyclomaticCpx ?= 0;                                        // The complexity factors of the AstFile
     private _cyclomaticLevel: CpxLevel = CpxLevel.LOW;                  // The cyclomatic level of the file
+    private _displayedCode?: Code = undefined;                                  // The code to display in the report
     private _end: number = undefined;                                   // The pos of the end of the source code
     private _name: string = undefined;                                  // The name of the AstFile
     private _stats?: Stats = undefined;                                 // The statistics of the AstFile
@@ -157,6 +158,11 @@ export class AstFile implements AstFileInterface, Evaluate, Logg {
 
     set cyclomaticLevel(cyclomaticStatus: CpxLevel) {
         this._cyclomaticLevel = cyclomaticStatus;
+    }
+
+
+    get displayedCode(): Code {
+        return this._displayedCode;
     }
 
 
