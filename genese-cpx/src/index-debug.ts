@@ -9,6 +9,7 @@ import { LanguageToJsonAst } from './languages-to-json-ast/language-to-json-ast'
 import { Framework } from './core/types/framework.type';
 import { Language } from './core/enum/language.enum';
 import { JsonAstToReports } from './json-ast-to-reports/json-ast-to-reports';
+import { ExportService } from './json-ast-to-reports/services/report/export.service';
 
 const ora = require('ora');
 const path = require('path');
@@ -56,7 +57,7 @@ async function start(): Promise<number> {
     LanguageToJsonAst.start(Options.pathFolderToAnalyze, LANGUAGE as Language)
     console.log(chalk.yellowBright('Report generation...'));
     const reportResult = JsonAstToReports.start(Options.pathCommand, undefined, ENABLE_MARKDOWN_REPORT, ENABLE_CONSOLE_REPORT);
-
+    await ExportService.exportReport();
     if (reportResult?.length > 0) {
         console.log();
         if (typeof reportResult === 'object') {

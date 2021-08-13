@@ -11,6 +11,7 @@ import {
 import { MethodReport } from '../../models/report/method-report.model';
 import { AstFile } from '../../models/ast/ast-file.model';
 import { Options } from '../../../core/models/options.model';
+import { ExportService } from './export.service';
 
 /**
  * Service generating files reports
@@ -49,6 +50,7 @@ export class AstFileReportService {
      */
     generateReport(): void {
         this.methodReports = this.getMethodsArray();
+        ExportService.addRows(this.methodReports, this.astFile);
         this.relativeRootReports = getRouteToRoot(this.astFile.astFolder?.relativePath);
         this.registerPartial("cognitiveBarchartScript", 'cognitive-barchart');
         this.registerPartial("cyclomaticBarchartScript", 'cyclomatic-barchart');
