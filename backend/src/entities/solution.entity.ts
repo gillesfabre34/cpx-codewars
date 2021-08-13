@@ -19,6 +19,9 @@ export class SolutionEntity extends BaseEntity {
     @Column('text')
     code: string;
 
+    @Column('text')
+    cpx: number;
+
     constructor(code) {
         super();
         this.code = code;
