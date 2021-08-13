@@ -1,6 +1,6 @@
 import { MethodReport } from '../../models/report/method-report.model';
 import { AstFile } from '../../models/ast/ast-file.model';
-import { CsvExportRow } from '../../models/report/csv-export.model';
+import { CsvExportRow } from '../../models/report/csv-export-row.model';
 import { CSV_EXPORT } from '../../global/csv-export.global';
 import { constructLink, deleteLastSlash } from '../../../core/services/file.service';
 import { Options } from '../../../core/models/options.model';
@@ -15,10 +15,10 @@ export class ExportService {
         const csvWriter = createCsvWriter({
             path: csvPath,
             header: [
-                {id: 'folderPath', title: 'FOLDER'},
-                {id: 'fileName', title: 'FILE'},
-                {id: 'functionName', title: 'FUNCTION'},
-                {id: 'cpx', title: 'CPX'},
+                {id: 'folderPath', title: 'folder'},
+                {id: 'fileName', title: 'file'},
+                {id: 'functionName', title: 'func'},
+                {id: 'cpx', title: 'cpx'},
             ]
         });
         await csvWriter.writeRecords(CSV_EXPORT);
