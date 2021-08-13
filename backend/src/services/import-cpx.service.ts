@@ -11,11 +11,11 @@ const fs = require('fs')
 export class ImportCpxService {
 
     static async start(): Promise<void> {
-        console.log(chalk.cyanBright('STARTTTT IMPORT'));
+        console.log(chalk.greenBright('Starts cpx dataset import'));
         const csvImportRows: CsvImportRow[] = await this.getCsv();
-        const solutionEntities: SolutionEntity[] = await SolutionsEntityService.findAllSolutions(CONFIG.language);
-        console.log(chalk.magentaBright('RESULTSSSSSSS'), csvImportRows?.slice(0,5));
-        this.setCpxToSolutions(solutionEntities, csvImportRows);
+        const solutionEntities: SolutionEntity[] = await SolutionsEntityService.findAllSolutions();
+        await this.setCpxToSolutions(solutionEntities, csvImportRows);
+        console.log(chalk.greenBright('Cpx imported from dataset'));
     }
 
     private static async getCsv(): Promise<CsvImportRow[]> {
@@ -32,16 +32,16 @@ export class ImportCpxService {
             });
     }
 
-    private static setCpxToSolutions(solutionEntities: SolutionEntity[], csvImportRows: CsvImportRow[]): void {
+    private static async setCpxToSolutions(solutionEntities: SolutionEntity[], csvImportRows: CsvImportRow[]): Promise<void> {
         for (const solutionEntity of solutionEntities) {
-            this.setCpxToSolution(solutionEntity, csvImportRows);
+            await this.setCpxToSolution(solutionEntity, csvImportRows);
         }
     }
 
-    private static setCpxToSolution(solutionEntity: SolutionEntity, csvImportRows: CsvImportRow[]): void {
+    private static async setCpxToSolution(solutionEntity: SolutionEntity, csvImportRows: CsvImportRow[]): Promise<void> {
         const rowsFile: CsvImportRow[] = csvImportRows.filter(c => removeExtension(c.file) === solutionEntity.id.toString());
-        let fileCpx: number = this.getFileCpx(rowsFile);
-        console.log(chalk.greenBright('FILE CPXXXX'), solutionEntity.id, rowsFile?.length, fileCpx);
+        solutionEntity.cpx = this.getFileCpx(rowsFile);
+        await solutionEntity.save();
     }
 
     private static getFileCpx(rows: CsvImportRow[]): number {
