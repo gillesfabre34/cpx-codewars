@@ -9,6 +9,7 @@ import { KataService } from './src/services/kata.service';
 import { SolutionsFilesService } from './src/services/solutions-files.service';
 import { TConstructor } from '../shared/types/constructor.type';
 import { ImportCpxService } from './src/services/import-cpx.service';
+import { StatsService } from './src/services/stats.service';
 
 console.log(chalk.yellowBright('Launch backend...'));
 
@@ -25,7 +26,8 @@ export function startBackend(clear: boolean) {
                 // await bootstrap();
                 // await KataService.getKata();
                 // await SolutionsFilesService.createFiles();
-                await ImportCpxService.start();
+                // await ImportCpxService.start();
+                await StatsService.createCsvStats();
                 console.log(chalk.yellowBright('Launched backend'));
             } catch (err) {
                 console.error(chalk.redBright("Error in process : "), err);
