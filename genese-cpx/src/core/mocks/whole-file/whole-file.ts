@@ -7,7 +7,7 @@ var countBits = function(n) {
 };
 
 var countBits2 = n => {
-    return n.toString(2).replace(/0/g,'').length;
+    return n;
 };
 
 

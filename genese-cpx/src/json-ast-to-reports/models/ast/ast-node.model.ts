@@ -458,7 +458,8 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
      * @private
      */
     private setFunctionStructuralCpx(): void {
-        if (this.type === 'function' && this.parent?.kind !== SyntaxKind.MethodDeclaration) {
+        if (this.type === 'function' || this.kind === 'ArrowFunction' || this.kind === 'FunctionDeclaration') {
+        // if (this.type === 'function' && this.parent?.kind !== SyntaxKind.MethodDeclaration) {
             this.cpxFactors.structural.method = cpxFactors.structural.method;
         }
     }
