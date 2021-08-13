@@ -4,6 +4,5 @@ export class SolutionsStats {
     clever: string = undefined;
     cpx: string = undefined;
     id: string = undefined;
-    name: string = undefined;
 
 }

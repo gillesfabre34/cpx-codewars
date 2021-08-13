@@ -32,21 +32,15 @@ export class StatsService {
     }
 
     private static async createStatsFile(solutionsStats: SolutionsStats[]): Promise<void> {
-        console.log(chalk.magentaBright('CREATE XLSXXXXX'), solutionsStats?.length);
+        console.log(chalk.magentaBright('CREATE XLSXXXXX'), solutionsStats?.slice(0, 2));
         const XLSX = require('xlsx');
-        const data = [{
-            firstName: 'John',
-            lastName: 'Doe'
-        }, {
-            firstName: 'Smith',
-            lastName: 'Peters'
-        }, {
-            firstName: 'Alice',
-            lastName: 'Lee'
-        }]
-        const ws = XLSX.utils.json_to_sheet(data)
-        const wb = XLSX.utils.book_new()
-        XLSX.utils.book_append_sheet(wb, ws, 'Responses')
+        const wb = XLSX.utils.book_new();
+        wb.SheetNames.push('Solutions');
+        const rows: string[][] = [['', 'Kata solutions'], [], ['', 'id', 'bestPractices', 'clever', 'cpx']];
+        const data: string[][] = solutionsStats.map(s => ['', s.id, s.bestPractices, s.clever, s.cpx]);
+        rows.push(...data);
+        let ws = XLSX.utils.aoa_to_sheet(rows);
+        wb.Sheets['Solutions'] = ws;
         const path: string = `${CONFIG.root}/stats/dataset-cw.xlsx`;
         console.log(chalk.magentaBright('CREATE XLSXXXXX PATHHHH'), path);
         XLSX.writeFile(wb, path)
