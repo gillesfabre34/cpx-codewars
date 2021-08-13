@@ -11,8 +11,6 @@ import {
 import { MethodReport } from '../../models/report/method-report.model';
 import { AstFile } from '../../models/ast/ast-file.model';
 import { Options } from '../../../core/models/options.model';
-import { METHOD_REPORTS } from '../../global/method-reports.global';
-import * as chalk from 'chalk';
 import { ExportService } from './export.service';
 
 /**

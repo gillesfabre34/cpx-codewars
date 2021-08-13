@@ -1,19 +1,31 @@
-import * as chalk from 'chalk';
-import { METHOD_REPORTS } from '../../global/method-reports.global';
 import { MethodReport } from '../../models/report/method-report.model';
 import { AstFile } from '../../models/ast/ast-file.model';
 import { CsvExportRow } from '../../models/report/csv-export.model';
 import { CSV_EXPORT } from '../../global/csv-export.global';
+import { constructLink, deleteLastSlash } from '../../../core/services/file.service';
+import { Options } from '../../../core/models/options.model';
+
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 export class ExportService {
 
     static async exportReport(): Promise<void> {
-        console.log(chalk.greenBright('START EXPORTTTT'), CSV_EXPORT);
+        const OUT_DIR = constructLink(Options.pathOutDir);
+        let csvPath = `${deleteLastSlash(OUT_DIR)}/cpx-report.csv`;
+        const csvWriter = createCsvWriter({
+            path: csvPath,
+            header: [
+                {id: 'folderPath', title: 'FOLDER'},
+                {id: 'fileName', title: 'FILE'},
+                {id: 'functionName', title: 'FUNCTION'},
+                {id: 'cpx', title: 'CPX'},
+            ]
+        });
+        await csvWriter.writeRecords(CSV_EXPORT);
     }
 
 
     static addRows(methodReports: MethodReport[], astFile: AstFile): void {
-        console.log(chalk.magentaBright('LGTH METHODS ARRRRRR'), methodReports?.length);
         for (const methodReport of methodReports) {
             this.addRow(methodReport, astFile);
         }
@@ -21,13 +33,11 @@ export class ExportService {
 
 
     private static addRow(methodReport: MethodReport, astFile: AstFile): void {
-        console.log(chalk.magentaBright('LGTH METHODS ARRRRRR'), methodReport.name);
         const csvExportRow = new CsvExportRow();
-        csvExportRow.complexity = methodReport.cpxIndex?.toString();
+        csvExportRow.cpx = methodReport.cpxIndex?.toString();
         csvExportRow.fileName = astFile.name;
         csvExportRow.folderPath = astFile.astFolder.relativePath;
         csvExportRow.functionName = methodReport.name;
-            CSV_EXPORT.push(csvExportRow);
-
+        CSV_EXPORT.push(csvExportRow);
     }
 }
