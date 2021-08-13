@@ -26,7 +26,7 @@ export class KataService {
     }
 
     private static async getHtml(): Promise<string> {
-        const filePath = `${CONFIG.root}/backend/src/mocks/kata.html`;
+        const filePath = `${CONFIG.root}/backend/dist/kata.html`;
         if (CONFIG.sendRequest) {
             const DEBUG_DISPLAY_ASK_SOLUTIONS = false;
             let html: string;
