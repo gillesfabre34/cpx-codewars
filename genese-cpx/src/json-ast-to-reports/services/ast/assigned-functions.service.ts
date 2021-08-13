@@ -3,9 +3,9 @@ import { AstNode } from '../../models/ast/ast-node.model';
 import { AstNodeService } from './ast-node.service';
 
 /**
- * Service specific to ArrowFunctions AstNodes
+ * Service specific to nodes corresponding to functions assigned to vars
  */
-export class ArrowFunctionsService {
+export class AssignedFunctionsService {
 
     /**
      * Returns the ArrowFunctions which are children of a given AstNode
@@ -32,9 +32,10 @@ export class ArrowFunctionsService {
      * @private
      */
     private static getStatementsDeclaringOrAssigningArrowFunctions(astNode: AstNode): AstNode[] {
-        const varStatements: AstNode[] = astNode.children?.filter(n => n.isVarStatement && n.hasArrowFunctionDescendant);
-        const exprStatements: AstNode[] = astNode.children?.filter(n => n.isExpressionStatement && n.hasArrowFunctionDescendant);
-        return varStatements.concat(exprStatements);
+        const varStatements: AstNode[] = astNode.children?.filter(n => n.isVarStatement && n.isFunctionAssignation);
+        return varStatements;
+        // const exprStatements: AstNode[] = astNode.children?.filter(n => n.isExpressionStatement && n.isFunctionAssignation);
+        // return varStatements.concat(exprStatements);
     }
 
     /**

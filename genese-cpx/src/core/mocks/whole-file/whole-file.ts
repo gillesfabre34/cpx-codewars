@@ -1,11 +1,16 @@
 let a;
-const b = 3;
-const c = b + a.filter(elt => elt > 3);
+let c;
+c = a.filter(elt => elt > 3);
 
-// function first() {
-//     return 2;
-// }
-//
-// function second(a) {
-//     return a;
-// }
+var countBits = function(n) {
+    return n.toString(2).replace(/0/g,'').length;
+};
+
+var countBits2 = n => {
+    return n;
+};
+
+
+function first() {
+    return 2;
+}

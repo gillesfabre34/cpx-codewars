@@ -159,8 +159,15 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
     }
 
 
-    get hasArrowFunctionDescendant(): boolean {
-        return !!Ast.getFirstDescendantOfKind(this, SyntaxKind.ArrowFunction);
+    get greatGrandParent(): AstNode {
+        return this.parent?.parent?.parent;
+    }
+
+
+    get isFunctionAssignation(): boolean {
+        const firstDescendantOfKindArrowFunction: AstNode = Ast.getFirstDescendantOfKind(this, SyntaxKind.ArrowFunction);
+        const firstDescendantOfKindFunction: AstNode = Ast.getFirstDescendantOfKind(this, SyntaxKind.FunctionExpression);
+        return firstDescendantOfKindArrowFunction?.greatGrandParent === this || firstDescendantOfKindFunction?.greatGrandParent === this;
     }
 
 
@@ -451,7 +458,8 @@ export class AstNode implements AstNodeInterface, Evaluate, Logg {
      * @private
      */
     private setFunctionStructuralCpx(): void {
-        if (this.type === 'function' && this.parent?.kind !== SyntaxKind.MethodDeclaration) {
+        if (this.type === 'function' || this.kind === 'ArrowFunction' || this.kind === 'FunctionDeclaration') {
+        // if (this.type === 'function' && this.parent?.kind !== SyntaxKind.MethodDeclaration) {
             this.cpxFactors.structural.method = cpxFactors.structural.method;
         }
     }
