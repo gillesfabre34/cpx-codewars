@@ -3,6 +3,7 @@ import { SolutionEntity } from '../entities/solution.entity';
 import { SolutionsEntityService } from './solutions-entity.service';
 import { SolutionsStats } from '../models/solutions-stats.model';
 import { CONFIG } from '../const/config';
+import { WorkBook, WorkSheet } from 'xlsx';
 
 
 export class StatsService {
@@ -11,7 +12,8 @@ export class StatsService {
         console.log(chalk.blueBright('START STATSSSSS'));
         const solutionEntities: SolutionEntity[] = await SolutionsEntityService.findAllSolutions();
         const solutionsStats: SolutionsStats[] = this.buildStatsTable(solutionEntities);
-        await this.createStatsFile(solutionsStats);
+        // await this.createStatsFile(solutionsStats);
+        await this.updateStatsFile(solutionsStats);
     }
 
     private static buildStatsTable(solutionEntities: SolutionEntity[]): SolutionsStats[] {
@@ -44,5 +46,14 @@ export class StatsService {
         const path: string = `${CONFIG.root}/stats/dataset-cw.xlsx`;
         console.log(chalk.magentaBright('CREATE XLSXXXXX PATHHHH'), path);
         XLSX.writeFile(wb, path)
+    }
+
+    private static async updateStatsFile(solutionsStats: SolutionsStats[]): Promise<void> {
+        console.log(chalk.cyanBright('UPDATE XLSXXXXX'), solutionsStats?.slice(0, 2));
+        const XLSX = require('xlsx');
+        const path: string = `${CONFIG.root}/stats/dataset-cw.xlsx`;
+        const spreadsheet: WorkBook = XLSX.readFile(path);
+        const sheet: WorkSheet = spreadsheet.Sheets['Solutions'];
+        console.log(chalk.blueBright('sheet namesssss'), sheet['E4']);
     }
 }
