@@ -10,6 +10,9 @@ import { SolutionsFilesService } from './src/services/solutions-files.service';
 import { TConstructor } from '../shared/types/constructor.type';
 import { ImportCpxService } from './src/services/import-cpx.service';
 import { StatsService } from './src/services/stats.service';
+import { CONFIG } from './src/const/config';
+import { XlsxService } from './src/services/xlsx.service';
+import { DataTable } from './src/models/data-table.model';
 
 console.log(chalk.yellowBright('Launch backend...'));
 
@@ -27,6 +30,7 @@ export function startBackend(clear: boolean) {
                 // await KataService.getKata();
                 // await SolutionsFilesService.createFiles();
                 // await ImportCpxService.start();
+                // CONFIG.dataSet = XlsxService.create(`${CONFIG.root}/stats/dataset-cw.xlsx`, 'Solutions', new DataTable('solutions', {c: 2, r: 4}, ['kata_id', 'solution', 'best_practices', 'clever', 'cpx']));
                 await StatsService.createCsvStats();
                 console.log(chalk.yellowBright('Launched backend'));
             } catch (err) {

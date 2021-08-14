@@ -1,10 +1,10 @@
-import { DataTable } from './data-table.model';
+import { XlsxFile } from './xlsx-file.model';
 
 export class Config {
-    cookie: string;
-    cwId: string;
-    dataTables: DataTable[] = [];
-    language: string;
-    root: string;
-    sendRequest: boolean;
+    cookie: string = undefined;
+    cwId: string = undefined;
+    language: string = undefined;
+    root: string = undefined;
+    sendRequest: boolean = undefined;
+    dataSet: XlsxFile = undefined;
 }

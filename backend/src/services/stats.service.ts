@@ -1,14 +1,15 @@
 import * as chalk from 'chalk';
 import { SolutionEntity } from '../entities/solution.entity';
-import { SolutionsEntityService } from './solutions-entity.service';
-import { SolutionsStats } from '../models/solutions-stats.model';
 import { CONFIG } from '../const/config';
 import { CellAddress, CellObject, WorkBook, WorkSheet } from 'xlsx';
 import { KataLanguageEntityService } from './kata-language-entity.service';
 import { KataLanguageEntity } from '../entities/kata-language.entity';
 import { existsSync } from '../utils/file-system.util';
-import { Cell } from '../types/cell.type';
 import { DataTable } from '../models/data-table.model';
+import { Row } from '../types/row.model';
+import { XlsxService } from './xlsx.service';
+import { DATASET } from '../const/dataset.const';
+import { flat } from '../../../shared/utils/arrays.util';
 
 
 export class StatsService {
@@ -18,62 +19,83 @@ export class StatsService {
     static async createCsvStats(): Promise<void> {
         console.log(chalk.blueBright('START STATSSSSS'));
         const kles: KataLanguageEntity[] = await KataLanguageEntityService.findAllKataLanguage(CONFIG.language);
-        // const solutionEntities: SolutionEntity[] = await SolutionsEntityService.findAllSolutions();
-        // const solutionsStats: SolutionsStats[] = this.buildStatsTable(kles);
         await this.createCsvDataset(kles);
         console.log(chalk.yellowBright('END STATSSSSS'));
     }
 
     private static async createCsvDataset(kles: KataLanguageEntity[]): Promise<void> {
-        const path: string = `${CONFIG.root}/stats/dataset-cw.xlsx`;
-        // const XLSX = require('xlsx');
-        if (!existsSync(path)) {
-            await this.createCsvFile(path, this.XLSX);
+        // const path: string = `${CONFIG.root}/stats/dataset-cw.xlsx`;
+        if (!existsSync(DATASET.path)) {
+            await this.createCsvFile();
         }
-        await this.setDataToCsvFile(kles, path, this.XLSX);
+        const dataTable: DataTable = flat(DATASET.sheets.map(s => s.dataTables)).find(d => d.name === 'solutions');
+        await this.setDataToCsvFile(kles, dataTable);
     }
 
-    private static async createCsvFile(path: string, XLSX): Promise<void> {
-        const wb = XLSX.utils.book_new();
+    private static async createCsvFile(): Promise<void> {
+        const wb: WorkBook = this.XLSX.utils.book_new();
         wb.SheetNames.push('Solutions');
-        const rows: string[][] = [['', 'Kata solutions'], [], ['', 'kata_id', 'solution', 'best_practices', 'clever', 'cpx']];
-        wb.Sheets['Solutions'] = XLSX.utils.aoa_to_sheet(rows);
-        XLSX.writeFile(wb, path);
+        this.XLSX.writeFile(wb, DATASET.path);
     }
 
-    private static async setDataToCsvFile(kles: KataLanguageEntity[], path: string, XLSX): Promise<void> {
-        const wb: WorkBook = XLSX.readFile(path);
-        const sheet: WorkSheet = wb.Sheets['Solutions'];
+    private static async setDataToCsvFile(kles: KataLanguageEntity[], dataTable: DataTable): Promise<void> {
+        const wb: WorkBook = this.XLSX.readFile(DATASET.path);
+        let sheet: WorkSheet = wb.Sheets[dataTable.name.toUpperCase()];
+        this.updateCsv(this.setSheetTitle('Kata solutions'));
+        // this.setTableHeader(sheet, dataTable);
+        // this.setTableContent(sheet, dataTable, kles);
+        console.log(chalk.blueBright('SHEETS CELSSS'), sheet);
+        // console.log(chalk.blueBright('SHEETS CELSSS'), Object.keys(sheet));
+        // wb.Sheets[dataTable.name.toUpperCase()] = sheet;
+        // await this.XLSX.writeFile(wb, path);
+    }
+
+    private static setSheetTitle(title: string): Row[] {
+        return [['', title]];
+        // this.updateCsv(titleRow);
+    }
+
+    private static updateCsv(rows: Row[]) {
+    // private static updateCsv(dataTable: DataTable, rows: Row[]) {
+        const path: string = `${CONFIG.root}/stats/dataset-cw.xlsx`;
+        const wb: WorkBook = this.XLSX.readFile(path);
+        let sheet: WorkSheet = wb.Sheets['Solutions'];
+        // let sheet: WorkSheet = wb.Sheets[dataTable.name.toUpperCase()];
+        this.XLSX.utils.sheet_add_aoa(sheet, rows);
+        this.XLSX.writeFile(wb, path);
+    }
+
+    private static setTableHeader(sheet: WorkSheet, dataTable: DataTable): void {
+        this.XLSX.utils.sheet_add_aoa(sheet, [dataTable.header], {origin: dataTable.topLeft});
+    }
+
+    private static setTableContent(sheet: WorkSheet, dataTable: DataTable, kles: KataLanguageEntity[]): void {
+        const rows: Row[] = [];
+        const contentTopLeft: CellAddress = this.XLSX.utils.encode_cell({c: dataTable.topLeft.c, r: dataTable.topLeft.r + 1});
         for (let kleRank = 0; kleRank < kles.length; kleRank++) {
-            this.addRow(sheet, kles[kleRank], kleRank);
+            rows.push(...this.getKleRows(kles[kleRank], kleRank));
         }
-        await XLSX.writeFile(wb, path);
+        this.XLSX.utils.sheet_add_aoa(sheet, rows, {origin: contentTopLeft});
     }
 
-    private static addRow(sheet: WorkSheet, kle: KataLanguageEntity, kleRank: number): void {
+    private static getKleRows(kle: KataLanguageEntity, kleRank: number): Row[] {
         const nbOfRowsByKle = 3;
+        const rows: Row[] = [];
         for (let solutionRank = 0; solutionRank < nbOfRowsByKle; solutionRank++) {
-            this.setSolutionData(sheet, kle.solutionEntities[solutionRank], kle.id, kleRank, solutionRank, nbOfRowsByKle);
+            rows.push(this.getSolutionRow(kle.solutionEntities[solutionRank], kle.id, kleRank, solutionRank, nbOfRowsByKle));
         }
+        return rows;
     }
 
-    private static setSolutionData(sheet: WorkSheet, solutionEntity: SolutionEntity, kleId: number, kleRank: number, solutionRank: number, nbOfRowsByKle: number): void {
-        const dataTable: DataTable = CONFIG.dataTables.find(d => d.name === 'solutions');
-        const top: number = dataTable.top;
-        const left: number = dataTable.left;
-        const row: number = (kleRank * nbOfRowsByKle) + solutionRank + top;
-        const col: string = String.fromCharCode( left + 64);
-        const kleIdCell = `${col}${row}`;
-        const solRankCell = `${col + 1}${row}`;
-        const bestPracticesCell = `${col + 2}${row}`;
-        const cleverCell = `${col + 3}${row}`;
-        const cpxCell = `${col + 4}${row}`;
-        sheet[kleIdCell] = {t: 's', v: kleId.toString()};
-        const XLSX = require('xlsx');
-        sheet[solRankCell] = {t: 'n', v: (solutionRank + 1).toString()};
-        sheet[bestPracticesCell] = {t: 'n', v: solutionEntity.bestPractices};
-        sheet[cleverCell] = {t: 'n', v: solutionEntity.clever};
-        sheet[cpxCell] = {t: 'n', v: solutionEntity.cpx};
-        XLSX.utils.sheet_add_aoa(sheet, [[sheet[kleIdCell], sheet[solRankCell], sheet[bestPracticesCell], sheet[cleverCell], sheet[cpxCell]]], {origin: kleIdCell});
+    private static getSolutionRow(solutionEntity: SolutionEntity, kleId: number, kleRank: number, solutionRank: number, nbOfRowsByKle: number): Row {
+        const kleIdCell: CellObject = {t: 's', v: kleId.toString()};
+        const solRankCell: CellObject = {t: 'n', v: (solutionRank + 1).toString()};
+        const bestPracticesCell: CellObject = {t: 'n', v: solutionEntity.bestPractices};
+        const cleverCell: CellObject = {t: 'n', v: solutionEntity.clever};
+        const cpxCell: CellObject = {t: 'n', v: solutionEntity.cpx};
+        const solutionRow: Row = [kleIdCell, solRankCell, bestPracticesCell, cleverCell, cpxCell];
+        // XLSX.utils.sheet_add_aoa(sheet, header);
+        // XLSX.utils.sheet_add_aoa(sheet, [[sheet[kleIdCell], sheet[solRankCell], sheet[bestPracticesCell], sheet[cleverCell], sheet[cpxCell]]], {origin: kleIdCell});
+        return solutionRow;
     }
 }
