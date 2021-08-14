@@ -63,8 +63,10 @@ export class StatsService {
         const nbOfRowsByKle = 3;
         const rows: Row[] = [];
         for (let solutionRank = 0; solutionRank < nbOfRowsByKle; solutionRank++) {
+            // const newRow: Row = this.getSolutionRow(kle.solutionEntities[solutionRank], kle.id, kleRank);
             rows.push(this.getSolutionRow(kle.solutionEntities[solutionRank], kle.id, kleRank));
         }
+        this.addPercentageStats(rows);
         return rows;
     }
 
@@ -75,6 +77,19 @@ export class StatsService {
         const cleverCell: CellObject = {t: 'n', v: solutionEntity.clever};
         const cpxCell: CellObject = {t: 'n', v: solutionEntity.cpx};
         return [kleIdCell, solRankCell, bestPracticesCell, cleverCell, cpxCell];
+    }
+
+    private static addPercentageStats(rows: Row[]): void {
+        for (let i = 0; i < rows.length; i++) {
+            let bpPercentage: number = 100 * +rows[i][2]['v'] / +rows[0][2]['v'];
+            let cpxPercentage: number = 100 * +rows[i][4]['v'] / +rows[0][4]['v'];
+            bpPercentage = isNaN(bpPercentage) ? 0 : bpPercentage;
+            cpxPercentage = isNaN(cpxPercentage) ? 0 : cpxPercentage;
+            const bpPercentageCell: CellObject = {t: 'n', v: bpPercentage.toString()};
+            const cpxPercentageCell: CellObject = {t: 'n', v: cpxPercentage.toString()};
+            rows[i].push(...[bpPercentageCell, cpxPercentageCell]);
+        }
+
     }
 
     private static updateCsv(sheetName: string, rows: Row[], origin?: CellAddress): void {
