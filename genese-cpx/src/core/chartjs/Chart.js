@@ -5340,7 +5340,7 @@ core_defaults._set('doughnut', {
 		var labels = data.labels;
 		var i, ilen, listItem, listItemSpan;
 
-		list.setAttribute('class', chart.id + '-legend');
+		list.setAttribute('class', chart.solutionId + '-legend');
 		if (datasets.length) {
 			for (i = 0, ilen = datasets[0].data.length; i < ilen; ++i) {
 				listItem = list.appendChild(document.createElement('li'));
@@ -5998,7 +5998,7 @@ var controller_line = core_datasetController.extend({
 				}
 
 				ds = chart.data.datasets[dsMeta.index];
-				if (dsMeta.type === 'line' && dsMeta.yAxisID === yScale.id) {
+				if (dsMeta.type === 'line' && dsMeta.yAxisID === yScale.solutionId) {
 					stackedRightValue = +yScale.getRightValue(ds.data[index]);
 					if (stackedRightValue < 0) {
 						sumNeg += stackedRightValue || 0;
@@ -6158,7 +6158,7 @@ core_defaults._set('polarArea', {
 		var labels = data.labels;
 		var i, ilen, listItem, listItemSpan;
 
-		list.setAttribute('class', chart.id + '-legend');
+		list.setAttribute('class', chart.solutionId + '-legend');
 		if (datasets.length) {
 			for (i = 0, ilen = datasets[0].data.length; i < ilen; ++i) {
 				listItem = list.appendChild(document.createElement('li'));
@@ -6247,14 +6247,14 @@ var controller_polarArea = core_datasetController.extend({
 	 * @private
 	 */
 	_getIndexScaleId: function() {
-		return this.chart.scale.id;
+		return this.chart.scale.solutionId;
 	},
 
 	/**
 	 * @private
 	 */
 	_getValueScaleId: function() {
-		return this.chart.scale.id;
+		return this.chart.scale.solutionId;
 	},
 
 	update: function(reset) {
@@ -6475,14 +6475,14 @@ var controller_radar = core_datasetController.extend({
 	 * @private
 	 */
 	_getIndexScaleId: function() {
-		return this.chart.scale.id;
+		return this.chart.scale.solutionId;
 	},
 
 	/**
 	 * @private
 	 */
 	_getValueScaleId: function() {
-		return this.chart.scale.id;
+		return this.chart.scale.solutionId;
 	},
 
 	update: function(reset) {
@@ -7809,7 +7809,7 @@ var platform_dom$2 = {
 
 		var expando = listener[EXPANDO_KEY] || (listener[EXPANDO_KEY] = {});
 		var proxies = expando.proxies || (expando.proxies = {});
-		var proxy = proxies[chart.id + '_' + type] = function(event) {
+		var proxy = proxies[chart.solutionId + '_' + type] = function(event) {
 			listener(fromNativeEvent(event, chart));
 		};
 
@@ -7826,7 +7826,7 @@ var platform_dom$2 = {
 
 		var expando = listener[EXPANDO_KEY] || {};
 		var proxies = expando.proxies || {};
-		var proxy = proxies[chart.id + '_' + type];
+		var proxy = proxies[chart.solutionId + '_' + type];
 		if (!proxy) {
 			return;
 		}
@@ -8043,7 +8043,7 @@ var core_plugins = {
 				return;
 			}
 
-			var id = plugin.id;
+			var id = plugin.solutionId;
 			var opts = options[id];
 			if (opts === false) {
 				return;
@@ -9268,7 +9268,7 @@ function updateConfig(chart) {
 function nextAvailableScaleId(axesOpts, prefix, index) {
 	var id;
 	var hasId = function(obj) {
-		return obj.id === id;
+		return obj.solutionId === id;
 	};
 
 	do {
@@ -9309,7 +9309,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 		var height = canvas && canvas.height;
 		var width = canvas && canvas.width;
 
-		me.id = helpers$1.uid();
+		me.solutionId = helpers$1.uid();
 		me.ctx = context;
 		me.canvas = canvas;
 		me.config = config;
@@ -9442,18 +9442,18 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 
 		helpers$1.each(scalesOptions.xAxes, function(xAxisOptions, index) {
 			if (!xAxisOptions.id) {
-				xAxisOptions.id = nextAvailableScaleId(scalesOptions.xAxes, 'x-axis-', index);
+				xAxisOptions.solutionId = nextAvailableScaleId(scalesOptions.xAxes, 'x-axis-', index);
 			}
 		});
 
 		helpers$1.each(scalesOptions.yAxes, function(yAxisOptions, index) {
 			if (!yAxisOptions.id) {
-				yAxisOptions.id = nextAvailableScaleId(scalesOptions.yAxes, 'y-axis-', index);
+				yAxisOptions.solutionId = nextAvailableScaleId(scalesOptions.yAxes, 'y-axis-', index);
 			}
 		});
 
 		if (scaleOptions) {
-			scaleOptions.id = scaleOptions.id || 'scale';
+			scaleOptions.solutionId = scaleOptions.id || 'scale';
 		}
 	},
 
@@ -9492,7 +9492,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 
 		helpers$1.each(items, function(item) {
 			var scaleOptions = item.options;
-			var id = scaleOptions.id;
+			var id = scaleOptions.solutionId;
 			var scaleType = valueOrDefault$9(scaleOptions.type, item.dtype);
 
 			if (positionIsHorizontal(scaleOptions.position) !== positionIsHorizontal(item.dposition)) {
@@ -9518,7 +9518,7 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 					ctx: me.ctx,
 					chart: me
 				});
-				scales[scale.id] = scale;
+				scales[scale.solutionId] = scale;
 			}
 
 			scale.mergeTicksOptions();
@@ -15198,7 +15198,7 @@ core_defaults._set('global', {
 		var datasets = chart.data.datasets;
 		var i, ilen, listItem, listItemSpan;
 
-		list.setAttribute('class', chart.id + '-legend');
+		list.setAttribute('class', chart.solutionId + '-legend');
 
 		for (i = 0, ilen = datasets.length; i < ilen; i++) {
 			listItem = list.appendChild(document.createElement('li'));
