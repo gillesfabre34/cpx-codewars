@@ -1,12 +1,17 @@
+import { CellAddress } from 'xlsx';
+import { Row } from '../types/row.model';
+import { Sheet } from './sheet.model';
+
 export class DataTable {
 
-    left: number = undefined;
+    header: Row = [];
     name: string = undefined;
-    top: number = undefined;
+    sheet: Sheet = undefined;
+    topLeft: CellAddress = undefined;
 
-    constructor(name: string, top: number, left: number) {
+    constructor(name: string, topLeft: CellAddress, header: Row = []) {
         this.name = name;
-        this.top = top;
-        this.left = left;
+        this.topLeft = topLeft;
+        this.header = header;
     }
 }

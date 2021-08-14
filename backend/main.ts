@@ -10,6 +10,9 @@ import { SolutionsFilesService } from './src/services/solutions-files.service';
 import { TConstructor } from '../shared/types/constructor.type';
 import { ImportCpxService } from './src/services/import-cpx.service';
 import { StatsService } from './src/services/stats.service';
+import { CONFIG } from './src/const/config';
+import { XlsxService } from './src/services/xlsx.service';
+import { DataTable } from './src/models/data-table.model';
 
 console.log(chalk.yellowBright('Launch backend...'));
 

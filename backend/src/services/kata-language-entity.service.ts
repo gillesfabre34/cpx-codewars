@@ -14,7 +14,6 @@ export class KataLanguageEntityService {
     }
 
     static async findAllKataLanguage(language: string): Promise<KataLanguageEntity[]> {
-        console.log(chalk.blueBright('find all KL language'), language);
         return await db.connection.getRepository(KataLanguageEntity)
             .createQueryBuilder('kle')
             .having('kle.language = :language', { language: language })
