@@ -30,7 +30,6 @@ export function startBackend(clear: boolean) {
                 // await KataService.getKata();
                 // await SolutionsFilesService.createFiles();
                 // await ImportCpxService.start();
-                // CONFIG.dataSet = XlsxService.create(`${CONFIG.root}/stats/dataset-cw.xlsx`, 'Solutions', new DataTable('solutions', {c: 2, r: 4}, ['kata_id', 'solution', 'best_practices', 'clever', 'cpx']));
                 await StatsService.createCsvStats();
                 console.log(chalk.yellowBright('Launched backend'));
             } catch (err) {
