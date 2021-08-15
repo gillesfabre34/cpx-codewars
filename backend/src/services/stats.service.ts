@@ -16,7 +16,7 @@ export class StatsService {
     static nbOfRowsByKle = 5;
     static sheet: WorkSheet = undefined;
     static XLSX = require('xlsx');
-    static wb: WorkBook = StatsService.XLSX.readFile(DATASET.path);
+    static wb: WorkBook = undefined;
 
     static async createCsvStats(): Promise<void> {
         console.log(chalk.cyanBright('START STATS'));
@@ -27,9 +27,11 @@ export class StatsService {
 
     private static async createCsvFile(): Promise<void> {
         if (!existsSync(DATASET.path)) {
-            const wb: WorkBook = this.XLSX.utils.book_new();
+            this.wb = this.XLSX.utils.book_new();
             this.addSheets();
-            this.XLSX.writeFile(wb, DATASET.path);
+            this.XLSX.writeFile(this.wb, DATASET.path);
+        } else {
+            this.wb = StatsService.XLSX.readFile(DATASET.path);
         }
     }
 
@@ -38,17 +40,19 @@ export class StatsService {
     }
 
     private static async addDataToSolutionsSheet(): Promise<void> {
-        this.sheet = StatsService.wb.Sheets['Solutions'];
+        this.sheet = this.wb.Sheets['Solutions'];
+        console.log(chalk.redBright('UPDATE SHEEET '), this.wb.SheetNames);
         const dataTable: DataTable = flat(DATASET.sheets.map(s => s.dataTables)).find(d => d.name === 'solutions');
         const kles: KataLanguageEntity[] = await KataLanguageEntityService.findAllKataLanguage(CONFIG.language);
         this.setSolutionsTable(kles, dataTable);
-        this.setMeansTable(kles, dataTable);
+        // this.setMeansTable(kles, dataTable);
     }
 
     private static setSolutionsTable(kles: KataLanguageEntity[], dataTable: DataTable): void {
         this.setSheetTitle('Kata solutions');
+        console.log(chalk.blueBright('SET SOLLLLLS'), kles.length);
         this.setTableHeader(dataTable);
-        this.setTableContent(dataTable, kles);
+        // this.setTableContent(dataTable, kles);
     }
 
     private static setSheetTitle(title: string): void {
@@ -73,7 +77,7 @@ export class StatsService {
         for (let solutionRank = 0; solutionRank < this.nbOfRowsByKle; solutionRank++) {
             rows.push(this.getSolutionRow(kle.solutionEntities[solutionRank], kle.id, solutionRank));
         }
-        this.addPercentageStats(rows);
+        this.addPercentageColumns(rows);
         return rows;
     }
 
@@ -86,7 +90,7 @@ export class StatsService {
         return [kleIdCell, solRankCell, bestPracticesCell, cleverCell, cpxCell];
     }
 
-    private static addPercentageStats(rows: Row[]): void {
+    private static addPercentageColumns(rows: Row[]): void {
         for (let i = 0; i < rows.length; i++) {
             let bpPercentage: number = 100 * +rows[i][2]['v'] / +rows[0][2]['v'];
             let cpxPercentage: number = 100 * +rows[i][4]['v'] / +rows[0][4]['v'];
@@ -119,6 +123,7 @@ export class StatsService {
         }
         const meansBySolutionRank: number[] = this.getMeansBySolutionRank(valuesForAllKlesBySolutionRank);
         console.log(chalk.greenBright('meansBySolutionRankkkk'), meansBySolutionRank);
+        this.addMeansTableInSolutionsSheet(meansBySolutionRank, dataTable);
     }
 
     private static getMeansBySolutionRank(valuesForAllKlesBySolutionRank: number[][]): number[] {
@@ -129,6 +134,21 @@ export class StatsService {
         return values;
     }
 
+    private static addMeansTableInSolutionsSheet(meansBySolutionRank: number[], dataTable: DataTable): void {
+        const rows: Row[] = [];
+        const topLeft: CellAddress = {c: dataTable.topLeft.c + 8, r: dataTable.topLeft.r};
+        rows.push(['solution_rank', 'cpx_percent']);
+        for (let i = 0; i < meansBySolutionRank.length; i++) {
+            let bpPercentage: number = 100 * +rows[i][2]['v'] / +rows[0][2]['v'];
+            let cpxPercentage: number = 100 * +rows[i][4]['v'] / +rows[0][4]['v'];
+            bpPercentage = isNaN(bpPercentage) ? 0 : bpPercentage;
+            cpxPercentage = isNaN(cpxPercentage) ? 0 : cpxPercentage;
+            const bpPercentageCell: CellObject = {t: 'n', v: bpPercentage.toString()};
+            const cpxPercentageCell: CellObject = {t: 'n', v: cpxPercentage.toString()};
+            rows[i].push(...[bpPercentageCell, cpxPercentageCell]);
+        }
+    }
+
     private static isEqualToZero(cellAddress: string): boolean {
         return this.sheet[cellAddress]?.v === '0';
     }
@@ -136,6 +156,7 @@ export class StatsService {
     private static updateCsv(rows: Row[], origin?: CellAddress): void {
         origin = origin || {c: 0, r: 0};
         this.XLSX.utils.sheet_add_aoa(this.sheet, rows, {origin: origin});
+        console.log(chalk.magentaBright('UPDATE SHEEET '), this.sheet);
         this.XLSX.writeFile(this.wb, DATASET.path);
     }
 }
