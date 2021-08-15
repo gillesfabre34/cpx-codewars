@@ -66,12 +66,13 @@ export class StatsService {
     }
 
     private static setTableContent(dataTable: DataTable, kles: KataLanguageEntity[]): void {
-        const rows: Row[] = [];
+        let rows: Row[] = [];
         const contentTopLeft: CellAddress = this.XLSX.utils.encode_cell({c: dataTable.topLeft.c, r: dataTable.topLeft.r + 1});
         for (let kleRank = 0; kleRank < kles.length; kleRank++) {
             rows.push(...this.getKleRows(kles[kleRank]));
         }
-        console.log(chalk.redBright('ROWSSSSS'), rows);
+        // rows = rows.slice(140, 160);
+        // console.log(chalk.redBright('ROWSSSSS'), rows);
         this.updateCsv(rows, contentTopLeft);
     }
 
@@ -80,7 +81,7 @@ export class StatsService {
         for (let solutionRank = 0; solutionRank < this.nbOfRowsByKle; solutionRank++) {
             rows.push(this.getSolutionRow(kle.solutionEntities[solutionRank], kle.id, solutionRank));
         }
-        // this.addPercentageColumns(rows);
+        this.addPercentageColumns(rows);
         return rows;
     }
 
@@ -97,12 +98,17 @@ export class StatsService {
         for (let i = 0; i < rows.length; i++) {
             let bpPercentage: number = 100 * +rows[i][2]['v'] / +rows[0][2]['v'];
             let cpxPercentage: number = 100 * +rows[i][4]['v'] / +rows[0][4]['v'];
-            bpPercentage = isNaN(bpPercentage) ? 0 : bpPercentage;
-            cpxPercentage = isNaN(cpxPercentage) ? 0 : cpxPercentage;
+            bpPercentage = this.isNumber(bpPercentage) ? bpPercentage : 0;
+            cpxPercentage = this.isNumber(cpxPercentage) ? cpxPercentage : 0;
             const bpPercentageCell: CellObject = {t: 'n', v: bpPercentage.toString()};
             const cpxPercentageCell: CellObject = {t: 'n', v: cpxPercentage.toString()};
+            console.log(chalk.redBright('PERENTSSSSS'), bpPercentage, cpxPercentage);
             rows[i].push(...[bpPercentageCell, cpxPercentageCell]);
         }
+    }
+
+    private static isNumber(n: number): boolean {
+        return !isNaN(n) && n !== Infinity;
     }
 
     private static getValuesByKleBySolutionRank(firstRow: number, column: number): number[] {
@@ -161,7 +167,7 @@ export class StatsService {
         this.XLSX.utils.sheet_add_aoa(this.sheet, rows, {origin: origin});
         const wb: WorkBook = this.XLSX.readFile(DATASET.path);
         wb.Sheets['Solutions'] = this.sheet;
-        console.log(chalk.magentaBright('UPDATE SHEEET '), this.sheet);
+        // console.log(chalk.magentaBright('UPDATE SHEEET '), this.sheet);
         this.XLSX.writeFile(wb, DATASET.path);
     }
 }
