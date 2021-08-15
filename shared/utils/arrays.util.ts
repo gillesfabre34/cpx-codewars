@@ -23,6 +23,16 @@ export function lastElement<T>(array: T[]): T {
 }
 
 
+export function sum(array: number[]): number {
+    return Array.isArray(array) ? array.reduce((a, b) => a + b, 0) : undefined;
+}
+
+
+export function average(array: number[]): number {
+    return Array.isArray(array) && array.length > 0 ? sum(array) / array.length : undefined;
+}
+
+
 /**
  * Checks if two arrays have the same values
  * @param arr1
@@ -43,6 +53,5 @@ export function arrayOfNumbersAreEqual(arr1: number[], arr2: number[]): boolean 
 
 export function push(obj: any, property: string, element: any): void {
     obj[property] = obj[property] ?? [];
-    // console.log(chalk.blueBright('ARRRRR'), obj[property]);
     obj[property].push(element);
 }

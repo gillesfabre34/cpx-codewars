@@ -8,6 +8,7 @@ export class XlsxService {
         const xlsx = new XlsxFile(path);
         const sheet = new Sheet(sheetName, xlsx);
         if (dataTable) {
+            dataTable.sheet = sheet;
             sheet.dataTables.push(dataTable);
         }
         xlsx.sheets.push(sheet);
