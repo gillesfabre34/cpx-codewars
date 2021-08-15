@@ -42,17 +42,14 @@ export class StatsService {
     private static async addDataToSolutionsSheet(): Promise<void> {
         const wb: WorkBook = this.XLSX.readFile(DATASET.path);
         this.sheet = wb.Sheets['Solutions'];
-        // this.sheet = this.wb.Sheets['Solutions'];
-        console.log(chalk.redBright('UPDATE SHEEET '), this.sheet);
         const dataTable: DataTable = flat(DATASET.sheets.map(s => s.dataTables)).find(d => d.name === 'solutions');
         const kles: KataLanguageEntity[] = await KataLanguageEntityService.findAllKataLanguage(CONFIG.language);
         this.setSolutionsTable(kles, dataTable);
-        // this.setMeansTable(kles, dataTable);
+        this.setMeansTable(kles, dataTable);
     }
 
     private static setSolutionsTable(kles: KataLanguageEntity[], dataTable: DataTable): void {
         this.setSheetTitle('Kata solutions');
-        console.log(chalk.blueBright('SET SOLLLLLS'), kles.length);
         this.setTableHeader(dataTable);
         this.setTableContent(dataTable, kles);
     }
@@ -71,8 +68,6 @@ export class StatsService {
         for (let kleRank = 0; kleRank < kles.length; kleRank++) {
             rows.push(...this.getKleRows(kles[kleRank]));
         }
-        // rows = rows.slice(140, 160);
-        // console.log(chalk.redBright('ROWSSSSS'), rows);
         this.updateCsv(rows, contentTopLeft);
     }
 
@@ -102,7 +97,6 @@ export class StatsService {
             cpxPercentage = this.isNumber(cpxPercentage) ? cpxPercentage : 0;
             const bpPercentageCell: CellObject = {t: 'n', v: bpPercentage.toString()};
             const cpxPercentageCell: CellObject = {t: 'n', v: cpxPercentage.toString()};
-            console.log(chalk.redBright('PERENTSSSSS'), bpPercentage, cpxPercentage);
             rows[i].push(...[bpPercentageCell, cpxPercentageCell]);
         }
     }
@@ -131,7 +125,6 @@ export class StatsService {
             }
         }
         const meansBySolutionRank: number[] = this.getMeansBySolutionRank(valuesForAllKlesBySolutionRank);
-        console.log(chalk.greenBright('meansBySolutionRankkkk'), meansBySolutionRank);
         this.addMeansTableInSolutionsSheet(meansBySolutionRank, dataTable);
     }
 
@@ -148,14 +141,11 @@ export class StatsService {
         const topLeft: CellAddress = {c: dataTable.topLeft.c + 8, r: dataTable.topLeft.r};
         rows.push(['solution_rank', 'cpx_percent']);
         for (let i = 0; i < meansBySolutionRank.length; i++) {
-            let bpPercentage: number = 100 * +rows[i][2]['v'] / +rows[0][2]['v'];
-            let cpxPercentage: number = 100 * +rows[i][4]['v'] / +rows[0][4]['v'];
-            bpPercentage = isNaN(bpPercentage) ? 0 : bpPercentage;
-            cpxPercentage = isNaN(cpxPercentage) ? 0 : cpxPercentage;
-            const bpPercentageCell: CellObject = {t: 'n', v: bpPercentage.toString()};
-            const cpxPercentageCell: CellObject = {t: 'n', v: cpxPercentage.toString()};
-            rows[i].push(...[bpPercentageCell, cpxPercentageCell]);
+            const rankCell: CellObject = {t: 'n', v: (i + 1).toString()};
+            const meanCell: CellObject = {t: 'n', v: meansBySolutionRank[i].toString()};
+            rows.push([rankCell, meanCell]);
         }
+        this.updateCsv(rows, topLeft);
     }
 
     private static isEqualToZero(cellAddress: string): boolean {
@@ -167,7 +157,6 @@ export class StatsService {
         this.XLSX.utils.sheet_add_aoa(this.sheet, rows, {origin: origin});
         const wb: WorkBook = this.XLSX.readFile(DATASET.path);
         wb.Sheets['Solutions'] = this.sheet;
-        // console.log(chalk.magentaBright('UPDATE SHEEET '), this.sheet);
         this.XLSX.writeFile(wb, DATASET.path);
     }
 }
