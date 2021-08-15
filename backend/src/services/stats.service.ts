@@ -40,8 +40,10 @@ export class StatsService {
     }
 
     private static async addDataToSolutionsSheet(): Promise<void> {
-        this.sheet = this.wb.Sheets['Solutions'];
-        console.log(chalk.redBright('UPDATE SHEEET '), this.wb.SheetNames);
+        const wb: WorkBook = this.XLSX.readFile(DATASET.path);
+        this.sheet = wb.Sheets['Solutions'];
+        // this.sheet = this.wb.Sheets['Solutions'];
+        console.log(chalk.redBright('UPDATE SHEEET '), this.sheet);
         const dataTable: DataTable = flat(DATASET.sheets.map(s => s.dataTables)).find(d => d.name === 'solutions');
         const kles: KataLanguageEntity[] = await KataLanguageEntityService.findAllKataLanguage(CONFIG.language);
         this.setSolutionsTable(kles, dataTable);
@@ -52,7 +54,7 @@ export class StatsService {
         this.setSheetTitle('Kata solutions');
         console.log(chalk.blueBright('SET SOLLLLLS'), kles.length);
         this.setTableHeader(dataTable);
-        // this.setTableContent(dataTable, kles);
+        this.setTableContent(dataTable, kles);
     }
 
     private static setSheetTitle(title: string): void {
@@ -69,6 +71,7 @@ export class StatsService {
         for (let kleRank = 0; kleRank < kles.length; kleRank++) {
             rows.push(...this.getKleRows(kles[kleRank]));
         }
+        console.log(chalk.redBright('ROWSSSSS'), rows);
         this.updateCsv(rows, contentTopLeft);
     }
 
@@ -77,7 +80,7 @@ export class StatsService {
         for (let solutionRank = 0; solutionRank < this.nbOfRowsByKle; solutionRank++) {
             rows.push(this.getSolutionRow(kle.solutionEntities[solutionRank], kle.id, solutionRank));
         }
-        this.addPercentageColumns(rows);
+        // this.addPercentageColumns(rows);
         return rows;
     }
 
@@ -156,7 +159,9 @@ export class StatsService {
     private static updateCsv(rows: Row[], origin?: CellAddress): void {
         origin = origin || {c: 0, r: 0};
         this.XLSX.utils.sheet_add_aoa(this.sheet, rows, {origin: origin});
+        const wb: WorkBook = this.XLSX.readFile(DATASET.path);
+        wb.Sheets['Solutions'] = this.sheet;
         console.log(chalk.magentaBright('UPDATE SHEEET '), this.sheet);
-        this.XLSX.writeFile(this.wb, DATASET.path);
+        this.XLSX.writeFile(wb, DATASET.path);
     }
 }
