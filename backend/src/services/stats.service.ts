@@ -7,36 +7,42 @@ import { KataLanguageEntity } from '../entities/kata-language.entity';
 import { existsSync } from '../utils/file-system.util';
 import { DataTable } from '../models/data-table.model';
 import { Row } from '../types/row.model';
+import { average, flat } from '../../../shared/utils/arrays.util';
 import { DATASET } from '../const/dataset.const';
-import { flat } from '../../../shared/utils/arrays.util';
 
 
 export class StatsService {
 
     static nbOfRowsByKle = 3;
+    static sheet: WorkSheet = undefined;
     static XLSX = require('xlsx');
     static wb: WorkBook = StatsService.XLSX.readFile(DATASET.path);
 
     static async createCsvStats(): Promise<void> {
         console.log(chalk.cyanBright('START STATS'));
-        const kles: KataLanguageEntity[] = await KataLanguageEntityService.findAllKataLanguage(CONFIG.language);
-        await this.createCsvDataset(kles);
+        await this.createCsvFile();
+        await this.addDataToSolutionsSheet();
         console.log(chalk.cyanBright('END STATS'));
     }
 
-    private static async createCsvDataset(kles: KataLanguageEntity[]): Promise<void> {
+    private static async createCsvFile(): Promise<void> {
         if (!existsSync(DATASET.path)) {
-            await this.createCsvFile();
+            const wb: WorkBook = this.XLSX.utils.book_new();
+            this.addSheets();
+            this.XLSX.writeFile(wb, DATASET.path);
         }
-        const dataTable: DataTable = flat(DATASET.sheets.map(s => s.dataTables)).find(d => d.name === 'solutions');
-        this.setSolutionsTable(kles, dataTable);
-        this.setMeansTable(kles, dataTable);
     }
 
-    private static async createCsvFile(): Promise<void> {
-        const wb: WorkBook = this.XLSX.utils.book_new();
-        wb.SheetNames.push('Solutions');
-        this.XLSX.writeFile(wb, DATASET.path);
+    private static addSheets(): void {
+        this.wb.SheetNames.push('Solutions');
+    }
+
+    private static async addDataToSolutionsSheet(): Promise<void> {
+        this.sheet = StatsService.wb.Sheets['Solutions'];
+        const dataTable: DataTable = flat(DATASET.sheets.map(s => s.dataTables)).find(d => d.name === 'solutions');
+        const kles: KataLanguageEntity[] = await KataLanguageEntityService.findAllKataLanguage(CONFIG.language);
+        this.setSolutionsTable(kles, dataTable);
+        this.setMeansTable(kles, dataTable);
     }
 
     private static setSolutionsTable(kles: KataLanguageEntity[], dataTable: DataTable): void {
@@ -92,28 +98,47 @@ export class StatsService {
         }
     }
 
-    private static setMeansTable(kles: KataLanguageEntity[], dataTable: DataTable): void {
+    private static getValuesBySolutionRank(firstRow: number, column: number): number[] {
+        let values: number[] = [];
         for (let solutionRank = 0; solutionRank < this.nbOfRowsByKle; solutionRank++) {
-            this.setMeanTable(kles, dataTable, solutionRank);
+            const cellAddress: string = this.XLSX.utils.encode_cell({c: column, r: firstRow + solutionRank});
+            values.push(this.sheet[cellAddress]?.v)
+        }
+        return values;
+    }
+
+    private static setMeansTable(kles: KataLanguageEntity[], dataTable: DataTable): void {
+        const sheet: WorkSheet = StatsService.wb.Sheets[dataTable.sheet.name];
+        let sum = 0;
+        let valuesForAllKlesBySolutionRank: number[][]= [];
+        for (let kleIndex = 0; kleIndex < kles.length; kleIndex++) {
+            const firstRow: number = dataTable.topLeft.r + 1 + kleIndex * this.nbOfRowsByKle;
+            const cpxPercentColumn: number = dataTable.topLeft.c + 6;
+            const firstCellAddress: string = this.XLSX.utils.encode_cell({c: cpxPercentColumn, r: firstRow});
+            if (!this.isEqualToZero(firstCellAddress, sheet)) {
+                const valuesBySolutionRank: number[] = this.getValuesBySolutionRank(firstRow, cpxPercentColumn);
+                // const solutionRow: number = dataTable.topLeft.r + 1 + solutionRank + i * this.nbOfRowsByKle;
+                // const cellAddress: string = this.XLSX.utils.encode_cell({c: cpxPercentColumn, r: solutionRow});
+                // sum += sheet[cellAddress];
+                // console.log(chalk.blueBright('CELLLL'), cellAddress, sheet[cellAddress]);
+            }
         }
     }
 
-    private static setMeanTable(kles: KataLanguageEntity[], dataTable: DataTable, solutionRank: number): void {
-        const sheet: WorkSheet = StatsService.wb.Sheets[dataTable.sheet.name];
-        let sum = 0;
-        for (let i = 0; i < kles.length; i++) {
-            const cpxPercentColumn: number = dataTable.topLeft.c + 6;
-            const solutionRow: number = dataTable.topLeft.r + 1 + solutionRank + i * this.nbOfRowsByKle;
-            const cellAddress: string = this.XLSX.utils.encode_cell({c: cpxPercentColumn, r: solutionRow});
-            sum += sheet[cellAddress];
-            console.log(chalk.blueBright('CELLLL'), cellAddress, sheet[cellAddress]);
-        }
+    private static isEqualToZero(cellAddress: string, sheet: WorkSheet): boolean {
+        // const firstRow = dataTable.topLeft.r + 1 + kleIndex * this.nbOfRowsByKle;
+        // const cpxPercentColumn: number = dataTable.topLeft.c + 6;
+        // const cellAddress: string = this.XLSX.utils.encode_cell({c: cpxPercentColumn, r: firstRow});
+        // console.log(chalk.magentaBright('ZEROOOO'), sheet[cellAddress]?.v === '0');
+        return sheet[cellAddress]?.v === '0';
     }
 
     private static updateCsv(sheetName: string, rows: Row[], origin?: CellAddress): void {
-        const sheet: WorkSheet = StatsService.wb.Sheets[sheetName];
+        // const sheet: WorkSheet = StatsService.wb.Sheets[sheetName];
+        console.log(chalk.blueBright('SHEEEET'), Object.keys(this.sheet).length);
         origin = origin || {c: 0, r: 0};
-        this.XLSX.utils.sheet_add_aoa(sheet, rows, {origin: origin});
+        this.XLSX.utils.sheet_add_aoa(this.sheet, rows, {origin: origin});
+        console.log(chalk.blueBright('SHEEEET 2'), Object.keys(this.sheet).length);
         this.XLSX.writeFile(this.wb, DATASET.path);
     }
 }

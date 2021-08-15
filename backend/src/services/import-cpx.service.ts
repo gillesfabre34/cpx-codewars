@@ -4,6 +4,7 @@ import { CONFIG } from '../const/config';
 import { SolutionEntity } from '../entities/solution.entity';
 import { CsvImportRow } from '../models/csv-import-row.model';
 import { removeExtension } from '../utils/file-system.util';
+import { sum } from '../../../shared/utils/arrays.util';
 
 const csv = require('csv-parser')
 const fs = require('fs')
@@ -45,7 +46,7 @@ export class ImportCpxService {
     }
 
     private static getFileCpx(rows: CsvImportRow[]): number {
-        return +rows.map(r => +r.cpx).reduce((a, b) => a + b, 0).toFixed(1);
+        return +sum(rows.map(r => +r.cpx)).toFixed(1);
     }
 
 }
