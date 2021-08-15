@@ -13,7 +13,7 @@ import { DATASET } from '../const/dataset.const';
 
 export class StatsService {
 
-    static nbOfRowsByKle = 3;
+    static nbOfRowsByKle = 5;
     static sheet: WorkSheet = undefined;
     static XLSX = require('xlsx');
     static wb: WorkBook = StatsService.XLSX.readFile(DATASET.path);
@@ -52,23 +52,23 @@ export class StatsService {
     }
 
     private static setSheetTitle(title: string): void {
-        this.updateCsv('Solutions', [['', title]]);
+        this.updateCsv([['', title]]);
     }
 
     private static setTableHeader(dataTable: DataTable): void {
-        this.updateCsv('Solutions', [dataTable.header], dataTable.topLeft);
+        this.updateCsv([dataTable.header], dataTable.topLeft);
     }
 
     private static setTableContent(dataTable: DataTable, kles: KataLanguageEntity[]): void {
         const rows: Row[] = [];
         const contentTopLeft: CellAddress = this.XLSX.utils.encode_cell({c: dataTable.topLeft.c, r: dataTable.topLeft.r + 1});
         for (let kleRank = 0; kleRank < kles.length; kleRank++) {
-            rows.push(...this.getKleRows(kles[kleRank], kleRank));
+            rows.push(...this.getKleRows(kles[kleRank]));
         }
-        this.updateCsv('Solutions', rows, contentTopLeft);
+        this.updateCsv(rows, contentTopLeft);
     }
 
-    private static getKleRows(kle: KataLanguageEntity, kleRank: number): Row[] {
+    private static getKleRows(kle: KataLanguageEntity): Row[] {
         const rows: Row[] = [];
         for (let solutionRank = 0; solutionRank < this.nbOfRowsByKle; solutionRank++) {
             rows.push(this.getSolutionRow(kle.solutionEntities[solutionRank], kle.id, solutionRank));
@@ -98,7 +98,7 @@ export class StatsService {
         }
     }
 
-    private static getValuesBySolutionRank(firstRow: number, column: number): number[] {
+    private static getValuesByKleBySolutionRank(firstRow: number, column: number): number[] {
         let values: number[] = [];
         for (let solutionRank = 0; solutionRank < this.nbOfRowsByKle; solutionRank++) {
             const cellAddress: string = this.XLSX.utils.encode_cell({c: column, r: firstRow + solutionRank});
@@ -108,37 +108,34 @@ export class StatsService {
     }
 
     private static setMeansTable(kles: KataLanguageEntity[], dataTable: DataTable): void {
-        const sheet: WorkSheet = StatsService.wb.Sheets[dataTable.sheet.name];
-        let sum = 0;
         let valuesForAllKlesBySolutionRank: number[][]= [];
         for (let kleIndex = 0; kleIndex < kles.length; kleIndex++) {
             const firstRow: number = dataTable.topLeft.r + 1 + kleIndex * this.nbOfRowsByKle;
             const cpxPercentColumn: number = dataTable.topLeft.c + 6;
             const firstCellAddress: string = this.XLSX.utils.encode_cell({c: cpxPercentColumn, r: firstRow});
-            if (!this.isEqualToZero(firstCellAddress, sheet)) {
-                const valuesBySolutionRank: number[] = this.getValuesBySolutionRank(firstRow, cpxPercentColumn);
-                // const solutionRow: number = dataTable.topLeft.r + 1 + solutionRank + i * this.nbOfRowsByKle;
-                // const cellAddress: string = this.XLSX.utils.encode_cell({c: cpxPercentColumn, r: solutionRow});
-                // sum += sheet[cellAddress];
-                // console.log(chalk.blueBright('CELLLL'), cellAddress, sheet[cellAddress]);
+            if (!this.isEqualToZero(firstCellAddress)) {
+                valuesForAllKlesBySolutionRank.push(this.getValuesByKleBySolutionRank(firstRow, cpxPercentColumn));
             }
         }
+        const meansBySolutionRank: number[] = this.getMeansBySolutionRank(valuesForAllKlesBySolutionRank);
+        console.log(chalk.greenBright('meansBySolutionRankkkk'), meansBySolutionRank);
     }
 
-    private static isEqualToZero(cellAddress: string, sheet: WorkSheet): boolean {
-        // const firstRow = dataTable.topLeft.r + 1 + kleIndex * this.nbOfRowsByKle;
-        // const cpxPercentColumn: number = dataTable.topLeft.c + 6;
-        // const cellAddress: string = this.XLSX.utils.encode_cell({c: cpxPercentColumn, r: firstRow});
-        // console.log(chalk.magentaBright('ZEROOOO'), sheet[cellAddress]?.v === '0');
-        return sheet[cellAddress]?.v === '0';
+    private static getMeansBySolutionRank(valuesForAllKlesBySolutionRank: number[][]): number[] {
+        let values: number[] = [];
+        for (let solutionRank = 0; solutionRank < this.nbOfRowsByKle; solutionRank++) {
+            values.push(average(valuesForAllKlesBySolutionRank.map(v => +v[solutionRank])));
+        }
+        return values;
     }
 
-    private static updateCsv(sheetName: string, rows: Row[], origin?: CellAddress): void {
-        // const sheet: WorkSheet = StatsService.wb.Sheets[sheetName];
-        console.log(chalk.blueBright('SHEEEET'), Object.keys(this.sheet).length);
+    private static isEqualToZero(cellAddress: string): boolean {
+        return this.sheet[cellAddress]?.v === '0';
+    }
+
+    private static updateCsv(rows: Row[], origin?: CellAddress): void {
         origin = origin || {c: 0, r: 0};
         this.XLSX.utils.sheet_add_aoa(this.sheet, rows, {origin: origin});
-        console.log(chalk.blueBright('SHEEEET 2'), Object.keys(this.sheet).length);
         this.XLSX.writeFile(this.wb, DATASET.path);
     }
 }
